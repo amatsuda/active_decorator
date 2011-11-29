@@ -29,6 +29,35 @@ end
 # helpers
 module ApplicationHelper; end
 
+# decorators
+module AuthorDecorator
+  def reverse_name
+    name.reverse
+  end
+
+  def capitalized_name
+    name.capitalize
+  end
+end
+
+# controllers
+class ApplicationController < ActionController::Base
+  self.append_view_path File.dirname(__FILE__)
+end
+class AuthorsController < ApplicationController
+  def index
+    if params[:variable_type] == 'array'
+      @authors = Author.all
+    else
+      @authors = Author.scoped
+    end
+  end
+
+  def show
+    @author = Author.find params[:id]
+  end
+end
+
 # migrations
 class CreateAllTables < ActiveRecord::Migration
   def self.up
