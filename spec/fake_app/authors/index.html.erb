@@ -1,4 +1,16 @@
 <% @authors.each do |author| %>
   <%= author.name %>
   <%= author.reverse_name %>
+
+  <% if params[:partial] == 'collection' %>
+    <%= render author.books %>
+  <% elsif params[:partial] == 'locals' %>
+    <% author.books.each do |book| %>
+      <%= render :partial => 'books/book_locals', :locals => {:b => book} %>
+    <% end %>
+  <% else %>
+    <% author.books.each do |book| %>
+      <%= render book %>
+    <% end %>
+  <% end %>
 <% end %>

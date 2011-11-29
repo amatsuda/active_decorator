@@ -39,6 +39,15 @@ module AuthorDecorator
     name.capitalize
   end
 end
+module BookDecorator
+  def reverse_title
+    title.reverse
+  end
+
+  def upcased_title
+    title.upcase
+  end
+end
 
 # controllers
 class ApplicationController < ActionController::Base
