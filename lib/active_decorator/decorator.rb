@@ -13,7 +13,7 @@ module ActiveDecorator
       end
     when Array
       obj.each do |r|
-        ActiveDecorator.decorate r
+        ActiveDecorator.decorate_if_model r
       end
     end
   end
