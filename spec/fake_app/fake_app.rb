@@ -1,8 +1,8 @@
-# config
-require 'rails'
-require 'active_decorator'
+require 'active_record'
+require 'action_controller/railtie'
+require 'action_view/railtie'
 
-# database
+# config
 ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ':memory:')
 
 module ActiveDecoratorTestApp
@@ -12,6 +12,7 @@ module ActiveDecoratorTestApp
     config.active_support.deprecation = :log
   end
 end
+ActiveDecoratorTestApp::Application.initialize!
 
 # routes
 ActiveDecoratorTestApp::Application.routes.draw do
