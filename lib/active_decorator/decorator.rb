@@ -18,20 +18,27 @@ module ActiveDecorator
     end
   end
 
+  private
   def self.decorate_all(models)
     return models if models.empty?
-    decorator_name = "#{models.first.class.name}Decorator"
-    k = decorator_name.constantize
+
+    d = decorator_for models.first.class
+    return unless d
+
     models.each do |m|
-      m.extend k unless m.is_a? k
+      m.extend d unless m.is_a? d
     end
-    rescue NameError
   end
 
   def self.decorate(model)
-    decorator_name = "#{model.class.name}Decorator"
-    k = decorator_name.constantize
-    model.extend k unless model.is_a? k
+    d = decorator_for model.class
+    return unless d
+    model.extend d unless model.is_a? d
+  end
+
+  def self.decorator_for(model_class)
+    decorator_name = "#{model_class.name}Decorator"
+    d = decorator_name.constantize
     rescue NameError
   end
 end
