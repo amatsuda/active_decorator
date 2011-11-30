@@ -19,7 +19,7 @@ module ActiveDecorator
   end
 
   def self.decorate_all(models)
-    return if models.empty?
+    return models if models.empty?
     decorator_name = "#{models.first.class.name}Decorator"
     k = decorator_name.constantize
     models.each do |m|
