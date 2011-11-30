@@ -16,7 +16,9 @@ ActiveDecoratorTestApp::Application.initialize!
 
 # routes
 ActiveDecoratorTestApp::Application.routes.draw do
-  resources :authors, :only => [:index, :show]
+  resources :authors, :only => [:index, :show] do
+    resources :books, :only => :show
+  end
 end
 
 # models
@@ -48,6 +50,10 @@ module BookDecorator
   def upcased_title
     title.upcase
   end
+
+  def link
+    link_to title, 'http://example.com'
+  end
 end
 
 # controllers
@@ -65,6 +71,11 @@ class AuthorsController < ApplicationController
 
   def show
     @author = Author.find params[:id]
+  end
+end
+class BooksController < ApplicationController
+  def show
+    @book = Author.find(params[:author_id]).books.find(params[:id])
   end
 end
 

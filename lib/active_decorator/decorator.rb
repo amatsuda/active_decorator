@@ -1,3 +1,5 @@
+require 'active_decorator/helpers'
+
 module ActiveDecorator
   def self.decorate_if_model(obj)
     case obj
@@ -39,6 +41,8 @@ module ActiveDecorator
   def self.decorator_for(model_class)
     decorator_name = "#{model_class.name}Decorator"
     d = decorator_name.constantize
+    #TODO avoid including more than twice
+    d.send :include, ActiveDecorator::Helpers
     rescue NameError
   end
 end
