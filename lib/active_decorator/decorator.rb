@@ -1,48 +1,50 @@
+require 'singleton'
 require 'active_decorator/helpers'
 
 module ActiveDecorator
-  def self.decorate_if_model(obj)
-    case obj
-    when ActiveRecord::Base
-      ActiveDecorator.decorate obj
-    when ActiveRecord::Relation
-      class << obj
-        def to_a_with_decorator
-          arr = to_a_without_decorator
-          ActiveDecorator.decorate_all arr
+  class Decorator
+    include Singleton
+
+    def initialize
+      @@decorators = {}
+    end
+
+    def decorate_if_model(obj)
+      case obj
+      when ActiveRecord::Base
+        decorate obj
+      when ActiveRecord::Relation
+        class << obj
+          def to_a_with_decorator
+            arr = to_a_without_decorator
+            arr.each do |model|
+              ActiveDecorator::Decorator.instance.decorate model
+            end
+          end
+          alias_method_chain :to_a, :decorator
         end
-        alias_method_chain :to_a, :decorator
-      end
-    when Array
-      obj.each do |r|
-        ActiveDecorator.decorate_if_model r
+      when Array
+        obj.each do |r|
+          decorate_if_model r
+        end
       end
     end
-  end
 
-  private
-  def self.decorate_all(models)
-    return models if models.empty?
-
-    d = decorator_for models.first.class
-    return unless d
-
-    models.each do |m|
-      m.extend d unless m.is_a? d
+    def decorate(model)
+      d = decorator_for model.class
+      return model unless d
+      model.extend d unless model.is_a? d
     end
-  end
 
-  def self.decorate(model)
-    d = decorator_for model.class
-    return unless d
-    model.extend d unless model.is_a? d
-  end
+    private
+    def decorator_for(model_class)
+      return @@decorators[model_class] if @@decorators.has_key? model_class
 
-  def self.decorator_for(model_class)
-    decorator_name = "#{model_class.name}Decorator"
-    d = decorator_name.constantize
-    #TODO avoid including more than twice
-    d.send :include, ActiveDecorator::Helpers
-    rescue NameError
+      decorator_name = "#{model_class.name}Decorator"
+      d = decorator_name.constantize
+      d.send :include, ActiveDecorator::Helpers
+      @@decorators[model_class] = d
+      rescue NameError
+    end
   end
 end
