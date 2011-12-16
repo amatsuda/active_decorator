@@ -4,11 +4,11 @@ module ActionView
       setup_without_decorator context, options, block
 
       @locals.values.each do |v|
-        ActiveDecorator::Decorator.instance.decorate_if_model v
+        ActiveDecorator::Decorator.instance.decorate v
       end if @locals.present?
-      ActiveDecorator::Decorator.instance.decorate_if_model @object
+      ActiveDecorator::Decorator.instance.decorate @object
       @collection.each do |v|
-        ActiveDecorator::Decorator.instance.decorate_if_model v
+        ActiveDecorator::Decorator.instance.decorate v
       end if @collection.present?
 
       self

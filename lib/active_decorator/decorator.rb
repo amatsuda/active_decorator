@@ -9,31 +9,26 @@ module ActiveDecorator
       @@decorators = {}
     end
 
-    def decorate_if_model(obj)
+    def decorate(obj)
       case obj
-      when ActiveRecord::Base
-        decorate obj
+      when Array
+        obj.each do |r|
+          decorate r
+        end
       when ActiveRecord::Relation
         class << obj
           def to_a_with_decorator
-            arr = to_a_without_decorator
-            arr.each do |model|
-              ActiveDecorator::Decorator.instance.decorate model
+            to_a_without_decorator.tap do |arr|
+              ActiveDecorator::Decorator.instance.decorate arr
             end
           end
           alias_method_chain :to_a, :decorator
         end
-      when Array
-        obj.each do |r|
-          decorate_if_model r
-        end
+      else
+        d = decorator_for obj.class
+        return obj unless d
+        obj.extend d unless obj.is_a? d
       end
-    end
-
-    def decorate(model)
-      d = decorator_for model.class
-      return model unless d
-      model.extend d unless model.is_a? d
     end
 
     private

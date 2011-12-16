@@ -3,7 +3,7 @@ module AbstractController
     def view_assigns_with_decorator
       hash = view_assigns_without_decorator
       hash.values.each do |v|
-        ActiveDecorator::Decorator.instance.decorate_if_model v
+        ActiveDecorator::Decorator.instance.decorate v
       end
       hash
     end
