@@ -10,6 +10,8 @@ module ActiveDecorator
     end
 
     def decorate(obj)
+      return if obj.nil?
+
       case obj
       when Array
         obj.each do |r|
