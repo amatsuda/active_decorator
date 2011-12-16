@@ -7,9 +7,7 @@ module ActionView
         ActiveDecorator::Decorator.instance.decorate v
       end if @locals.present?
       ActiveDecorator::Decorator.instance.decorate @object
-      @collection.each do |v|
-        ActiveDecorator::Decorator.instance.decorate v
-      end if @collection.present?
+      ActiveDecorator::Decorator.instance.decorate @collection if @collection.present?
 
       self
     end
