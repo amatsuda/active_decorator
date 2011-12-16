@@ -12,12 +12,11 @@ module ActiveDecorator
     def decorate(obj)
       return if obj.nil?
 
-      case obj
-      when Array
+      if obj.is_a? Array
         obj.each do |r|
           decorate r
         end
-      when ActiveRecord::Relation
+      elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation)
         class << obj
           def to_a_with_decorator
             to_a_without_decorator.tap do |arr|
