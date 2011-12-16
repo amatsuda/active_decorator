@@ -6,7 +6,7 @@ module ActionView
       @locals.values.each do |v|
         ActiveDecorator::Decorator.instance.decorate v
       end if @locals.present?
-      ActiveDecorator::Decorator.instance.decorate @object
+      ActiveDecorator::Decorator.instance.decorate @object if @object.present?
       ActiveDecorator::Decorator.instance.decorate @collection if @collection.present?
 
       self
