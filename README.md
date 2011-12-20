@@ -19,7 +19,7 @@ Rails 3.0.x, 3.1.x, and 3.2 (edge)
 
 ## Supported ORMs ##
 
-ActiveRecord, ActiveRcsource, and any kind of ORMs that uses Ruby Objects as model objects
+ActiveRecord, ActiveResource, and any kind of ORMs that uses Ruby Objects as model objects
 
 
 ## Usage ##
