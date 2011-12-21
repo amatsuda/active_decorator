@@ -8,7 +8,7 @@ module ActiveDecorator
     rescue NoMethodError => no_method_error
       begin
         @@_decorator_view_proxy ||= DecoratorViewProxy.new
-        @@_decorator_view_proxy.send method, *args, block
+        @@_decorator_view_proxy.send method, *args, &block
       rescue NoMethodError
         raise no_method_error
       end
