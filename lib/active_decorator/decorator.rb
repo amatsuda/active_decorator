@@ -16,7 +16,7 @@ module ActiveDecorator
         obj.each do |r|
           decorate r
         end
-      elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation)
+      elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation) && !obj.respond_to?(:to_a_with_decorator)
         class << obj
           def to_a_with_decorator
             to_a_without_decorator.tap do |arr|
