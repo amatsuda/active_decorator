@@ -11,5 +11,6 @@ feature 'fallback to helpers' do
     within 'a' do
       page.should have_content 'RHG'
     end
+    page.should have_css('img')
   end
 end

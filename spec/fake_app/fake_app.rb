@@ -54,6 +54,10 @@ module BookDecorator
   def link
     link_to title, 'http://example.com'
   end
+
+  def cover_image
+    image_tag 'cover.png'
+  end
 end
 
 # controllers
