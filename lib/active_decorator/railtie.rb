@@ -1,3 +1,4 @@
+require 'active_decorator/view_context'
 require 'rails'
 
 module ActiveDecorator
@@ -8,6 +9,7 @@ module ActiveDecorator
       end
       ActiveSupport.on_load(:action_controller) do
         require 'active_decorator/monkey/abstract_controller/rendering'
+        ActionController::Base.send :include, ActiveDecorator::ViewContext::Filter
       end
       ActiveSupport.on_load(:action_mailer) do
         require 'active_decorator/monkey/abstract_controller/rendering'
