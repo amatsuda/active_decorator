@@ -5,9 +5,9 @@ if ActionPack::VERSION::STRING >= '3.1'
 
       @locals.values.each do |v|
         ActiveDecorator::Decorator.instance.decorate v
-      end if @locals.present?
-      ActiveDecorator::Decorator.instance.decorate @object if @object.present?
-      ActiveDecorator::Decorator.instance.decorate @collection if @collection.present?
+      end unless @locals.blank?
+      ActiveDecorator::Decorator.instance.decorate @object unless @object.blank?
+      ActiveDecorator::Decorator.instance.decorate @collection unless @collection.blank?
 
       self
     end
@@ -21,9 +21,9 @@ else
 
       @locals.values.each do |v|
         ActiveDecorator::Decorator.instance.decorate v
-      end if @locals.present?
-      ActiveDecorator::Decorator.instance.decorate @object if @object.present?
-      ActiveDecorator::Decorator.instance.decorate @collection if @collection.present?
+      end unless @locals.blank?
+      ActiveDecorator::Decorator.instance.decorate @object unless @object.blank?
+      ActiveDecorator::Decorator.instance.decorate @collection unless @collection.blank?
 
       self
     end
