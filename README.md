@@ -51,7 +51,7 @@ You can use the generator for doing this ( `% rails g decorator user` )
     # app/controllers/users_controller.rb
     class UsersController < ApplicationController
       def index
-        User.all
+        @users = User.all
       end
     end
     
