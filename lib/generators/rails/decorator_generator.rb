@@ -15,8 +15,6 @@ Examples:
 DESC
 
       def create_decorator_file
-        empty_directory 'app/decorators'
-
         template 'decorator.rb', File.join('app/decorators', "#{singular_name}_decorator.rb")
       end
 
