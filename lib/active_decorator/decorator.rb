@@ -40,7 +40,8 @@ module ActiveDecorator
       d = decorator_name.constantize
       d.send :include, ActiveDecorator::Helpers
       @@decorators[model_class] = d
-      rescue NameError
+    rescue NameError
+      @@decorators[model_class] = nil
     end
   end
 end
