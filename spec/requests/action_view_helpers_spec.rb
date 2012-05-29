@@ -12,5 +12,6 @@ feature 'fallback to helpers' do
       page.should have_content 'RHG'
     end
     page.should have_css('img')
+    page.should have_content 'RHG, by Aamine'
   end
 end
