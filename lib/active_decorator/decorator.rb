@@ -37,7 +37,7 @@ module ActiveDecorator
                 Decorator.instance.decorate(associated)
               }
             end
-          end
+          end if obj.class.respond_to? :reflect_on_all_associations
         end
       end
       obj
