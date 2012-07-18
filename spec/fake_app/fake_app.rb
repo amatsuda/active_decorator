@@ -52,7 +52,7 @@ module BookDecorator
   end
 
   def link
-    link_to title, 'http://example.com'
+    link_to title, "#{request.protocol}#{request.host_with_port}/assets/sample.png"
   end
 
   def cover_image
