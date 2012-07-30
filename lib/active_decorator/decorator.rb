@@ -28,8 +28,19 @@ module ActiveDecorator
       else
         d = decorator_for obj.class
         return obj unless d
-        obj.extend d unless obj.is_a? d
+        unless obj.is_a? d
+          obj.extend d
+          (class << obj ; self ; end).class_eval do
+            obj.class.reflect_on_all_associations.map(&:name).each do |assoc|
+              define_method(assoc) { |*args|
+                associated = super(*args)
+                Decorator.instance.decorate(associated)
+              }
+            end
+          end if obj.class.respond_to? :reflect_on_all_associations
+        end
       end
+      obj
     end
 
     private

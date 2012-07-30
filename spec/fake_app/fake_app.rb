@@ -58,6 +58,10 @@ module BookDecorator
   def cover_image
     image_tag 'cover.png'
   end
+
+  def attribution
+    "#{title}, by #{author.capitalized_name}"
+  end
 end
 
 # controllers
