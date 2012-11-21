@@ -6,9 +6,17 @@ require 'active_decorator'
 # needs to load the app before loading rspec/rails => capybara
 require 'fake_app/fake_app'
 require 'rspec/rails'
+require 'capybara/rspec'
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+
+module ::RSpec::Core
+  class ExampleGroup
+    include Capybara::DSL
+    include Capybara::RSpecMatchers
+  end
+end 
 
 RSpec.configure do |config|
   config.before :all do
