@@ -17,6 +17,7 @@ ActiveDecoratorTestApp::Application.initialize!
 # routes
 ActiveDecoratorTestApp::Application.routes.draw do
   resources :authors, :only => [:index, :show] do
+    member { get :fancy_show }
     resources :books, :only => :show
   end
 end
@@ -40,6 +41,11 @@ module AuthorDecorator
 
   def capitalized_name
     name.capitalize
+  end
+end
+module FancyAuthorDecorator
+  def number_name
+    name.sum
   end
 end
 module BookDecorator
@@ -74,6 +80,11 @@ class AuthorsController < ApplicationController
   end
 
   def show
+    @author = Author.find params[:id]
+  end
+
+  def fancy_show
+    Author.decorator = FancyAuthorDecorator 
     @author = Author.find params[:id]
   end
 end
