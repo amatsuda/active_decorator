@@ -5,6 +5,7 @@ feature 'decorating controller ivar' do
     @matz = Author.create! :name => 'matz'
     Author.create! :name => 'takahashim'
   end
+  
   after do
     Author.delete_all
   end
@@ -25,5 +26,10 @@ feature 'decorating controller ivar' do
     visit '/authors?variable_type=array'
     page.should have_content 'takahashim'
     page.should have_content 'takahashim'.reverse
+  end
+
+  scenario "decorating Model with arbitrary decorator" do
+    visit "/authors/#{@matz.id}"
+    page.should have_content @matz.name.insert(0, 'Awesome he is, ')
   end
 end
