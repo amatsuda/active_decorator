@@ -37,6 +37,7 @@ You can use the generator for doing this ( `% rails g decorator user` )
       # first_name:string last_name:string website:string
     end
     
+    # Implicit decorator. Works without configuration.
     # app/decorators/user_decorator.rb
     module UserDecorator
       def full_name
@@ -47,6 +48,18 @@ You can use the generator for doing this ( `% rails g decorator user` )
         link_to full_name, website
       end
     end
+
+    # Explicit decorator. Allows you to use a different
+    # decorator for other contexts. Overrides the
+    # implicit decorator.
+    # app/decorators/user_json_decorator.rb
+    module UserJsonDecorator
+      def as_json(opts={})
+        { :id => id,
+          :first_name => first_name }
+      end
+    end
+
     
     # app/controllers/users_controller.rb
     class UsersController < ApplicationController
@@ -55,28 +68,20 @@ You can use the generator for doing this ( `% rails g decorator user` )
       end
     end
     
-    # app/views/users/index.html.erb
-    <% @users.each do |user| %>
-      <%= user.link %><br>
-    <% end %>
-
-### Examples with explicit decorator ###
-    # app/decorators/user_json_decorator.rb
-    module UserJsonDecorator
-      def as_json(opts={})
-        { :id => id,
-          :first_name => first_name }
-      end
-    end
-    
-    # app/controllers/users_controller.rb
-    class UsersController < ApplicationController
+    # app/controllers/remote_users_controller.rb
+    class RemoteUsersController < ApplicationController
       decorate :user, :with => UserJsonDecorator # or :user_json_decorator
       def show 
         @user = User.find(params[:id])
         respond_with @user
       end
     end
+
+    # app/views/users/index.html.erb
+    <% @users.each do |user| %>
+      <%= user.link %><br>
+    <% end %>
+    
  
 
 
