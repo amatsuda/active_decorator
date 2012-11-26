@@ -26,10 +26,4 @@ feature 'decorating controller ivar' do
     page.should have_content 'takahashim'
     page.should have_content 'takahashim'.reverse
   end
-
-  scenario 'decorating a model object with custom decorator' do
-    visit "/authors/#{@matz.id}/fancy_show"
-    page.should have_content 'matz'
-    page.should have_content '444'
-  end
 end
