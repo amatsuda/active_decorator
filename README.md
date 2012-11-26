@@ -60,6 +60,25 @@ You can use the generator for doing this ( `% rails g decorator user` )
       <%= user.link %><br>
     <% end %>
 
+### Examples with explicit decorator ###
+    # app/decorators/user_json_decorator.rb
+    module UserJsonDecorator
+      def as_json(opts={})
+        { :id => id,
+          :first_name => first_name }
+      end
+    end
+    
+    # app/controllers/users_controller.rb
+    class UsersController < ApplicationController
+      decorate :user, :with => UserJsonDecorator # or :user_json_decorator
+      def show 
+        @user = User.find(params[:id])
+        respond_with @user
+      end
+    end
+ 
+
 
 ## Contributing to ActiveDecorator ##
 

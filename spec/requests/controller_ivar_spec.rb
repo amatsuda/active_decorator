@@ -36,4 +36,9 @@ feature 'decorating controller ivar' do
   scenario "throw ArgumentError when no :with is passed" do
     lambda { BooksController.decorate :book }.should raise_error ArgumentError
   end
+
+  scenario "should accept symbol for decorator class" do
+    BooksController.decorate :book, :with => :arbitrary_decorator 
+    Book.decorated_with.should == ArbitraryDecorator
+  end
 end
