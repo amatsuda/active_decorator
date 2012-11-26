@@ -11,7 +11,6 @@ require 'rspec/rails'
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
-#https://github.com/rspec/rspec-rails/issues/503
 module ::RSpec::Core
   class ExampleGroup
     include Capybara::DSL
