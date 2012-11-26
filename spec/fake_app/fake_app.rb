@@ -88,7 +88,7 @@ class ApplicationController < ActionController::Base
 end
 
 class AuthorsController < ApplicationController
-  decorate :author => ArbitraryDecorator
+  decorate :author, :with => ArbitraryDecorator
 
   def index
     if params[:variable_type] == 'array'

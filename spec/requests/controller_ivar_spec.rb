@@ -32,4 +32,8 @@ feature 'decorating controller ivar' do
     visit "/authors/#{@matz.id}"
     page.should have_content @matz.name.insert(0, 'Awesome he is, ')
   end
+
+  scenario "throw ArgumentError when no :with is passed" do
+    lambda { BooksController.decorate :book }.should raise_error ArgumentError
+  end
 end
