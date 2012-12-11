@@ -23,6 +23,21 @@ if ActionPack::VERSION::STRING >= '3.1'
 
     alias_method_chain :setup, :decorator
   end
+
+  # patch for : <%= render template: 'my_view', :locals => {:foo => foo} %>
+  class ActionView::TemplateRenderer
+    def render_template_with_decorator(template, layout_name = nil, locals = {}) #:nodoc:
+      # apply decorate for locals
+      locals.values.each do |v|
+        ActiveDecorator::Decorator.instance.decorate v
+      end unless locals.blank?
+
+      render_template_without_decorator(template, layout_name, locals)
+    end
+
+    alias_method_chain :render_template, :decorator
+  end
+
 else
   class ActionView::Partials::PartialRenderer
     include ActiveDecorator::ActionViewExtension
