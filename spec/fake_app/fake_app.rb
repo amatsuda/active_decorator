@@ -24,7 +24,15 @@ end
 # models
 class Author < ActiveRecord::Base
   has_many :books
+
+  #decorated_with ArbitraryDecorator  
+
+  def self.decorated_with
+    ArbitraryDecorator
+  end
+
 end
+
 class Book < ActiveRecord::Base
   belongs_to :author
 end
@@ -60,11 +68,28 @@ module BookDecorator
   end
 end
 
+ module ArbitraryDecorator
+   def fancy_name
+     name.insert(0, 'Awesome he is, ')
+   end
+
+  def reverse_name
+    name.reverse
+  end
+
+  def capitalized_name
+    name.capitalize
+  end
+ end
+
 # controllers
 class ApplicationController < ActionController::Base
   self.append_view_path File.dirname(__FILE__)
 end
+
 class AuthorsController < ApplicationController
+  decorate :author, :with => ArbitraryDecorator
+
   def index
     if params[:variable_type] == 'array'
       @authors = Author.all
@@ -82,6 +107,7 @@ class BooksController < ApplicationController
     @book = Author.find(params[:author_id]).books.find(params[:id])
   end
 end
+
 
 # migrations
 class CreateAllTables < ActiveRecord::Migration
