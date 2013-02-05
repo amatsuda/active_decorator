@@ -12,7 +12,7 @@ module ActiveDecorator
     def decorate(obj)
       return if obj.nil?
 
-      if obj.is_a? Array
+      if Array === obj
         obj.each do |r|
           decorate r
         end
