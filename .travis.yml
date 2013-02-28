@@ -11,6 +11,10 @@ gemfile:
   - Gemfile
 matrix:
   exclude:
+    - rvm: 2.0.0
+      gemfile: gemfiles/Gemfile-rails.3.0.x
+    - rvm: 2.0.0
+      gemfile: gemfiles/Gemfile-rails.3.1.x
     - rvm: ruby-head
       gemfile: gemfiles/Gemfile-rails.3.0.x
     - rvm: ruby-head
