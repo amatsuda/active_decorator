@@ -17,5 +17,6 @@ RSpec.configure do |config|
   config.before :each do
     Book.delete_all
     Author.delete_all
+    Movie.delete_all
   end
 end
