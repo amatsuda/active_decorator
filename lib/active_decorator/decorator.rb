@@ -38,8 +38,12 @@ module ActiveDecorator
 
       decorator_name = "#{model_class.name}Decorator"
       d = decorator_name.constantize
-      d.send :include, ActiveDecorator::Helpers
-      @@decorators[model_class] = d
+      unless Class === d
+        d.send :include, ActiveDecorator::Helpers
+        @@decorators[model_class] = d
+      else
+        @@decorators[model_class] = nil
+      end
     rescue NameError
       @@decorators[model_class] = nil
     end

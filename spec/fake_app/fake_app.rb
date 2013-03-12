@@ -19,6 +19,7 @@ ActiveDecoratorTestApp::Application.routes.draw do
   resources :authors, :only => [:index, :show] do
     resources :books, :only => :show
   end
+  resources :movies, :only => :show
 end
 
 # models
@@ -27,6 +28,8 @@ class Author < ActiveRecord::Base
 end
 class Book < ActiveRecord::Base
   belongs_to :author
+end
+class Movie < ActiveRecord::Base
 end
 
 # helpers
@@ -60,6 +63,9 @@ module BookDecorator
   end
 end
 
+# decorator fake
+class MovieDecorator; end
+
 # controllers
 class ApplicationController < ActionController::Base
   self.append_view_path File.dirname(__FILE__)
@@ -82,11 +88,17 @@ class BooksController < ApplicationController
     @book = Author.find(params[:author_id]).books.find(params[:id])
   end
 end
+class MoviesController < ApplicationController
+  def show
+    @movie = Movie.find params[:id]
+  end
+end
 
 # migrations
 class CreateAllTables < ActiveRecord::Migration
   def self.up
     create_table(:authors) {|t| t.string :name}
     create_table(:books) {|t| t.string :title; t.references :author}
+    create_table(:movies) {|t| t.string :name}
   end
 end
