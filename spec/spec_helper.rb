@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rails'
 require 'active_decorator'
 # needs to load the app before loading rspec/rails => capybara
-require 'fake_app/fake_app'
+require 'fake_app/rails_app'
 require 'rspec/rails'
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
