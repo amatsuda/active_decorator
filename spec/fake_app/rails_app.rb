@@ -2,6 +2,9 @@ require 'active_record'
 require 'action_controller/railtie'
 require 'action_view/railtie'
 
+require 'fake_app/models'
+require 'fake_app/decorators'
+
 # config
 ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ':memory:')
 
@@ -21,44 +24,8 @@ ActiveDecoratorTestApp::Application.routes.draw do
   end
 end
 
-# models
-class Author < ActiveRecord::Base
-  has_many :books
-end
-class Book < ActiveRecord::Base
-  belongs_to :author
-end
-
 # helpers
 module ApplicationHelper; end
-
-# decorators
-module AuthorDecorator
-  def reverse_name
-    name.reverse
-  end
-
-  def capitalized_name
-    name.capitalize
-  end
-end
-module BookDecorator
-  def reverse_title
-    title.reverse
-  end
-
-  def upcased_title
-    title.upcase
-  end
-
-  def link
-    link_to title, "#{request.protocol}#{request.host_with_port}/assets/sample.png"
-  end
-
-  def cover_image
-    image_tag 'cover.png'
-  end
-end
 
 # controllers
 class ApplicationController < ActionController::Base
@@ -80,13 +47,5 @@ end
 class BooksController < ApplicationController
   def show
     @book = Author.find(params[:author_id]).books.find(params[:id])
-  end
-end
-
-# migrations
-class CreateAllTables < ActiveRecord::Migration
-  def self.up
-    create_table(:authors) {|t| t.string :name}
-    create_table(:books) {|t| t.string :title; t.references :author}
   end
 end
