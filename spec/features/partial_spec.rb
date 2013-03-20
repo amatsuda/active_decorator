@@ -11,13 +11,13 @@ feature 'decorating partial object' do
     Author.delete_all
   end
 
-  scenario 'decorating implicit @object' do
+  scenario 'decorating implicit @object', :if => rails? do
     visit '/authors'
     page.should have_content 'the gc book'
     page.should have_content 'the gc book'.reverse
   end
 
-  scenario 'decorating implicit @collection' do
+  scenario 'decorating implicit @collection', :if => rails? do
     visit '/authors?partial=collection'
     page.should have_content 'the gc book'
     page.should have_content 'the gc book'.reverse

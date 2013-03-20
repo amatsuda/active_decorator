@@ -1,0 +1,8 @@
+<% @authors.each do |author| %>
+  <%= author.name %>
+  <%= author.reverse_name %>
+
+  <% author.books.each do |book| %>
+    <%= erb :'books/_book_locals.html', :locals => {:b => book} %>
+  <% end %>
+<% end %>

@@ -3,5 +3,6 @@
 Gemfile.lock
 gemfiles/Gemfile-rails.3.0.x.lock
 gemfiles/Gemfile-rails.3.1.x.lock
+gemfiles/Gemfile-sinatra.lock
 pkg/*
 log
