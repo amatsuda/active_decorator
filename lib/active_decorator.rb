@@ -1,3 +1,12 @@
+begin
+  require 'rails'
+rescue LoadError
+  #do nothing
+end
+
 require 'active_decorator/version'
 require 'active_decorator/decorator'
-require 'active_decorator/railtie'
+
+if defined? Rails
+  require 'active_decorator/railtie'
+end
