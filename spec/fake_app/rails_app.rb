@@ -62,7 +62,7 @@ end
 
 # controllers
 class ApplicationController < ActionController::Base
-  self.append_view_path File.dirname(__FILE__)
+  self.append_view_path File.dirname(__FILE__)+"/rails_views"
 end
 class AuthorsController < ApplicationController
   def index
