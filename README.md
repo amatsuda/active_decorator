@@ -32,34 +32,36 @@ You can use the generator for doing this ( `% rails g decorator user` )
 
 ## Examples ##
 
-    # app/models/user.rb
-    class User < ActiveRecord::Base
-      # first_name:string last_name:string website:string
-    end
-    
-    # app/decorators/user_decorator.rb
-    module UserDecorator
-      def full_name
-        "#{first_name} #{last_name}"
-      end
-    
-      def link
-        link_to full_name, website
-      end
-    end
-    
-    # app/controllers/users_controller.rb
-    class UsersController < ApplicationController
-      def index
-        @users = User.all
-      end
-    end
-    
-    # app/views/users/index.html.erb
-    <% @users.each do |user| %>
-      <%= user.link %><br>
-    <% end %>
+```ruby
+# app/models/user.rb
+class User < ActiveRecord::Base
+  # first_name:string last_name:string website:string
+end
 
+# app/decorators/user_decorator.rb
+module UserDecorator
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def link
+    link_to full_name, website
+  end
+end
+
+# app/controllers/users_controller.rb
+class UsersController < ApplicationController
+  def index
+    @users = User.all
+  end
+end
+```
+```erb
+# app/views/users/index.html.erb
+<% @users.each do |user| %>
+  <%= user.link %><br>
+<% end %>
+```
 
 ## Contributing to ActiveDecorator ##
 
