@@ -13,4 +13,9 @@ feature 'fallback to helpers' do
     end
     page.should have_css('img')
   end
+
+  scenario 'When invoked respond_to? in decorator, delegate to view_context' do
+    visit "/authors/#{@rhg.author.id}"
+    page.should have_content('true')
+  end
 end

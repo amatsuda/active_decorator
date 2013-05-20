@@ -10,5 +10,11 @@ module ActiveDecorator
         raise original_error
       end
     end
+
+    if RUBY_VERSION >= '1.9.3'
+      def respond_to_missing?(method, include_private)
+        ActiveDecorator::ViewContext.current.respond_to?(method, include_private)
+      end
+    end
   end
 end
