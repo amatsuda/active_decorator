@@ -10,6 +10,7 @@ module ActiveDecoratorTestApp
     config.secret_token = '"confusion" will be my epitaph.'
     config.session_store :cookie_store, :key => '_myapp_session'
     config.active_support.deprecation = :log
+    config.eager_load = false
   end
 end
 ActiveDecoratorTestApp::Application.initialize!
