@@ -23,3 +23,5 @@ matrix:
       gemfile: gemfiles/Gemfile-rails.3.1.x
     - rvm: 1.8.7
       gemfile: gemfiles/Gemfile-rails.4.0.x
+  allow_failures:
+    - rvm: ruby-head
