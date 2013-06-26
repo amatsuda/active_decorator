@@ -10,7 +10,6 @@ gemfile:
   - gemfiles/Gemfile-rails.3.1.x
   - gemfiles/Gemfile-rails.3.2.x
   - gemfiles/Gemfile-rails.4.0.x
-  - Gemfile
 matrix:
   exclude:
     - rvm: 2.0.0
