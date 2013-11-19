@@ -1,6 +1,6 @@
 # ActiveDecorator
 
-A simple and Rubyish view helper for Rails 3. Keep your helpers and views Object-Oriented!
+A simple and Rubyish view helper for Rails 3 and Rails 4. Keep your helpers and views Object-Oriented!
 
 
 ## Features ##
@@ -17,9 +17,9 @@ A simple and Rubyish view helper for Rails 3. Keep your helpers and views Object
 Rails 3.0.x, 3.1.x, 3.2.x, 4.0.x, and 4.1 (edge)
 
 
-## Supported ORMs ##
+## Supported ORMs/ODMs ##
 
-ActiveRecord, ActiveResource, and any kind of ORMs that uses Ruby Objects as model objects
+ActiveRecord, ActiveResource, Mongoid and any kind of ORMs/ODMs that uses Ruby Objects as model objects
 
 
 ## Usage ##
