@@ -1,6 +1,6 @@
 # ActiveDecorator
 
-A simple and Rubyish view helper for Rails 3. Keep your helpers and views Object-Oriented!
+A simple and Rubyish view helper for Rails 3 and Rails 4. Keep your helpers and views Object-Oriented!
 
 
 ## Features ##
