@@ -45,6 +45,10 @@ module AuthorDecorator
   def capitalized_name
     name.capitalize
   end
+
+  def current_user_id_respond_to?
+    respond_to?(:current_user_id)
+  end
 end
 module BookDecorator
   def reverse_title
@@ -70,6 +74,11 @@ class MovieDecorator; end
 # controllers
 class ApplicationController < ActionController::Base
   self.append_view_path File.dirname(__FILE__)
+  private
+  def current_user_id
+    1
+  end
+  helper_method :current_user_id
 end
 class AuthorsController < ApplicationController
   def index
