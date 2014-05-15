@@ -5,8 +5,16 @@ module ActiveDecorator
   class Decorator
     include Singleton
 
+    DEFAULT_NAME_RESOLVER = lambda {|model_class| "#{model_class.name}Decorator" }
+
     def initialize
-      @@decorators = {}
+      @@decorators   = {}
+      @name_resolver = DEFAULT_NAME_RESOLVER
+    end
+
+    def resolve_decorator_with(&block)
+      @@decorators.clear
+      @name_resolver = block
     end
 
     def decorate(obj)
@@ -36,7 +44,7 @@ module ActiveDecorator
     def decorator_for(model_class)
       return @@decorators[model_class] if @@decorators.has_key? model_class
 
-      decorator_name = "#{model_class.name}Decorator"
+      decorator_name = @name_resolver.call(model_class)
       d = decorator_name.constantize
       unless Class === d
         d.send :include, ActiveDecorator::Helpers
