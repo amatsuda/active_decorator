@@ -11,6 +11,7 @@ module ActiveDecoratorTestApp
     config.session_store :cookie_store, :key => '_myapp_session'
     config.active_support.deprecation = :log
     config.eager_load = false
+    config.action_dispatch.show_exceptions = false
   end
 end
 ActiveDecoratorTestApp::Application.initialize!
@@ -73,10 +74,20 @@ class ApplicationController < ActionController::Base
 end
 class AuthorsController < ApplicationController
   def index
-    if params[:variable_type] == 'array'
-      @authors = Author.all
+    if Author.respond_to?(:scoped)
+      # ActiveRecord 3.x
+      if params[:variable_type] == 'array'
+        @authors = Author.all
+      else
+        @authors = Author.scoped
+      end
     else
-      @authors = Author.scoped
+      # ActiveRecord 4.x
+      if params[:variable_type] == 'array'
+        @authors = Author.all.to_a
+      else
+        @authors = Author.all
+      end
     end
   end
 
