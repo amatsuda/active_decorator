@@ -41,8 +41,12 @@ module ActiveDecorator
         @@decorators[model_class] = nil
       end
     rescue NameError
-      # Cache nil results
-      @@decorators[model_class] = nil
+      if model_class.respond_to?(:base_class) && (model_class.base_class != model_class)
+        @@decorators[model_class] = decorator_for model_class.base_class
+      else
+        # Cache nil results
+        @@decorators[model_class] = nil
+      end
     end
   end
 
