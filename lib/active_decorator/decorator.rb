@@ -25,6 +25,8 @@ module ActiveDecorator
           end
           alias_method_chain :to_a, :decorator
         end
+      elsif defined?(Mongoid) && obj.is_a?(Mongoid::Criteria)
+        obj.extend ORM::Mongoid
       else
         d = decorator_for obj.class
         return obj unless d
