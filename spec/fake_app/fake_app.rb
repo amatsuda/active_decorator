@@ -19,7 +19,7 @@ ActiveDecoratorTestApp::Application.initialize!
 # routes
 ActiveDecoratorTestApp::Application.routes.draw do
   resources :authors, :only => [:index, :show] do
-    resources :books, :only => :show
+    resources :books, :only => [:index, :show]
   end
   resources :movies, :only => :show
 end
@@ -96,6 +96,11 @@ class AuthorsController < ApplicationController
   end
 end
 class BooksController < ApplicationController
+  def index
+    @author = Author.find params[:author_id]
+    @books  = @author.books
+  end
+
   def show
     @book = Author.find(params[:author_id]).books.find(params[:id])
   end
