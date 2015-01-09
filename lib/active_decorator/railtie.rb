@@ -13,6 +13,7 @@ module ActiveDecorator
       end
       ActiveSupport.on_load(:action_mailer) do
         require 'active_decorator/monkey/abstract_controller/rendering'
+        ActionMailer::Base.send :include, ActiveDecorator::ViewContext::Filter
       end
     end
   end
