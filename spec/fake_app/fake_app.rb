@@ -1,6 +1,7 @@
 require 'active_record'
 require 'action_controller/railtie'
 require 'action_view/railtie'
+require 'jbuilder'
 
 # config
 ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ':memory:')

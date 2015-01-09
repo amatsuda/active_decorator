@@ -10,6 +10,7 @@ module ActiveDecorator
     end
 
     def decorate(obj)
+      return if defined?(Jbuilder) && Jbuilder === obj
       return if obj.nil?
 
       if obj.is_a?(Array)
