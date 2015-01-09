@@ -12,4 +12,8 @@ gem 'capybara', '~> 2.0.0'
 gem 'rubyzip', '< 1.0.0'
 gem 'sqlite3'
 gem 'nokogiri', '~> 1.5.0'
-gem 'jbuilder'
+if RUBY_VERSION <= '1.8.7'
+  gem 'jbuilder', '< 2'
+else
+  gem 'jbuilder'
+end
