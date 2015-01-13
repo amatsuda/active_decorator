@@ -37,16 +37,21 @@ module ActiveDecorator
     def decorator_for(model_class)
       return @@decorators[model_class] if @@decorators.has_key? model_class
 
-      decorator_name = "#{model_class.name}Decorator"
-      d = decorator_name.constantize
-      unless Class === d
-        d.send :include, ActiveDecorator::Helpers
-        @@decorators[model_class] = d
-      else
-        @@decorators[model_class] = nil
+      (model_class.ancestors - model_class.included_modules).find do |candidate|
+        decorator_name = "#{candidate.name}Decorator"
+
+        begin
+          d = decorator_name.constantize
+
+          unless Class === d
+            d.send :include, ActiveDecorator::Helpers
+            @@decorators[model_class] = d
+            return d
+          end
+        rescue NameError
+          next
+        end
       end
-    rescue NameError
-      @@decorators[model_class] = nil
     end
   end
 end
