@@ -17,3 +17,4 @@ if RUBY_VERSION <= '1.8.7'
 else
   gem 'jbuilder'
 end
+gem 'test-unit'
