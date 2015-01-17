@@ -63,6 +63,16 @@ end
 <% end %>
 ```
 
+## Configuration
+
+If you want to use other decorator suffix, you can configurate.
+
+```
+ActiveDecorator.configure do |config|
+  config.decorator_suffix = 'Presenter'
+end
+```
+
 ## Contributing to ActiveDecorator ##
 
 * Fork, fix, then send me a pull request.
