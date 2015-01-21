@@ -12,7 +12,7 @@ module ComicPresenter
   end
 end
 
-describe 'Configure' do
+describe ActiveDecorator::Configuration do
   let(:comic) { Comic.new }
 
   before do
