@@ -29,7 +29,7 @@ describe 'Configure' do
     end
   end
 
-  it 'must use MoviePresenter' do
+  it 'must use ComicPresenter' do
     expect(comic.presenter).to eq 'presenter'
   end
 end
