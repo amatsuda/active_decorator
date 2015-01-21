@@ -1,19 +1,15 @@
 require 'spec_helper'
 
-class Comic
-  def presenter
-    'decorator'
-  end
-end
+Comic = Struct.new(:title, :price)
 
 module ComicPresenter
-  def presenter
-    'presenter'
+  def price
+    "$#{super}"
   end
 end
 
 describe ActiveDecorator::Configuration do
-  let(:comic) { Comic.new }
+  let(:comic) { Comic.new("amatsuda's (Poignant) Guide to ActiveDecorator", 3) }
 
   before do
     ActiveDecorator.configure do |config|
@@ -30,6 +26,6 @@ describe ActiveDecorator::Configuration do
   end
 
   it 'must use ComicPresenter' do
-    expect(comic.presenter).to eq 'presenter'
+    expect(comic.price).to eq '$3'
   end
 end
