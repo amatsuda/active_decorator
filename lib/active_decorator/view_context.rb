@@ -14,8 +14,14 @@ module ActiveDecorator
       extend ActiveSupport::Concern
 
       included do
-        before_filter do |controller|
-          ActiveDecorator::ViewContext.current = controller.view_context
+        if Rails::VERSION::MAJOR >= 4
+          before_action do |controller|
+            ActiveDecorator::ViewContext.current = controller.view_context
+          end
+        else
+          before_filter do |controller|
+            ActiveDecorator::ViewContext.current = controller.view_context
+          end
         end
       end
     end
