@@ -30,7 +30,7 @@ module ActiveDecorator
           before_filter do |controller|
             ActiveDecorator::ViewContext.push controller.view_context
           end
-          after_action do |controller|
+          after_filter do |controller|
             ActiveDecorator::ViewContext.pop
           end
         end
