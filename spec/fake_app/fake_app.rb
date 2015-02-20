@@ -13,6 +13,7 @@ module ActiveDecoratorTestApp
     config.active_support.deprecation = :log
     config.eager_load = false
     config.action_dispatch.show_exceptions = false
+    config.root = File.dirname(__FILE__)
   end
 end
 ActiveDecoratorTestApp::Application.initialize!
