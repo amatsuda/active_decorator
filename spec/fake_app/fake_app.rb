@@ -15,6 +15,8 @@ module ActiveDecoratorTestApp
     config.eager_load = false
     config.action_dispatch.show_exceptions = false
     config.root = File.dirname(__FILE__)
+
+    config.action_mailer.delivery_method = :test
   end
 end
 ActiveDecoratorTestApp::Application.initialize!
