@@ -8,7 +8,7 @@ feature 'fallback to helpers' do
 
   scenario 'invoking action_view helper methods' do
     visit "/authors/#{@rhg.author.id}/books/#{@rhg.id}"
-    within 'a' do
+    within 'a.title' do
       page.should have_content 'RHG'
     end
     page.should have_css('img')

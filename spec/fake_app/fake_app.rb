@@ -58,7 +58,7 @@ module BookDecorator
   end
 
   def link
-    link_to title, "#{request.protocol}#{request.host_with_port}/assets/sample.png"
+    link_to title, "#{request.protocol}#{request.host_with_port}/assets/sample.png", :class => 'title'
   end
 
   def cover_image
