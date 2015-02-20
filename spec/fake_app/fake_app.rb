@@ -1,5 +1,6 @@
 require 'active_record'
 require 'action_controller/railtie'
+require 'action_mailer/railtie'
 require 'action_view/railtie'
 require 'jbuilder'
 
@@ -21,7 +22,11 @@ ActiveDecoratorTestApp::Application.initialize!
 # routes
 ActiveDecoratorTestApp::Application.routes.draw do
   resources :authors, :only => [:index, :show] do
-    resources :books, :only => [:index, :show]
+    resources :books, :only => [:index, :show] do
+      member do
+        post :purchase
+      end
+    end
   end
   resources :movies, :only => :show
 end
@@ -106,10 +111,24 @@ class BooksController < ApplicationController
   def show
     @book = Author.find(params[:author_id]).books.find(params[:id])
   end
+
+  def purchase
+    @book = Author.find(params[:author_id]).books.find(params[:id])
+
+    BookMailer.thanks(@book).deliver
+  end
 end
 class MoviesController < ApplicationController
   def show
     @movie = Movie.find params[:id]
+  end
+end
+
+# mailers
+class BookMailer < ActionMailer::Base
+  def thanks(book)
+    @book = book
+    mail from: 'nobody@example.com', to: 'test@example.com', subject: 'Thanks'
   end
 end
 

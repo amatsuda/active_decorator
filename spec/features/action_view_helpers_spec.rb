@@ -13,4 +13,10 @@ feature 'fallback to helpers' do
     end
     page.should have_css('img')
   end
+
+  scenario 'make sure that action_view + action_mailer works' do
+    visit "/authors/#{@rhg.author.id}/books/#{@rhg.id}"
+    click_link 'purchase'
+    page.should have_content 'done'
+  end
 end
