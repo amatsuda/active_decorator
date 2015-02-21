@@ -20,18 +20,22 @@ module ActiveDecorator
 
       included do
         if Rails::VERSION::MAJOR >= 4
-          before_action do |controller|
-            ActiveDecorator::ViewContext.push controller.view_context
-          end
-          after_action do |controller|
-            ActiveDecorator::ViewContext.pop
+          around_action do |controller, blk|
+            begin
+              ActiveDecorator::ViewContext.push controller.view_context
+              blk.call
+            ensure
+              ActiveDecorator::ViewContext.pop
+            end
           end
         else
-          before_filter do |controller|
-            ActiveDecorator::ViewContext.push controller.view_context
-          end
-          after_filter do |controller|
-            ActiveDecorator::ViewContext.pop
+          around_filter do |controller, blk|
+            begin
+              ActiveDecorator::ViewContext.push controller.view_context
+              blk.call
+            ensure
+              ActiveDecorator::ViewContext.pop
+            end
           end
         end
       end
