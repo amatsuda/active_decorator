@@ -14,7 +14,7 @@ A simple and Rubyish view helper for Rails 3 and Rails 4. Keep your helpers and 
 
 ## Supported versions ##
 
-Rails 3.0.x, 3.1.x, 3.2.x, 4.0.x, and 4.1 (edge)
+Rails 3.0.x, 3.1.x, 3.2.x, 4.0.x, 4.1.x, 4.2.x, and 5.0 (edge)
 
 
 ## Supported ORMs ##
@@ -63,11 +63,13 @@ end
 <% end %>
 ```
 
-## Configuration
+## Configuring the decorator suffix
 
-If you want to use other decorator suffix, you can configurate.
+By default, ActiveDecorator searches a decorator module named `target_class.name + "Decorator"`
 
-```
+If you would like a different rule, you can configure in your initializer.
+
+```ruby
 ActiveDecorator.configure do |config|
   config.decorator_suffix = 'Presenter'
 end
