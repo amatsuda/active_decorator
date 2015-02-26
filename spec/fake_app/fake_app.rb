@@ -26,6 +26,7 @@ ActiveDecoratorTestApp::Application.routes.draw do
   resources :authors, :only => [:index, :show] do
     resources :books, :only => [:index, :show] do
       member do
+        get :error
         post :purchase
       end
     end
@@ -105,6 +106,10 @@ class AuthorsController < ApplicationController
   end
 end
 class BooksController < ApplicationController
+  rescue_from "StandardError" do
+    render "show"
+  end
+
   def index
     @author = Author.find params[:author_id]
     @books  = @author.books
@@ -112,6 +117,11 @@ class BooksController < ApplicationController
 
   def show
     @book = Author.find(params[:author_id]).books.find(params[:id])
+  end
+
+  def error
+    @book = Author.find(params[:author_id]).books.find(params[:id])
+    raise "error"
   end
 
   def purchase
