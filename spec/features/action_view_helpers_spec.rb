@@ -14,6 +14,11 @@ feature 'fallback to helpers' do
     page.should have_css('img')
   end
 
+  scenario 'invoking action_view helper methods in rescue_from view' do
+    visit "/authors/#{@rhg.author.id}/books/#{@rhg.id}/error"
+    page.should have_content('ERROR')
+  end
+
   scenario 'make sure that action_view + action_mailer works' do
     visit "/authors/#{@rhg.author.id}/books/#{@rhg.id}"
     click_link 'purchase'

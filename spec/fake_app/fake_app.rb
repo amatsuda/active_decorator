@@ -26,6 +26,7 @@ ActiveDecoratorTestApp::Application.routes.draw do
   resources :authors, :only => [:index, :show] do
     resources :books, :only => [:index, :show] do
       member do
+        get :error
         post :purchase
       end
     end
@@ -72,6 +73,10 @@ module BookDecorator
   def cover_image
     image_tag 'cover.png'
   end
+
+  def error
+    "ERROR"
+  end
 end
 
 # decorator fake
@@ -105,6 +110,12 @@ class AuthorsController < ApplicationController
   end
 end
 class BooksController < ApplicationController
+  class CustomError < StandardError; end
+
+  rescue_from "CustomError" do
+    render "error"
+  end
+
   def index
     @author = Author.find params[:author_id]
     @books  = @author.books
@@ -112,6 +123,11 @@ class BooksController < ApplicationController
 
   def show
     @book = Author.find(params[:author_id]).books.find(params[:id])
+  end
+
+  def error
+    @book = Author.find(params[:author_id]).books.find(params[:id])
+    raise CustomError, "error"
   end
 
   def purchase
