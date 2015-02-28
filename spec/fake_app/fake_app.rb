@@ -112,7 +112,7 @@ end
 class BooksController < ApplicationController
   class CustomError < StandardError; end
 
-  rescue_from "CustomError" do
+  rescue_from CustomError do
     render "error"
   end
 
