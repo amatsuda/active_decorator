@@ -73,6 +73,10 @@ module BookDecorator
   def cover_image
     image_tag 'cover.png'
   end
+
+  def error
+    "ERROR"
+  end
 end
 
 # decorator fake
@@ -106,8 +110,10 @@ class AuthorsController < ApplicationController
   end
 end
 class BooksController < ApplicationController
-  rescue_from "StandardError" do
-    render "show"
+  class CustomError < StandardError; end
+
+  rescue_from "CustomError" do
+    render "error"
   end
 
   def index
@@ -121,7 +127,7 @@ class BooksController < ApplicationController
 
   def error
     @book = Author.find(params[:author_id]).books.find(params[:id])
-    raise "error"
+    raise CustomError, "error"
   end
 
   def purchase

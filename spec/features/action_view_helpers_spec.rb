@@ -16,10 +16,7 @@ feature 'fallback to helpers' do
 
   scenario 'invoking action_view helper methods in rescue_from view' do
     visit "/authors/#{@rhg.author.id}/books/#{@rhg.id}/error"
-    within 'a.title' do
-      page.should have_content 'RHG'
-    end
-    page.should have_css('img')
+    page.should have_content('ERROR')
   end
 
   scenario 'make sure that action_view + action_mailer works' do
