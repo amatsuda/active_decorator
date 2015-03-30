@@ -1,6 +1,8 @@
 require 'active_record'
 require 'action_controller/railtie'
+require 'action_mailer/railtie'
 require 'action_view/railtie'
+require 'jbuilder'
 
 # config
 ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ':memory:')
@@ -11,6 +13,10 @@ module ActiveDecoratorTestApp
     config.session_store :cookie_store, :key => '_myapp_session'
     config.active_support.deprecation = :log
     config.eager_load = false
+    config.action_dispatch.show_exceptions = false
+    config.root = File.dirname(__FILE__)
+
+    config.action_mailer.delivery_method = :test
   end
 end
 ActiveDecoratorTestApp::Application.initialize!
@@ -18,7 +24,19 @@ ActiveDecoratorTestApp::Application.initialize!
 # routes
 ActiveDecoratorTestApp::Application.routes.draw do
   resources :authors, :only => [:index, :show] do
-    resources :books, :only => :show
+    resources :books, :only => [:index, :show] do
+      member do
+        get :error
+        post :purchase
+      end
+    end
+
+    resources :novels do
+      member do
+        get :error
+        post :purchase
+      end
+    end
   end
   resources :movies, :only => :show
 end
@@ -58,11 +76,15 @@ module BookDecorator
   end
 
   def link
-    link_to title, "#{request.protocol}#{request.host_with_port}/assets/sample.png"
+    link_to title, "#{request.protocol}#{request.host_with_port}/assets/sample.png", :class => 'title'
   end
 
   def cover_image
     image_tag 'cover.png'
+  end
+
+  def error
+    "ERROR"
   end
 end
 
@@ -75,10 +97,20 @@ class ApplicationController < ActionController::Base
 end
 class AuthorsController < ApplicationController
   def index
-    if params[:variable_type] == 'array'
-      @authors = Author.all
+    if Author.respond_to?(:scoped)
+      # ActiveRecord 3.x
+      if params[:variable_type] == 'array'
+        @authors = Author.all
+      else
+        @authors = Author.scoped
+      end
     else
-      @authors = Author.scoped
+      # ActiveRecord 4.x
+      if params[:variable_type] == 'array'
+        @authors = Author.all.to_a
+      else
+        @authors = Author.all
+      end
     end
   end
 
@@ -87,13 +119,45 @@ class AuthorsController < ApplicationController
   end
 end
 class BooksController < ApplicationController
+  class CustomError < StandardError; end
+
+  rescue_from CustomError do
+    render "error"
+  end
+
+  def index
+    @author = Author.find params[:author_id]
+    @books  = @author.books
+  end
+
   def show
     @book = Author.find(params[:author_id]).books.find(params[:id])
+  end
+
+  def error
+    @book = Author.find(params[:author_id]).books.find(params[:id])
+    raise CustomError, "error"
+  end
+
+  def purchase
+    @book = Author.find(params[:author_id]).books.find(params[:id])
+
+    @view_context_before_sending_mail = ActiveDecorator::ViewContext.current
+    BookMailer.thanks(@book).deliver
+    raise 'Wrong ViewContext!' if ActiveDecorator::ViewContext.current != @view_context_before_sending_mail
   end
 end
 class MoviesController < ApplicationController
   def show
     @movie = Movie.find params[:id]
+  end
+end
+
+# mailers
+class BookMailer < ActionMailer::Base
+  def thanks(book)
+    @book = book
+    mail :from => 'nobody@example.com', :to => 'test@example.com', :subject => 'Thanks'
   end
 end
 

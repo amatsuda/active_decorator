@@ -1,0 +1,4 @@
+<%= @book.link %>
+<%= @book.cover_image %>
+
+<%= link_to 'purchase', [:purchase, @book.author, @book], :method => :post %>

@@ -1,31 +1,35 @@
 language: ruby
+
 script: bundle exec rake spec
+
 rvm:
-  - 1.8.7
   - 1.9.3
   - 2.0.0
-  - 2.1.0
+  - 2.1
+  - 2.2
   - ruby-head
 gemfile:
-  - gemfiles/Gemfile-rails.3.0.x
-  - gemfiles/Gemfile-rails.3.1.x
   - gemfiles/Gemfile-rails.3.2.x
   - gemfiles/Gemfile-rails.4.0.x
+  - gemfiles/Gemfile-rails.4.1.x
+  - gemfiles/Gemfile-rails.4.2.x
+
+sudo: false
+
 matrix:
-  exclude:
-    - rvm: 2.0.0
+  include:
+    - rvm: 1.8.7
       gemfile: gemfiles/Gemfile-rails.3.0.x
-    - rvm: 2.0.0
-      gemfile: gemfiles/Gemfile-rails.3.1.x
-    - rvm: 2.1.0
-      gemfile: gemfiles/Gemfile-rails.3.0.x
-    - rvm: 2.1.0
-      gemfile: gemfiles/Gemfile-rails.3.1.x
-    - rvm: ruby-head
-      gemfile: gemfiles/Gemfile-rails.3.0.x
-    - rvm: ruby-head
+    - rvm: 1.8.7
       gemfile: gemfiles/Gemfile-rails.3.1.x
     - rvm: 1.8.7
-      gemfile: gemfiles/Gemfile-rails.4.0.x
+      gemfile: gemfiles/Gemfile-rails.3.2.x
+    - rvm: 1.9.3
+      gemfile: gemfiles/Gemfile-rails.3.0.x
+    - rvm: 1.9.3
+      gemfile: gemfiles/Gemfile-rails.3.1.x
+  exclude:
+    - rvm: ruby-head
+      gemfile: gemfiles/Gemfile-rails.3.2.x
   allow_failures:
     - rvm: ruby-head

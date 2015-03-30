@@ -10,9 +10,10 @@ module ActiveDecorator
     end
 
     def decorate(obj)
+      return if defined?(Jbuilder) && Jbuilder === obj
       return if obj.nil?
 
-      if Array === obj
+      if obj.is_a?(Array)
         obj.each do |r|
           decorate r
         end
@@ -36,7 +37,7 @@ module ActiveDecorator
     def decorator_for(model_class)
       return @@decorators[model_class] if @@decorators.has_key? model_class
 
-      decorator_name = "#{model_class.name}Decorator"
+      decorator_name = "#{model_class.name}#{ActiveDecorator.config.decorator_suffix}"
       d = decorator_name.constantize
       unless Class === d
         d.send :include, ActiveDecorator::Helpers

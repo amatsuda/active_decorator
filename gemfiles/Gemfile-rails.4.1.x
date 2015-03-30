@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-gemspec
+gem 'active_decorator', :path => '..'
 
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.1.0'
 gem 'rspec-rails'
-gem 'capybara', '>= 2'
+gem 'capybara'
 gem 'sqlite3'
 gem 'jbuilder'

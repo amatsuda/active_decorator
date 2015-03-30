@@ -11,6 +11,10 @@ require 'rspec/rails'
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 RSpec.configure do |config|
+  config.expect_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+
   config.before :all do
     CreateAllTables.up unless ActiveRecord::Base.connection.table_exists? 'authors'
   end

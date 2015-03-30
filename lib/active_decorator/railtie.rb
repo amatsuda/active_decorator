@@ -9,10 +9,14 @@ module ActiveDecorator
       end
       ActiveSupport.on_load(:action_controller) do
         require 'active_decorator/monkey/abstract_controller/rendering'
+        require 'active_decorator/monkey/action_controller/base/rescue_from'
         ActionController::Base.send :include, ActiveDecorator::ViewContext::Filter
       end
       ActiveSupport.on_load(:action_mailer) do
-        require 'active_decorator/monkey/abstract_controller/rendering'
+        if ActionMailer::Base.respond_to? :before_action
+          require 'active_decorator/monkey/abstract_controller/rendering'
+          ActionMailer::Base.send :include, ActiveDecorator::ViewContext::Filter
+        end
       end
     end
   end

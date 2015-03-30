@@ -1,3 +1,3 @@
 module ActiveDecorator
-  VERSION = '0.3.4'
+  VERSION = '0.5.1'
 end
