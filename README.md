@@ -1,4 +1,4 @@
-# ActiveDecorator
+# ActiveDecorator [![Build Status](https://travis-ci.org/amatsuda/active_decorator.svg?branch=master)](https://travis-ci.org/amatsuda/active_decorator) [![Code Climate](https://codeclimate.com/github/amatsuda/active_decorator/badges/gpa.svg)](https://codeclimate.com/github/amatsuda/active_decorator)
 
 A simple and Rubyish view helper for Rails 3 and Rails 4. Keep your helpers and views Object-Oriented!
 
