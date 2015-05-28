@@ -92,6 +92,8 @@ class AuthorsController < ApplicationController
       # ActiveRecord 3.x
       if params[:variable_type] == 'array'
         @authors = Author.all
+      elsif params[:variable_type] == 'proxy'
+        @authors = RelationProxy.new(Author.scoped)
       else
         @authors = Author.scoped
       end
@@ -99,6 +101,8 @@ class AuthorsController < ApplicationController
       # ActiveRecord 4.x
       if params[:variable_type] == 'array'
         @authors = Author.all.to_a
+      elsif params[:variable_type] == 'proxy'
+        @authors = RelationProxy.new(Author.all)
       else
         @authors = Author.all
       end
@@ -158,5 +162,32 @@ class CreateAllTables < ActiveRecord::Migration
     create_table(:authors) {|t| t.string :name}
     create_table(:books) {|t| t.string :title; t.references :author}
     create_table(:movies) {|t| t.string :name}
+  end
+end
+
+# Proxy for ActiveRecord::Relation
+if RUBY_VERSION >= '1.9.0'
+  class RelationProxy < BasicObject
+    attr_accessor :ar_relation
+
+    def initialize(ar_relation)
+      @ar_relation = ar_relation
+    end
+
+    def method_missing(method, *args, &block)
+      @ar_relation.public_send(method, *args, &block)
+    end
+  end
+else
+  class RelationProxy < Object
+    attr_accessor :ar_relation
+
+    def initialize(ar_relation)
+      @ar_relation = ar_relation
+    end
+
+    def method_missing(method, *args, &block)
+      @ar_relation.send(method, *args, &block)
+    end
   end
 end
