@@ -30,6 +30,12 @@ feature 'decorating controller ivar' do
     page.should have_content 'takahashim'.reverse
   end
 
+  scenario "decorating models' proxy object in ivar" do
+    visit '/authors?variable_type=proxy'
+    page.should have_content 'takahashim'
+    page.should have_content 'takahashim'.reverse
+  end
+
   scenario 'decorating model association proxy in ivar' do
     visit "/authors/#{@matz.id}/books"
     page.should have_content 'the world of code'
