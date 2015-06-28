@@ -2,6 +2,7 @@ require 'active_record'
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
+require 'ostruct'
 require 'jbuilder'
 
 # config
