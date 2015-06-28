@@ -15,7 +15,7 @@ Examples:
 DESC
 
       def create_decorator_file
-        template 'decorator.rb', File.join('app/decorators', "#{singular_name}_decorator.rb")
+        template 'decorator.rb', File.join('app/decorators', class_path, "#{file_name}_decorator.rb")
       end
 
       hook_for :test_framework
