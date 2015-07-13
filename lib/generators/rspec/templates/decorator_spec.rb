@@ -1,4 +1,3 @@
-# coding: utf-8
 require '<%= File.exists?('spec/rails_helper.rb') ? 'rails_helper' : 'spec_helper' %>'
 
 describe <%= singular_name.camelize %>Decorator do
