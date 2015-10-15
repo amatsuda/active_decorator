@@ -4,6 +4,9 @@ require 'rails'
 module ActiveDecorator
   class Railtie < ::Rails::Railtie
     initializer 'active_decorator' do
+      ActiveSupport.on_load(:active_record) do
+        require 'active_decorator/monkey/active_record/relation'
+      end
       ActiveSupport.on_load(:action_view) do
         require 'active_decorator/monkey/action_view/partial_renderer'
       end

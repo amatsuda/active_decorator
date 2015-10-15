@@ -13,18 +13,9 @@ module ActiveDecorator
       return if defined?(Jbuilder) && Jbuilder === obj
       return if obj.nil?
 
-      if obj.is_a?(Array)
+      if obj.is_a?(Array) || obj.is_a?(ActiveRecord::Relation)
         obj.each do |r|
           decorate r
-        end
-      elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation) && !obj.respond_to?(:to_a_with_decorator)
-        obj.class.class_eval do
-          def to_a_with_decorator
-            to_a_without_decorator.tap do |arr|
-              ActiveDecorator::Decorator.instance.decorate arr
-            end
-          end
-          alias_method_chain :to_a, :decorator
         end
       else
         d = decorator_for obj.class
