@@ -65,7 +65,7 @@ end
 
 ## Decorating associated objects ##
 
-ActiveDecorator *dose not* automatically decorate associated objects. We recommend that you pass associated objects to `render` when decorated associated objects are needed.
+ActiveDecorator *does not* automatically decorate associated objects. We recommend that you pass associated objects to `render` when decorated associated objects are needed.
 
 ```ruby
 # app/models/blog_post.rb
