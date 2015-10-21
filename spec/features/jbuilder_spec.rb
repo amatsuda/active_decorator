@@ -4,10 +4,6 @@ feature 'decorating partial object in Jbuilder' do
     nari = Author.create! :name => 'nari'
     nari.books.create! :title => 'the gc book'
   end
-  after do
-    Book.delete_all
-    Author.delete_all
-  end
 
   scenario 'decorating objects in Jbuilder partials' do
     visit "/authors/#{Author.last.id}.json"
