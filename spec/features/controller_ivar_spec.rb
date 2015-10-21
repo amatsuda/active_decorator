@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'decorating controller ivar' do
   background do
     @matz = Author.create! :name => 'matz'

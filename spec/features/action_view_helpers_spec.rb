@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'fallback to helpers' do
   background do
     aamine = Author.create! :name => 'aamine'
