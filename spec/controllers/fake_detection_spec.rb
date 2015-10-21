@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe MoviesController, :type => :controller do
   let(:movie){ Movie.create }
 

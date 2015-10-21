@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'decorating partial object in Jbuilder' do
   background do
     Author.create! :name => 'aamine'

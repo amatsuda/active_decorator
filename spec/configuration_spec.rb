@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 Comic = Struct.new(:title, :price)
 
 module ComicPresenter
