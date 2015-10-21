@@ -18,6 +18,7 @@ RSpec.configure do |config|
   config.before :all do
     CreateAllTables.up unless ActiveRecord::Base.connection.table_exists? 'authors'
   end
+
   config.before :each do
     Book.delete_all
     Author.delete_all

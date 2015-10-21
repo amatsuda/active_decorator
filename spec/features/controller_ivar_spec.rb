@@ -5,11 +5,6 @@ feature 'decorating controller ivar' do
     Author.create! :name => 'takahashim'
   end
 
-  after do
-    Author.delete_all
-    Book.delete_all
-  end
-
   scenario 'decorating a model object in ivar' do
     visit "/authors/#{@matz.id}"
     page.should have_content 'matz'
