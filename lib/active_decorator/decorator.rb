@@ -2,6 +2,26 @@ require 'singleton'
 require 'active_decorator/helpers'
 
 module ActiveDecorator
+  module DecoratorPrependModule
+    def each
+      if block_given?
+        super {|e| yield ActiveDecorator::Decorator.instance.decorate(e) }
+      else
+        super
+      end
+    end
+
+    # We should override #map method, because Array#map dose not depend on
+    # Array#each and ActionView::PartialRenderer calls #map method.
+    def map
+      if block_given?
+        super {|e| yield ActiveDecorator::Decorator.instance.decorate(e) }
+      else
+        super
+      end
+    end
+  end
+
   class Decorator
     include Singleton
 
@@ -13,19 +33,8 @@ module ActiveDecorator
       return if defined?(Jbuilder) && Jbuilder === obj
       return if obj.nil?
 
-      if obj.is_a?(Array)
-        obj.each do |r|
-          decorate r
-        end
-      elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation) && !obj.respond_to?(:to_a_with_decorator)
-        obj.class.class_eval do
-          def to_a_with_decorator
-            to_a_without_decorator.tap do |arr|
-              ActiveDecorator::Decorator.instance.decorate arr
-            end
-          end
-          alias_method_chain :to_a, :decorator
-        end
+      if !obj.is_a?(DecoratorPrependModule) && obj.respond_to?(:each)
+        obj.singleton_class.prepend DecoratorPrependModule
       else
         d = decorator_for obj.class
         return obj unless d
