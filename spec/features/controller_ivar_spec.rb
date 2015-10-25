@@ -1,8 +1,8 @@
 feature 'decorating controller ivar' do
   background do
-    @matz = Author.create! :name => 'matz'
-    @matz.books.create! :title => 'the world of code'
-    Author.create! :name => 'takahashim'
+    @matz = Author.create! name: 'matz'
+    @matz.books.create! title: 'the world of code'
+    Author.create! name: 'takahashim'
   end
 
   scenario 'decorating a model object in ivar' do

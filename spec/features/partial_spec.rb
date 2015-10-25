@@ -1,8 +1,8 @@
 feature 'decorating partial object' do
   background do
-    Author.create! :name => 'aamine'
-    nari = Author.create! :name => 'nari'
-    nari.books.create! :title => 'the gc book'
+    Author.create! name: 'aamine'
+    nari = Author.create! name: 'nari'
+    nari.books.create! title: 'the gc book'
   end
 
   scenario 'decorating implicit @object' do
