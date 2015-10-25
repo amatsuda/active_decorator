@@ -7,6 +7,6 @@ feature 'decorating partial object in Jbuilder' do
 
   scenario 'decorating objects in Jbuilder partials' do
     visit "/authors/#{Author.last.id}.json"
-    page.source.should eq '{"name":"nari","books":[{"title":"the gc book","reverse_title":"koob cg eht"}]}'
+    expect(page.source).to eq '{"name":"nari","books":[{"title":"the gc book","reverse_title":"koob cg eht"}]}'
   end
 end
