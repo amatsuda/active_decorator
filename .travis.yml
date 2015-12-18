@@ -5,7 +5,7 @@ script: bundle exec rake spec
 rvm:
   - 2.0.0
   - 2.1
-  - 2.2.3
+  - 2.2.4
   - ruby-head
 gemfile:
   - gemfiles/Gemfile-rails.3.2.x
