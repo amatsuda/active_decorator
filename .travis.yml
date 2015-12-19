@@ -20,5 +20,9 @@ matrix:
   exclude:
     - rvm: ruby-head
       gemfile: gemfiles/Gemfile-rails.3.2.x
+    - rvm: 2.0.0
+      gemfile: gemfiles/Gemfile-rails.5.0.0.beta1
+    - rvm: 2.1
+      gemfile: gemfiles/Gemfile-rails.5.0.0.beta1
   allow_failures:
     - rvm: ruby-head
