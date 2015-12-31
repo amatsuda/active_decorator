@@ -17,15 +17,8 @@ module ActiveDecorator
         obj.each do |r|
           decorate r
         end
-      elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation) && !obj.respond_to?(:to_a_with_decorator)
-        obj.class.class_eval do
-          def to_a_with_decorator
-            to_a_without_decorator.tap do |arr|
-              ActiveDecorator::Decorator.instance.decorate arr
-            end
-          end
-          alias_method_chain :to_a, :decorator
-        end
+      elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation) && !obj.is_a?(ActiveDecorator::RelationDecorator)
+        obj.extend ActiveDecorator::RelationDecorator
       else
         d = decorator_for obj.class
         return obj unless d
@@ -47,6 +40,14 @@ module ActiveDecorator
       end
     rescue NameError
       @@decorators[model_class] = nil
+    end
+  end
+
+  module RelationDecorator
+    def to_a
+      super.tap do |arr|
+        ActiveDecorator::Decorator.instance.decorate arr
+      end
     end
   end
 end

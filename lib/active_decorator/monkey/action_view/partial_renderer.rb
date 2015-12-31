@@ -1,24 +1,21 @@
 module ActiveDecorator
-  module ActionViewExtension
-    def setup_decorator
-      @locals.values.each do |v|
-        ActiveDecorator::Decorator.instance.decorate v
-      end unless @locals.blank?
-      ActiveDecorator::Decorator.instance.decorate @object unless @object.blank?
-      ActiveDecorator::Decorator.instance.decorate @collection unless @collection.blank?
+  module Monkey
+    module ActionView
+      module PartialRenderer
+        def setup(*)
+          super
 
-      self
+          @locals.values.each do |v|
+            ActiveDecorator::Decorator.instance.decorate v
+          end unless @locals.blank?
+          ActiveDecorator::Decorator.instance.decorate @object unless @object.blank?
+          ActiveDecorator::Decorator.instance.decorate @collection unless @collection.blank?
+
+          self
+        end
+      end
     end
   end
 end
 
-class ActionView::PartialRenderer
-  include ActiveDecorator::ActionViewExtension
-
-  def setup_with_decorator(context, options, block) #:nodoc:
-    setup_without_decorator context, options, block
-    setup_decorator
-  end
-
-  alias_method_chain :setup, :decorator
-end
+::ActionView::PartialRenderer.send :prepend, ActiveDecorator::Monkey::ActionView::PartialRenderer
