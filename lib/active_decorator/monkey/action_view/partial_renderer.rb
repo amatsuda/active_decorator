@@ -12,26 +12,13 @@ module ActiveDecorator
   end
 end
 
-if ActionPack::VERSION::STRING >= '3.1'
-  class ActionView::PartialRenderer
-    include ActiveDecorator::ActionViewExtension
+class ActionView::PartialRenderer
+  include ActiveDecorator::ActionViewExtension
 
-    def setup_with_decorator(context, options, block) #:nodoc:
-      setup_without_decorator context, options, block
-      setup_decorator
-    end
-
-    alias_method_chain :setup, :decorator
+  def setup_with_decorator(context, options, block) #:nodoc:
+    setup_without_decorator context, options, block
+    setup_decorator
   end
-else
-  class ActionView::Partials::PartialRenderer
-    include ActiveDecorator::ActionViewExtension
 
-    def setup_with_decorator(options, block) #:nodoc:
-      setup_without_decorator options, block
-      setup_decorator
-    end
-
-    alias_method_chain :setup, :decorator
-  end
+  alias_method_chain :setup, :decorator
 end
