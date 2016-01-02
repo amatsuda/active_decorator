@@ -167,28 +167,14 @@ class CreateAllTables < ActiveRecord::Migration
 end
 
 # Proxy for ActiveRecord::Relation
-if RUBY_VERSION >= '1.9.0'
-  class RelationProxy < BasicObject
-    attr_accessor :ar_relation
+class RelationProxy < BasicObject
+  attr_accessor :ar_relation
 
-    def initialize(ar_relation)
-      @ar_relation = ar_relation
-    end
-
-    def method_missing(method, *args, &block)
-      @ar_relation.public_send(method, *args, &block)
-    end
+  def initialize(ar_relation)
+    @ar_relation = ar_relation
   end
-else
-  class RelationProxy < Object
-    attr_accessor :ar_relation
 
-    def initialize(ar_relation)
-      @ar_relation = ar_relation
-    end
-
-    def method_missing(method, *args, &block)
-      @ar_relation.send(method, *args, &block)
-    end
+  def method_missing(method, *args, &block)
+    @ar_relation.public_send(method, *args, &block)
   end
 end
