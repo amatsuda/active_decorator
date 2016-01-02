@@ -13,8 +13,8 @@ module ActiveDecorator
         ActionController::Base.send :include, ActiveDecorator::ViewContext::Filter
       end
       ActiveSupport.on_load(:action_mailer) do
+        require 'active_decorator/monkey/action_mailer/base/rendering'
         if ActionMailer::Base.respond_to? :before_action
-          require 'active_decorator/monkey/action_mailer/base/rendering'
           ActionMailer::Base.send :include, ActiveDecorator::ViewContext::Filter
         end
       end
