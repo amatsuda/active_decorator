@@ -14,7 +14,9 @@ A simple and Rubyish view helper for Rails 3 and Rails 4. Keep your helpers and 
 
 ## Supported versions ##
 
-Rails 3.2.x, 4.0.x, 4.1.x, 4.2.x, and 5.0 (edge)
+* Ruby 2.0.0, 2.1.x, 2.2.x, 2.3.x, and 2.4 (trunk)
+
+* Rails 3.2.x, 4.0.x, 4.1.x, 4.2.x, and 5.0 (edge)
 
 
 ## Supported ORMs ##
