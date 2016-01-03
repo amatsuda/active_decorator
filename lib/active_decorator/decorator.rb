@@ -18,6 +18,7 @@ module ActiveDecorator
           decorate r
         end
       elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation) && !obj.is_a?(ActiveDecorator::RelationDecorator)
+        # don't call each nor to_a immediately
         obj.extend ActiveDecorator::RelationDecorator
       else
         d = decorator_for obj.class
@@ -36,9 +37,11 @@ module ActiveDecorator
         d.send :include, ActiveDecorator::Helpers
         @@decorators[model_class] = d
       else
+        # Cache nil results
         @@decorators[model_class] = nil
       end
     rescue NameError
+      # Cache nil results
       @@decorators[model_class] = nil
     end
   end
