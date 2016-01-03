@@ -13,5 +13,3 @@ module ActiveDecorator
     end
   end
 end
-
-::ActionMailer::Base.send :prepend, ActiveDecorator::Monkey::AbstractController::Rendering

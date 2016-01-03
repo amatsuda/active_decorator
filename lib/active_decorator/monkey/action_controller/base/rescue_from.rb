@@ -12,5 +12,3 @@ module ActiveDecorator
     end
   end
 end
-
-::ActionController::Base.send :prepend, ActiveDecorator::Monkey::ActionController::Base

@@ -17,5 +17,3 @@ module ActiveDecorator
     end
   end
 end
-
-::ActionView::PartialRenderer.send :prepend, ActiveDecorator::Monkey::ActionView::PartialRenderer
