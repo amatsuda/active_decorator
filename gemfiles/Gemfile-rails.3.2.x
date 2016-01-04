@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'active_decorator', :path => '..'
 
 gem 'rails', '~> 3.2.0'
-gem 'rspec-rails', '~> 2.14.0'
+gem 'test-unit-rails'
 if RUBY_VERSION <= '1.8.7'
   gem 'i18n', '~> 0.6.11'
 end

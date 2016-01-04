@@ -1,3 +1,5 @@
+require 'test_helper'
+
 Comic = Struct.new(:title, :price)
 
 module ComicPresenter
@@ -6,22 +8,19 @@ module ComicPresenter
   end
 end
 
-describe ActiveDecorator::Configuration do
-  let(:comic) { ActiveDecorator::Decorator.instance.decorate(Comic.new("amatsuda's (Poignant) Guide to ActiveDecorator", 3)) }
-
-  context 'with a custom decorator_suffix' do
-    before do
+class ConfigurationTest < Test::Unit::TestCase
+  test 'with a custom decorator_suffix' do
+    begin
       ActiveDecorator.configure do |config|
         config.decorator_suffix = 'Presenter'
       end
-    end
 
-    after do
+      comic = ActiveDecorator::Decorator.instance.decorate Comic.new("amatsuda's (Poignant) Guide to ActiveDecorator", 3)
+      assert_equal '$3', comic.price
+    ensure
       ActiveDecorator.configure do |config|
         config.decorator_suffix = 'Decorator'
       end
     end
-
-    specify { comic.price.should == '$3' }
   end
 end

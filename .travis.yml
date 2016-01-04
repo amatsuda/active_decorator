@@ -1,6 +1,6 @@
 language: ruby
 
-script: bundle exec rake spec
+script: bundle exec rake test
 
 rvm:
   - 2.0.0
