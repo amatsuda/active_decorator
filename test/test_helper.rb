@@ -24,6 +24,6 @@ module DatabaseDeleter
   end
 end
 
-Test::Unit::TestCase.prepend DatabaseDeleter
+Test::Unit::TestCase.send :prepend, DatabaseDeleter
 
 CreateAllTables.up unless ActiveRecord::Base.connection.table_exists? 'authors'
