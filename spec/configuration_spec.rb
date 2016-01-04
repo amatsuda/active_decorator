@@ -22,6 +22,6 @@ describe ActiveDecorator::Configuration do
       end
     end
 
-    specify { comic.price.should == '$3' }
+    specify { expect(comic.price).to eq('$3') }
   end
 end
