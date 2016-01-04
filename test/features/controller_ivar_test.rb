@@ -2,9 +2,9 @@ require 'test_helper'
 
 class ControllerIvarTest < ActionDispatch::IntegrationTest
   setup do
-    @matz = Author.create! :name => 'matz'
-    @matz.books.create! :title => 'the world of code'
-    Author.create! :name => 'takahashim'
+    @matz = Author.create! name: 'matz'
+    @matz.books.create! title: 'the world of code'
+    Author.create! name: 'takahashim'
   end
 
   test 'decorating a model object in ivar' do

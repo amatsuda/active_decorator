@@ -2,9 +2,9 @@ require 'test_helper'
 
 class PartialTest < ActionDispatch::IntegrationTest
   setup do
-    Author.create! :name => 'aamine'
-    nari = Author.create! :name => 'nari'
-    nari.books.create! :title => 'the gc book'
+    Author.create! name: 'aamine'
+    nari = Author.create! name: 'nari'
+    nari.books.create! title: 'the gc book'
   end
 
   test 'decorating implicit @object' do
