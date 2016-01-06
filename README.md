@@ -107,6 +107,37 @@ end
 <% end %>
 ```
 
+## Testing
+
+You can test a decorator using your favorite test framework by decorating the model instance with
+
+```ruby
+ActiveDecorator::Decorator.instance.decorate(model_instance)
+```
+
+Considering an `Organization` model and it's simple decorator:
+
+```ruby
+module OrganizationDecorator
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+end
+```
+
+An RSpec test would look like:
+
+```ruby
+describe '#full_name' do
+  it 'returns the full organization name' do
+    organization = Organization.new(first_name: 'John', last_name: 'Doe')
+    decorated_organization = ActiveDecorator::Decorator.instance.decorate(organization)
+
+    expect(decorated_organization.full_name).to eq('John Doe')
+  end
+end
+```
+
 ## Configuring the decorator suffix
 
 By default, ActiveDecorator searches a decorator module named `target_class.name + "Decorator"`
