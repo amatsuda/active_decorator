@@ -19,7 +19,13 @@ module ActiveDecorator
         end
       elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation) && !obj.is_a?(ActiveDecorator::RelationDecorator)
         # don't call each nor to_a immediately
-        obj.extend ActiveDecorator::RelationDecorator
+        if obj.respond_to?(:records)
+          # Rails 5.0
+          obj.extend ActiveDecorator::RelationDecorator
+        else
+          # Rails 3.x and 4.x
+          obj.extend ActiveDecorator::RelationDecoratorLegacy
+        end
       else
         d = decorator_for obj.class
         return obj unless d
@@ -50,8 +56,16 @@ module ActiveDecorator
     end
   end
 
-  module RelationDecorator
+  module RelationDecoratorLegacy
     def to_a
+      super.tap do |arr|
+        ActiveDecorator::Decorator.instance.decorate arr
+      end
+    end
+  end
+
+  module RelationDecorator
+    def records
       super.tap do |arr|
         ActiveDecorator::Decorator.instance.decorate arr
       end
