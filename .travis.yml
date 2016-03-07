@@ -13,7 +13,7 @@ gemfile:
   - gemfiles/Gemfile-rails.4.0.x
   - gemfiles/Gemfile-rails.4.1.x
   - gemfiles/Gemfile-rails.4.2.x
-  - gemfiles/Gemfile-rails.5.0.0.beta1
+  - gemfiles/Gemfile-rails.5.0.0.beta3
 
 sudo: false
 
@@ -22,8 +22,8 @@ matrix:
     - rvm: ruby-head
       gemfile: gemfiles/Gemfile-rails.3.2.x
     - rvm: 2.0.0
-      gemfile: gemfiles/Gemfile-rails.5.0.0.beta1
+      gemfile: gemfiles/Gemfile-rails.5.0.0.beta3
     - rvm: 2.1.8
-      gemfile: gemfiles/Gemfile-rails.5.0.0.beta1
+      gemfile: gemfiles/Gemfile-rails.5.0.0.beta3
   allow_failures:
     - rvm: ruby-head
