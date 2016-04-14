@@ -2,6 +2,8 @@ module ActiveDecorator
   module Monkey
     module ActionView
       module PartialRenderer
+        private
+
         def setup(*)
           super
 
