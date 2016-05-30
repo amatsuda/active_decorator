@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require 'singleton'
 require 'active_decorator/helpers'
+require 'active_decorator/decorated'
 
 module ActiveDecorator
   class Decorator
@@ -28,11 +29,19 @@ module ActiveDecorator
           obj.extend ActiveDecorator::RelationDecoratorLegacy unless obj.is_a? ActiveDecorator::RelationDecoratorLegacy
         end
       else
+        if defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Base) && !obj.is_a?(ActiveDecorator::Decorated)
+          obj.extend ActiveDecorator::Decorated
+        end
+
         d = decorator_for obj.class
         return obj unless d
         obj.extend d unless obj.is_a? d
         obj
       end
+    end
+
+    def decorate_association(owner, target)
+      owner.is_a?(ActiveDecorator::Decorated) ? decorate(target) : target
     end
 
     private

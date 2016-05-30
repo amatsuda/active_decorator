@@ -1,2 +1,9 @@
 <%= @author.name %>
 <%= @author.capitalized_name %>
+<%= @author.books.first.upcased_title %>
+<%= @author.books[-1].upcased_title %>
+<% if p = @author.publishers.last %><%= p.upcased_name %><% end %>
+<% if p = @author.profile %><%= p.address %><% end %>
+<% if h = @author.profile_history %><%= h.update_date %><% end %>
+<% if m = @author.magazines.first %><%= m.upcased_title %><% end %>
+<% if c = @author.company %><%= c.reverse_name %><% end %>
