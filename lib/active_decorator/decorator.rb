@@ -35,7 +35,7 @@ module ActiveDecorator
 
     private
     def decorator_for(model_class)
-      return @@decorators[model_class] if @@decorators.has_key? model_class
+      return @@decorators[model_class] if @@decorators.key? model_class
 
       decorator_name = "#{model_class.name}#{ActiveDecorator.config.decorator_suffix}"
       d = decorator_name.constantize
