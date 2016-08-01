@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'rails', '~> 4.0.0'
-gem 'capybara', '>= 2'
+gem 'rails'
+gem 'capybara'
 gem 'sqlite3'
 gem 'jbuilder'
