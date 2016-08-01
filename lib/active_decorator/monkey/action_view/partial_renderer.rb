@@ -9,7 +9,7 @@ module ActiveDecorator
 
           @locals.values.each do |v|
             ActiveDecorator::Decorator.instance.decorate v
-          end unless @locals.blank?
+          end if @locals
           ActiveDecorator::Decorator.instance.decorate @object unless @object.blank?
           ActiveDecorator::Decorator.instance.decorate @collection unless @collection.blank?
 
