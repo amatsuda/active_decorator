@@ -4,7 +4,7 @@ module ActiveDecorator
       module Rendering
         def view_assigns
           hash = super
-          hash.values.each do |v|
+          hash.each_value do |v|
             ActiveDecorator::Decorator.instance.decorate v
           end
           hash
