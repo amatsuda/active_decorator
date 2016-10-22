@@ -17,7 +17,7 @@ module ActiveDecorator
         obj.each do |r|
           decorate r
         end
-      elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation) && !obj.is_a?(ActiveDecorator::RelationDecorator)
+      elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation) && !obj.is_a?(ActiveDecorator::RelationDecorator) && !obj.is_a?(ActiveDecorator::RelationDecoratorLegacy)
         # don't call each nor to_a immediately
         if obj.respond_to?(:records)
           # Rails 5.0
