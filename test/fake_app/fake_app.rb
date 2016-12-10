@@ -27,6 +27,7 @@ ActiveDecoratorTestApp::Application.routes.draw do
   resources :authors, only: [:index, :show] do
     resources :books, only: [:index, :show] do
       member do
+        get :errata
         get :error
         post :purchase
       end
@@ -83,6 +84,10 @@ module BookDecorator
     image_tag 'cover.png'
   end
 
+  def errata
+    poof!
+  end
+
   def error
     "ERROR"
   end
@@ -135,6 +140,10 @@ class BooksController < ApplicationController
   end
 
   def show
+    @book = Author.find(params[:author_id]).books.find(params[:id])
+  end
+
+  def errata
     @book = Author.find(params[:author_id]).books.find(params[:id])
   end
 

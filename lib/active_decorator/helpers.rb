@@ -3,11 +3,11 @@ module ActiveDecorator
     def method_missing(method, *args, &block)
       super
     #TODO need to make sure who raised the error?
-    rescue NoMethodError, NameError => original_error
+    rescue NoMethodError, NameError
       begin
-        ActiveDecorator::ViewContext.current.send method, *args, &block
+        (view_context = ActiveDecorator::ViewContext.current).send method, *args, &block
       rescue NoMethodError, NameError
-        raise original_error
+        raise NameError, "undefined local variable or method `#{method}` for either #{self} or #{view_context}"
       end
     end
   end
