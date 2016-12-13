@@ -132,7 +132,7 @@ class BooksController < ApplicationController
   class CustomError < StandardError; end
 
   rescue_from CustomError do
-    render "error"
+    render :error
   end
 
   def index
