@@ -17,14 +17,14 @@ module ActiveDecorator
         obj.each do |r|
           decorate r
         end
-      elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation) && !obj.is_a?(ActiveDecorator::RelationDecorator) && !obj.is_a?(ActiveDecorator::RelationDecoratorLegacy)
+      elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation)
         # don't call each nor to_a immediately
         if obj.respond_to?(:records)
           # Rails 5.0
-          obj.extend ActiveDecorator::RelationDecorator
+          obj.extend ActiveDecorator::RelationDecorator unless obj.is_a? ActiveDecorator::RelationDecorator
         else
           # Rails 3.x and 4.x
-          obj.extend ActiveDecorator::RelationDecoratorLegacy
+          obj.extend ActiveDecorator::RelationDecoratorLegacy unless obj.is_a? ActiveDecorator::RelationDecoratorLegacy
         end
       else
         d = decorator_for obj.class
