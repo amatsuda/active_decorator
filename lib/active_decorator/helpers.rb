@@ -5,8 +5,10 @@ module ActiveDecorator
     rescue NoMethodError, NameError
       begin
         (view_context = ActiveDecorator::ViewContext.current).send method, *args, &block
-      rescue NoMethodError, NameError
-        raise NameError, "undefined local variable or method `#{method}` for either #{self} or #{view_context}"
+      rescue NoMethodError
+        raise NoMethodError, "undefined method `#{method}` for either #{self} or #{view_context}"
+      rescue NameError
+        raise NameError, "undefined local variable `#{method}` for either #{self} or #{view_context}"
       end
     end
   end
