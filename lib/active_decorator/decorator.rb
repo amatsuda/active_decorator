@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'singleton'
 require 'active_decorator/helpers'
 

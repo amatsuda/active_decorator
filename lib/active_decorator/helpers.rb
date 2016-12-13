@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActiveDecorator
   module Helpers
     def method_missing(method, *args, &block)

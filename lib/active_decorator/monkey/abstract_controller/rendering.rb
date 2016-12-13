@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActiveDecorator
   module Monkey
     module AbstractController
