@@ -6,7 +6,15 @@ module ActiveDecorator
     rescue NoMethodError, NameError => original_error
       begin
         ActiveDecorator::ViewContext.current.send method, *args, &block
-      rescue NoMethodError, NameError
+      rescue NoMethodError, NameError => e
+        original_error.to_s =~ %r"(`.*')"
+        original_method = $1
+
+        if e.to_s =~ %r"(`.*')" && original_method == $1
+          raise original_error
+        end
+
+        original_error.message.gsub! %r"`.*'", $1
         raise original_error
       end
     end
