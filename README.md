@@ -65,48 +65,6 @@ end
 <% end %>
 ```
 
-## Decorating associated objects ##
-
-ActiveDecorator *does not* automatically decorate associated objects. We recommend that you pass associated objects to `render` when decorated associated objects are needed.
-
-```ruby
-# app/models/blog_post.rb
-class BlogPost < ActiveRecord::Base
-  # published_at:datetime
-end
-
-# app/models/user.rb
-class User < ActiveRecord::Base
-  has_many :blog_posts
-end
-
-# app/decorators/blog_post_decorator.rb
-module BlogPostDecorator
-  def published_date
-    published_at.strftime("%Y.%m.%d")
-  end
-end
-
-# app/controllers/users_controller.rb
-class UsersController < ApplicationController
-  def index
-    @users = User.all
-  end
-end
-```
-
-```erb
-# app/views/users/index.html.erb
-<% @users.each do |user| %>
-  <%= render partial: "blog_post", locals: { blog_posts: user.blog_posts } %><br>
-<% end %>
-
-# app/views/users/_blog_post.html.erb
-<% blog_posts.each do |blog_post| %>
-  <%= blog_post.published_date %>
-<% end %>
-```
-
 ## Testing
 
 You can test a decorator using your favorite test framework by decorating the model instance with

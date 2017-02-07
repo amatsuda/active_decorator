@@ -46,13 +46,39 @@ end
 # models
 class Author < ActiveRecord::Base
   has_many :books
+  has_many :publishers, through: :books
+  has_many :movies
+  has_one :profile
+  has_one :profile_history, through: :profile
+  has_and_belongs_to_many :magazines
+  belongs_to :company
 end
 class Book < ActiveRecord::Base
   belongs_to :author
+  belongs_to :publisher
+  accepts_nested_attributes_for :publisher
 end
 class Novel < Book
 end
 class Movie < ActiveRecord::Base
+  belongs_to :author
+end
+class Publisher < ActiveRecord::Base
+  has_many :books
+end
+class Profile < ActiveRecord::Base
+  belongs_to :author
+  has_one :profile_history
+  accepts_nested_attributes_for :profile_history
+end
+class ProfileHistory < ActiveRecord::Base
+  belongs_to :profile
+end
+class Magazine < ActiveRecord::Base
+  has_and_belongs_to_many :authors
+end
+class Company < ActiveRecord::Base
+  has_many :authors
 end
 
 # helpers
@@ -91,6 +117,31 @@ module BookDecorator
 
   def error
     "ERROR"
+  end
+end
+module PublisherDecorator
+  def upcased_name
+    name.upcase
+  end
+end
+module ProfileDecorator
+  def address
+    "secret"
+  end
+end
+module ProfileHistoryDecorator
+  def update_date
+    updated_on.strftime('%Y/%m/%d')
+  end
+end
+module MagazineDecorator
+  def upcased_title
+    title.upcase
+  end
+end
+module CompanyDecorator
+  def reverse_name
+    name.reverse
   end
 end
 
@@ -178,9 +229,15 @@ end
 # migrations
 class CreateAllTables < ActiveRecord::Migration
   def self.up
-    create_table(:authors) {|t| t.string :name}
-    create_table(:books) {|t| t.string :title; t.references :author; t.string :type }
-    create_table(:movies) {|t| t.string :name}
+    create_table(:authors) {|t| t.string :name; t.references :company}
+    create_table(:books) {|t| t.string :title; t.string :type; t.references :author; t.references :publisher }
+    create_table(:profiles) {|t| t.string :address; t.references :author}
+    create_table(:profile_histories) {|t| t.date :updated_on; t.references :profile}
+    create_table(:publishers) {|t| t.string :name}
+    create_table(:movies) {|t| t.string :name; t.references :author}
+    create_table(:magazines) {|t| t.string :title}
+    create_table(:authors_magazines) {|t| t.references :author; t.references :magazine}
+    create_table(:companies) {|t| t.string :name}
   end
 end
 

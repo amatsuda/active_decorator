@@ -1,0 +1,2 @@
+module ActiveDecorator::Decorated
+end
