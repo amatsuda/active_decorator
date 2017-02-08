@@ -8,6 +8,7 @@ A simple and Rubyish view helper for Rails 3, Rails 4 and Rails 5. Keep your hel
 1. automatically mixes decorator module into corresponding model only when:
   1. passing a model or collection of models or an instance of ActiveRecord::Relation from controllers to views
   2. rendering partials with models (using `:collection` or `:object` or `:locals` explicitly or implicitly)
+  3. fetching already decorated Active Record model object's association
 2. the decorator module runs in the model's context. So, you can directly call any attributes or methods in the decorator module
 3. since decorators are considered as sort of helpers, you can also call any ActionView's helper methods such as `content_tag` or `link_to`
 
@@ -34,35 +35,81 @@ You can use the generator for doing this ( `% rails g decorator user` )
 
 ## Examples ##
 
+### Auto-decorating via `render` ###
+
+* Model
 ```ruby
-# app/models/user.rb
-class User < ActiveRecord::Base
-  # first_name:string last_name:string website:string
+class Author < ActiveRecord::Base
+  # first_name:string last_name:string
 end
+```
 
-# app/decorators/user_decorator.rb
-module UserDecorator
-  def full_name
-    "#{first_name} #{last_name}"
-  end
-
-  def link
-    link_to full_name, website
-  end
-end
-
-# app/controllers/users_controller.rb
-class UsersController < ApplicationController
-  def index
-    @users = User.all
+* Controller
+```ruby
+class AuthorsController < ApplicationController
+  def show(id)
+    @user = Author.find id
   end
 end
 ```
+
+* Decorator
+```ruby
+module AuthorDecorator
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+end
+```
+
+* View
 ```erb
-# app/views/users/index.html.erb
-<% @users.each do |user| %>
-  <%= user.link %><br>
+<%# @author here is auto-decorated in between the controller and the view %>
+<p><%= @author.full_name %></p>
+```
+
+### Auto-decorating via AR model's associated objects ###
+
+* Models
+```ruby
+class Author < ActiveRecord::Base
+  # name:string
+  has_many :books
+end
+
+class Book < ActiveRecord::Base
+  # title:string url:string
+  belongs_to :author
+end
+```
+
+* Controller
+```ruby
+class AuthorsController < ApplicationController
+  def show(id)
+    @user = Author.find id
+  end
+end
+```
+
+* Decorator
+```ruby
+module BookDecorator
+  def link
+    link_to title, url
+  end
+end
+```
+
+* View
+```erb
+<p><%= @author.name %></p>
+<ul>
+<% @author.books.each do |book| %>
+  <%# `book` here is auto-decorated because @author is a decorated instance %>
+  <li><%= book.link %></li>
 <% end %>
+</ul>
 ```
 
 ## Testing
