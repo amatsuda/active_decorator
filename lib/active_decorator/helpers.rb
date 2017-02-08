@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# On the fly delegation from the decorator to the decorated object and the helpers.
 module ActiveDecorator
   module Helpers
     def method_missing(method, *args, &block)

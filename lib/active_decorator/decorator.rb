@@ -11,6 +11,15 @@ module ActiveDecorator
       @@decorators = {}
     end
 
+    # Decorates the given object.
+    # Plus, performs special decoration for the classes below:
+    #   Array: decorates its each element
+    #   AR::Relation: decorates its each record lazily
+    #   AR model: decorates its associations on the fly
+    #
+    # Always returns the object, regardless of whether decorated or not decorated.
+    #
+    # This method can be publicly called from anywhere by `ActiveDecorator::Decorator.instance.decorate(obj)`.
     def decorate(obj)
       return if defined?(Jbuilder) && (Jbuilder === obj)
       return if obj.nil?
@@ -40,11 +49,15 @@ module ActiveDecorator
       end
     end
 
+    # Decorates AR model object's association only when the object was decorated.
+    # Returns the association instance.
     def decorate_association(owner, target)
       owner.is_a?(ActiveDecorator::Decorated) ? decorate(target) : target
     end
 
     private
+    # Returns a decorator module for the given class.
+    # Returns `nil` if no decorator module was found.
     def decorator_for(model_class)
       return @@decorators[model_class] if @@decorators.key? model_class
 
@@ -67,6 +80,7 @@ module ActiveDecorator
     end
   end
 
+  # For AR 3 and 4
   module RelationDecoratorLegacy
     def to_a
       super.tap do |arr|
@@ -75,6 +89,7 @@ module ActiveDecorator
     end
   end
 
+  # For AR 5+
   module RelationDecorator
     def records
       super.tap do |arr|
