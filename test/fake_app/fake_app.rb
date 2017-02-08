@@ -227,7 +227,7 @@ class BookMailer < ActionMailer::Base
 end
 
 # migrations
-class CreateAllTables < ActiveRecord::Migration
+class CreateAllTables < ActiveRecord::VERSION::MAJOR >= 5 ? ActiveRecord::Migration[5.0] : ActiveRecord::Migration
   def self.up
     create_table(:authors) {|t| t.string :name; t.references :company}
     create_table(:books) {|t| t.string :title; t.string :type; t.references :author; t.references :publisher }
