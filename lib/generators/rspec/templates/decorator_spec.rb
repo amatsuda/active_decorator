@@ -1,7 +1,7 @@
 require '<%= File.exists?('spec/rails_helper.rb') ? 'rails_helper' : 'spec_helper' %>'
 
-describe <%= singular_name.camelize %>Decorator do
-  let(:<%= singular_name %>) { <%= class_name %>.new.extend <%= singular_name.camelize %>Decorator }
+describe <%= class_name %>Decorator do
+  let(:<%= singular_name %>) { <%= class_name %>.new.extend <%= class_name %>Decorator }
   subject { <%= singular_name %> }
   it { should be_a <%= class_name %> }
 end
