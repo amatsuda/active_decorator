@@ -11,23 +11,43 @@ module ActiveDecorator
         end
 
         module CollectionAssociation
-          private
+          if Rails.version.to_f < 5.1
+            private
 
-          # @see https://github.com/rails/rails/commit/03855e790de2224519f55382e3c32118be31eeff
-          if Rails.version.to_f < 4.1
-            def first_or_last(*)
-              ActiveDecorator::Decorator.instance.decorate_association(owner, super)
-            end
-          else
-            def first_nth_or_last(*)
-              ActiveDecorator::Decorator.instance.decorate_association(owner, super)
+            # @see https://github.com/rails/rails/commit/03855e790de2224519f55382e3c32118be31eeff
+            if Rails.version.to_f < 4.1
+              def first_or_last(*)
+                ActiveDecorator::Decorator.instance.decorate_association(owner, super)
+              end
+            else
+              def first_nth_or_last(*)
+                ActiveDecorator::Decorator.instance.decorate_association(owner, super)
+              end
             end
           end
         end
 
         module CollectionProxy
-          def take(limit = nil)
-            ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+          if Rails.version.to_f >= 4.0
+            def take(limit = nil)
+              ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+            end
+          end
+
+          if Rails.version.to_f >= 5.1
+            def last(limit = nil)
+              ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+            end
+
+            private
+
+            def find_nth_with_limit(index, limit)
+              ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+            end
+
+            def find_nth_from_last(index)
+              ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+            end
           end
         end
       end
