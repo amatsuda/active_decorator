@@ -22,6 +22,12 @@ module ActiveDecorator
             end
           end
         end
+
+        module CollectionProxy
+          def take(limit = nil)
+            ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+          end
+        end
       end
     end
   end

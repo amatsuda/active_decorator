@@ -33,6 +33,9 @@ module ActiveDecorator
         require 'active_decorator/monkey/active_record/associations'
         ActiveRecord::Associations::Association.send :prepend, ActiveDecorator::Monkey::ActiveRecord::Associations::Association
         ActiveRecord::Associations::CollectionAssociation.send :prepend, ActiveDecorator::Monkey::ActiveRecord::Associations::CollectionAssociation
+        if Rails.version.to_f >= 4.0
+          ActiveRecord::Associations::CollectionProxy.send :prepend, ActiveDecorator::Monkey::ActiveRecord::Associations::CollectionProxy
+        end
       end
     end
   end
