@@ -11,6 +11,8 @@ module ActiveDecorator
         end
 
         module CollectionAssociation
+          private
+
           # @see https://github.com/rails/rails/commit/03855e790de2224519f55382e3c32118be31eeff
           if Rails.version.to_f < 4.1
             def first_or_last(*)
