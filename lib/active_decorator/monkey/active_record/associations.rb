@@ -11,6 +11,8 @@ module ActiveDecorator
         end
 
         module CollectionAssociation
+          private
+
           # @see https://github.com/rails/rails/commit/03855e790de2224519f55382e3c32118be31eeff
           if Rails.version.to_f < 4.1
             def first_or_last(*)
@@ -20,6 +22,12 @@ module ActiveDecorator
             def first_nth_or_last(*)
               ActiveDecorator::Decorator.instance.decorate_association(owner, super)
             end
+          end
+        end
+
+        module CollectionProxy
+          def take(limit = nil)
+            ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
           end
         end
       end

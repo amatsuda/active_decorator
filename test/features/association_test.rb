@@ -22,6 +22,9 @@ class AssociationTest < ActionDispatch::IntegrationTest
     visit "/authors/#{@matz.id}"
     assert page.has_content? 'the world of code'.upcase
     assert page.has_content? 'the ruby programming language'.upcase
+    if Rails.version.to_f >= 4.0
+      assert page.has_content? 'nikkei linux'.upcase
+    end
     assert page.has_content? "o'reilly".upcase
     assert page.has_content? 'secret'
     assert page.has_content? '2017/02/07'
