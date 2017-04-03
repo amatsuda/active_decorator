@@ -25,7 +25,9 @@ class AssociationTest < ActionDispatch::IntegrationTest
     if Rails.version.to_f >= 4.0
       assert page.has_content? 'nikkei linux'.upcase
     end
-    assert page.has_content? "o'reilly".upcase
+    if Rails.version.to_f >= 5.1
+      assert page.has_content? 'nikkei linux'.reverse
+    end
     assert page.has_content? 'secret'
     assert page.has_content? '2017/02/07'
     assert page.has_content? 'rubima'.upcase

@@ -1,9 +1,9 @@
 <%= @author.name %>
 <%= @author.capitalized_name %>
 <%= @author.books.first.upcased_title %>
-<%= @author.books[-1].upcased_title %>
+<%= @author.books.last.upcased_title %>
 <% if Rails.version.to_f >= 4.0 && p = @author.publishers.take %><%= p.upcased_name %><% end %>
-<% if p = @author.publishers.last %><%= p.upcased_name %><% end %>
+<% if Rails.version.to_f >= 5.1 && p = @author.publishers.second_to_last %><%= p.reversed_name %><% end %>
 <% if p = @author.profile %><%= p.address %><% end %>
 <% if h = @author.profile_history %><%= h.update_date %><% end %>
 <% if m = @author.magazines.first %><%= m.upcased_title %><% end %>
