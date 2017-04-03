@@ -27,26 +27,26 @@ module ActiveDecorator
           end
         end
 
-        module CollectionProxy
-          if Rails.version.to_f >= 4.0
+        if Rails.version.to_f >= 4.0
+          module CollectionProxy
             def take(limit = nil)
               ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
             end
-          end
 
-          if Rails.version.to_f >= 5.1
-            def last(limit = nil)
-              ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
-            end
+            if Rails.version.to_f >= 5.1
+              def last(limit = nil)
+                ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+              end
 
-            private
+              private
 
-            def find_nth_with_limit(index, limit)
-              ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
-            end
+              def find_nth_with_limit(index, limit)
+                ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+              end
 
-            def find_nth_from_last(index)
-              ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+              def find_nth_from_last(index)
+                ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+              end
             end
           end
         end
