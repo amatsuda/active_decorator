@@ -11,18 +11,16 @@ module ActiveDecorator
         end
 
         module CollectionAssociation
-          if Rails.version.to_f < 5.1
+          # @see https://github.com/rails/rails/commit/03855e790de2224519f55382e3c32118be31eeff
+          if Rails.version.to_f < 4.1
             private
-
-            # @see https://github.com/rails/rails/commit/03855e790de2224519f55382e3c32118be31eeff
-            if Rails.version.to_f < 4.1
-              def first_or_last(*)
-                ActiveDecorator::Decorator.instance.decorate_association(owner, super)
-              end
-            else
-              def first_nth_or_last(*)
-                ActiveDecorator::Decorator.instance.decorate_association(owner, super)
-              end
+            def first_or_last(*)
+              ActiveDecorator::Decorator.instance.decorate_association(owner, super)
+            end
+          elsif Rails.version.to_f < 5.1
+            private
+            def first_nth_or_last(*)
+              ActiveDecorator::Decorator.instance.decorate_association(owner, super)
             end
           end
         end
