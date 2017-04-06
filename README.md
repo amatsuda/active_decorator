@@ -47,7 +47,7 @@ end
 * Controller
 ```ruby
 class AuthorsController < ApplicationController
-  def show(id)
+  def show(id)  # powered by action_args
     @user = Author.find id
   end
 end
