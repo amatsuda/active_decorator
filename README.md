@@ -155,6 +155,29 @@ ActiveDecorator.configure do |config|
 end
 ```
 
+## RSpec Testing
+
+Given the following decorator:
+```ruby
+module OrganizationDecorator
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+end
+```
+
+It may be tested this way:
+```ruby
+describe '#full_name' do
+  it 'returns the full organization name' do
+    organization = create(:organization, first_name: 'John', last_name: 'Doe')
+    decorated_organization = ActiveDecorator::Decorator.instance.decorate(organization)
+
+    expect(decorated_organization.full_name).to eq('John Doe')
+  end
+end
+```
+
 ## Contributing to ActiveDecorator ##
 
 * Fork, fix, then send me a pull request.
