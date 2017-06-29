@@ -112,6 +112,20 @@ end
 </ul>
 ```
 
+### Using ActiveDecorator outside of Action View ###
+
+Sometimes your may want to use decorators outside of Action View, for example,
+for background tasks for ActiveJob.
+For such use case, ActiveDecorator module provides `with_view_context` method
+that takes some kind of Action View and a block.
+
+```ruby
+ActiveDecorator::ViewContext.run_with ApplicationController.new.view_context do
+  ## perform some heavy jobs here
+end
+```
+
+
 ## Testing
 
 You can test a decorator using your favorite test framework by decorating the model instance with
