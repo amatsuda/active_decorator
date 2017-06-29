@@ -5,23 +5,17 @@ module ActiveDecorator
     def method_missing(method, *args, &block)
       super
     rescue NoMethodError, NameError => e
-      if e.name != method
-        # the error is not mine, so just releases it as is.
-        raise e
-      end
+      # the error is not mine, so just releases it as is.
+      raise e if e.name != method
 
       begin
         (view_context = ActiveDecorator::ViewContext.current).send method, *args, &block
       rescue NoMethodError => e
-        if e.name != method
-          raise e
-        end
+        raise e if e.name != method
 
         raise NoMethodError.new("undefined method `#{method}' for either #{self} or #{view_context}", method)
       rescue NameError => e
-        if e.name != method
-          raise e
-        end
+        raise e if e.name != method
 
         raise NameError.new("undefined local variable `#{method}' for either #{self} or #{view_context}", method)
       end
