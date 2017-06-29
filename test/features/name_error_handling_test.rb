@@ -12,6 +12,6 @@ class NameErrorHandlingTest < ActionDispatch::IntegrationTest
       visit "/authors/#{@rhg.author.id}/books/#{@rhg.id}/errata"
     end
 
-    assert_match(/undefined method `poof!` for/, err.message)
+    assert_match(/undefined method `poof!' for/, err.message)
   end
 end

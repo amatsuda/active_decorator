@@ -17,13 +17,13 @@ module ActiveDecorator
           raise e
         end
 
-        raise NoMethodError, "undefined method `#{method}` for either #{self} or #{view_context}"
+        raise NoMethodError, "undefined method `#{method}' for either #{self} or #{view_context}"
       rescue NameError => e
         if e.name != method
           raise e
         end
 
-        raise NameError, "undefined local variable `#{method}` for either #{self} or #{view_context}"
+        raise NameError, "undefined local variable `#{method}' for either #{self} or #{view_context}"
       end
     end
   end
