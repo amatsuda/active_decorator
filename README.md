@@ -120,7 +120,7 @@ You can test a decorator using your favorite test framework by decorating the mo
 ActiveDecorator::Decorator.instance.decorate(model_instance)
 ```
 
-Considering an `Organization` model and it's simple decorator:
+Considering an `Organization` model and its simple decorator:
 
 ```ruby
 module OrganizationDecorator
