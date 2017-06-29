@@ -4,16 +4,26 @@ module ActiveDecorator
   module ViewContext
     class << self
       def current
-        Thread.current[:active_decorator_view_contexts].last
+        view_context_stack.last
       end
 
       def push(view_context)
-        Thread.current[:active_decorator_view_contexts] ||= []
-        Thread.current[:active_decorator_view_contexts] << view_context
+        view_context_stack.push view_context
       end
 
       def pop
-        Thread.current[:active_decorator_view_contexts].pop if Thread.current[:active_decorator_view_contexts]
+        view_context_stack.pop
+      end
+
+      def view_context_stack
+        Thread.current[:active_decorator_view_contexts] ||= []
+      end
+
+      def run_with(view_context, &block)
+        push view_context
+        block.call
+      ensure
+        pop
       end
     end
 
@@ -23,20 +33,14 @@ module ActiveDecorator
       included do
         if Rails::VERSION::MAJOR >= 4
           around_action do |controller, blk|
-            begin
-              ActiveDecorator::ViewContext.push controller.view_context
+            ActiveDecorator::ViewContext.run_with(controller.view_context) do
               blk.call
-            ensure
-              ActiveDecorator::ViewContext.pop
             end
           end
         else
           around_filter do |controller, blk|
-            begin
-              ActiveDecorator::ViewContext.push controller.view_context
+            ActiveDecorator::ViewContext.run_with(controller.view_context) do
               blk.call
-            ensure
-              ActiveDecorator::ViewContext.pop
             end
           end
         end
