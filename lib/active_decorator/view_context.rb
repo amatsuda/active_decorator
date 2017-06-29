@@ -19,9 +19,9 @@ module ActiveDecorator
         Thread.current[:active_decorator_view_contexts] ||= []
       end
 
-      def run_with(view_context, &block)
+      def run_with(view_context)
         push view_context
-        block.call
+        yield
       ensure
         pop
       end
