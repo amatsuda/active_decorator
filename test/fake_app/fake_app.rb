@@ -29,6 +29,7 @@ ActiveDecoratorTestApp::Application.routes.draw do
     resources :books, only: [:index, :show] do
       member do
         get :errata
+        get :errata2
         get :error
         post :purchase
       end
@@ -113,6 +114,10 @@ module BookDecorator
 
   def errata
     poof!
+  end
+
+  def errata2
+    title.boom!
   end
 
   def error
@@ -200,6 +205,10 @@ class BooksController < ApplicationController
   end
 
   def errata
+    @book = Author.find(params[:author_id]).books.find(params[:id])
+  end
+
+  def errata2
     @book = Author.find(params[:author_id]).books.find(params[:id])
   end
 
