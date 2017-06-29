@@ -13,5 +13,6 @@ class NameErrorHandlingTest < ActionDispatch::IntegrationTest
     end
 
     assert_match(/undefined method `poof!' for/, err.message)
+    assert_match 'poof!', err.cause.name if err.respond_to?(:cause)
   end
 end
