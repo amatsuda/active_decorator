@@ -114,7 +114,7 @@ end
 
 ### Using ActiveDecorator outside of Action View ###
 
-Sometimes your may want to use decorators outside of Action View, for example,
+Sometimes you may want to use decorators outside of Action View, for example,
 for background tasks for ActiveJob.
 For such use case, ActiveDecorator module provides `with_view_context` method
 that takes some kind of Action View and a block.
