@@ -116,7 +116,7 @@ end
 
 Sometimes you may want to use decorators outside of Action View, for example,
 for background tasks for ActiveJob.
-For such use case, ActiveDecorator module provides `with_view_context` method
+For such use case, ActiveDecorator module provides `run_with` method
 that takes some kind of Action View and a block.
 
 ```ruby
