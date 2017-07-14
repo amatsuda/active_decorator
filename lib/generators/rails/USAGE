@@ -1,0 +1,8 @@
+Description:
+    Stubs out a decorator module in app/decorators directory.
+
+Examples:
+    `rails g decorator book`
+
+    This creates:
+        app/decorators/book_decorator.rb
