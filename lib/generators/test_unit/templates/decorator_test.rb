@@ -1,6 +1,7 @@
 require 'test_helper'
 
-class <%= singular_name.camelize %>DecoratorTest < ActiveSupport::TestCase
+<% module_namespacing do -%>
+class <%= class_name %>DecoratorTest < ActiveSupport::TestCase
   def setup
     @<%= singular_name %> = <%= class_name %>.new.extend <%= class_name %>Decorator
   end
@@ -9,3 +10,4 @@ class <%= singular_name.camelize %>DecoratorTest < ActiveSupport::TestCase
   #   assert true
   # end
 end
+<% end -%>
