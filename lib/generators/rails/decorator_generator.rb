@@ -2,7 +2,7 @@
 module Rails
   module Generators
     class DecoratorGenerator < NamedBase
-      source_root File.expand_path('../templates', __FILE__)
+      source_root File.expand_path("templates", __dir__)
       check_class_collision suffix: "Decorator"
 
       def create_decorator_file
