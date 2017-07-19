@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Akira Matsuda"]
   s.email       = ["ronnie@dio.jp"]
   s.homepage    = 'https://github.com/amatsuda/active_decorator'
+  s.license     = 'MIT'
   s.summary     = %q{A simple and Rubyish view helper for Rails}
   s.description = %q{A simple and Rubyish view helper for Rails}
 
