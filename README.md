@@ -6,9 +6,9 @@ A simple and Rubyish view helper for Rails 3, Rails 4 and Rails 5. Keep your hel
 ## Features ##
 
 1. automatically mixes decorator module into corresponding model only when:
-  1. passing a model or collection of models or an instance of ActiveRecord::Relation from controllers to views
-  2. rendering partials with models (using `:collection` or `:object` or `:locals` explicitly or implicitly)
-  3. fetching already decorated Active Record model object's association
+   1. passing a model or collection of models or an instance of ActiveRecord::Relation from controllers to views
+   2. rendering partials with models (using `:collection` or `:object` or `:locals` explicitly or implicitly)
+   3. fetching already decorated Active Record model object's association
 2. the decorator module runs in the model's context. So, you can directly call any attributes or methods in the decorator module
 3. since decorators are considered as sort of helpers, you can also call any ActionView's helper methods such as `content_tag` or `link_to`
 
