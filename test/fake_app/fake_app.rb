@@ -42,6 +42,12 @@ ActiveDecoratorTestApp::Application.routes.draw do
     end
   end
   resources :movies, only: :show
+
+  if Rails::VERSION::MAJOR >= 5
+    namespace :api do
+      resources :authors, only: [:show]
+    end
+  end
 end
 
 # models
@@ -228,6 +234,15 @@ end
 class MoviesController < ApplicationController
   def show
     @movie = Movie.find params[:id]
+  end
+end
+if Rails::VERSION::MAJOR >= 5
+  module API
+    class AuthorsController < ActionController::API
+      def show
+        @author = Author.find params[:id]
+      end
+    end
   end
 end
 

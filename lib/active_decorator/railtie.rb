@@ -20,6 +20,18 @@ module ActiveDecorator
         ActionController::Base.send :include, ActiveDecorator::ViewContext::Filter
       end
 
+      if Rails::VERSION::MAJOR >= 5
+        ActiveSupport.on_load :action_controller_api do
+          require 'active_decorator/monkey/abstract_controller/rendering'
+          ::ActionController::API.send :prepend, ActiveDecorator::Monkey::AbstractController::Rendering
+
+          require 'active_decorator/monkey/action_controller/base/rescue_from'
+          ::ActionController::API.send :prepend, ActiveDecorator::Monkey::ActionController::Base
+
+          ::ActionController::API.send :include, ActiveDecorator::ViewContext::Filter
+        end
+      end
+
       ActiveSupport.on_load :action_mailer do
         require 'active_decorator/monkey/abstract_controller/rendering'
         ActionMailer::Base.send :prepend, ActiveDecorator::Monkey::AbstractController::Rendering
