@@ -237,7 +237,7 @@ class MoviesController < ApplicationController
   end
 end
 if Rails::VERSION::MAJOR >= 5
-  module API
+  module Api
     class AuthorsController < ActionController::API
       def show
         @author = Author.find params[:id]

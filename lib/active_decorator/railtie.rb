@@ -21,14 +21,22 @@ module ActiveDecorator
       end
 
       if Rails::VERSION::MAJOR >= 5
-        ActiveSupport.on_load :action_controller_api do
-          require 'active_decorator/monkey/abstract_controller/rendering'
-          ::ActionController::API.send :prepend, ActiveDecorator::Monkey::AbstractController::Rendering
+        module ::ActionController
+          module ApiRendering
+            include ActionView::Rendering
+          end
+        end
 
-          require 'active_decorator/monkey/action_controller/base/rescue_from'
-          ::ActionController::API.send :prepend, ActiveDecorator::Monkey::ActionController::Base
+        ActiveSupport.on_load :action_controller do
+          if self == ActionController::API
+            require 'active_decorator/monkey/abstract_controller/rendering'
+            ::ActionController::API.send :prepend, ActiveDecorator::Monkey::AbstractController::Rendering
 
-          ::ActionController::API.send :include, ActiveDecorator::ViewContext::Filter
+            require 'active_decorator/monkey/action_controller/base/rescue_from'
+            ::ActionController::API.send :prepend, ActiveDecorator::Monkey::ActionController::Base
+
+            ::ActionController::API.send :include, ActiveDecorator::ViewContext::Filter
+          end
         end
       end
 

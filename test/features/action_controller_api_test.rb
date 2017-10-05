@@ -10,7 +10,7 @@ class ActionControllerAPITest < ActionDispatch::IntegrationTest
   end
 
   test 'decorating objects in api only controllers' do
-    visit "/authors/#{Author.last.id}.json"
+    visit "/api/authors/#{Author.last.id}.json"
 
     assert_equal '{"name":"nari","books":[{"title":"the gc book","reverse_title":"koob cg eht"}]}', page.source
   end
