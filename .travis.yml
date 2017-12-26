@@ -4,55 +4,55 @@ before_install: gem update bundler --no-document
 script: bundle exec rake test
 
 rvm:
-  - 2.0.0
-  - 2.1.10
-  - 2.2.9
-  - 2.3.6
-  - 2.4.3
   - 2.5.0
+  - 2.4.3
+  - 2.3.6
+  - 2.2.9
+  - 2.1.10
+  - 2.0.0
   - ruby-head
 gemfile:
-  - gemfiles/Gemfile-rails.3.2.x
-  - gemfiles/Gemfile-rails.4.0.x
-  - gemfiles/Gemfile-rails.4.1.x
-  - gemfiles/Gemfile-rails.4.2.x
-  - gemfiles/Gemfile-rails.5.0.x
   - gemfiles/Gemfile-rails.5.1.x
+  - gemfiles/Gemfile-rails.5.0.x
+  - gemfiles/Gemfile-rails.4.2.x
+  - gemfiles/Gemfile-rails.4.1.x
+  - gemfiles/Gemfile-rails.4.0.x
+  - gemfiles/Gemfile-rails.3.2.x
 
 sudo: false
 
 matrix:
   exclude:
     - rvm: ruby-head
-      gemfile: gemfiles/Gemfile-rails.3.2.x
+      gemfile: gemfiles/Gemfile-rails.4.1.x
     - rvm: ruby-head
       gemfile: gemfiles/Gemfile-rails.4.0.x
     - rvm: ruby-head
-      gemfile: gemfiles/Gemfile-rails.4.1.x
-    - rvm: 2.5.0
       gemfile: gemfiles/Gemfile-rails.3.2.x
+    - rvm: 2.5.0
+      gemfile: gemfiles/Gemfile-rails.4.2.x
+    - rvm: 2.5.0
+      gemfile: gemfiles/Gemfile-rails.4.1.x
     - rvm: 2.5.0
       gemfile: gemfiles/Gemfile-rails.4.0.x
     - rvm: 2.5.0
-      gemfile: gemfiles/Gemfile-rails.4.1.x
-    - rvm: 2.5.0
+      gemfile: gemfiles/Gemfile-rails.3.2.x
+    - rvm: 2.4.3
       gemfile: gemfiles/Gemfile-rails.4.2.x
     - rvm: 2.4.3
-      gemfile: gemfiles/Gemfile-rails.3.2.x
+      gemfile: gemfiles/Gemfile-rails.4.1.x
     - rvm: 2.4.3
       gemfile: gemfiles/Gemfile-rails.4.0.x
     - rvm: 2.4.3
-      gemfile: gemfiles/Gemfile-rails.4.1.x
-    - rvm: 2.4.3
-      gemfile: gemfiles/Gemfile-rails.4.2.x
-    - rvm: 2.0.0
-      gemfile: gemfiles/Gemfile-rails.5.0.x
+      gemfile: gemfiles/Gemfile-rails.3.2.x
     - rvm: 2.1.10
-      gemfile: gemfiles/Gemfile-rails.5.0.x
+      gemfile: gemfiles/Gemfile-rails.5.1.x
     - rvm: 2.0.0
       gemfile: gemfiles/Gemfile-rails.5.1.x
     - rvm: 2.1.10
-      gemfile: gemfiles/Gemfile-rails.5.1.x
+      gemfile: gemfiles/Gemfile-rails.5.0.x
+    - rvm: 2.0.0
+      gemfile: gemfiles/Gemfile-rails.5.0.x
   allow_failures:
     - rvm: ruby-head
     - gemfile: gemfiles/Gemfile-rails.5.1.x
