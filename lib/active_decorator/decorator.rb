@@ -33,9 +33,11 @@ module ActiveDecorator
         if obj.respond_to?(:records)
           # Rails 5.0
           obj.extend ActiveDecorator::RelationDecorator unless obj.is_a? ActiveDecorator::RelationDecorator
+          obj
         else
           # Rails 3.x and 4.x
           obj.extend ActiveDecorator::RelationDecoratorLegacy unless obj.is_a? ActiveDecorator::RelationDecoratorLegacy
+          obj
         end
       else
         if defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Base) && !obj.is_a?(ActiveDecorator::Decorated)
