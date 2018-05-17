@@ -55,4 +55,3 @@ matrix:
       gemfile: gemfiles/Gemfile-rails.5.0.x
   allow_failures:
     - rvm: ruby-head
-    - gemfile: gemfiles/Gemfile-rails.5.1.x
