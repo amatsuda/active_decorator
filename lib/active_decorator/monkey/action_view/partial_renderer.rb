@@ -9,7 +9,7 @@ module ActiveDecorator
         def setup(*)
           super
 
-          @locals.values.each do |v|
+          @locals.each_value do |v|
             ActiveDecorator::Decorator.instance.decorate v
           end if @locals
           ActiveDecorator::Decorator.instance.decorate @object if @object && (@object != nil)
