@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 # load Rails first
@@ -7,13 +8,29 @@ require 'rails'
 # load the plugin
 require 'active_decorator'
 
+Bundler.require
+require 'capybara'
+require 'selenium/webdriver'
+
 # needs to load the app next
 require 'fake_app/fake_app'
 
 require 'test/unit/rails/test_help'
 
-class ActionDispatch::IntegrationTest
-  include Capybara::DSL
+begin
+  require 'action_dispatch/system_test_case'
+rescue LoadError
+  Capybara.register_driver :chrome do |app|
+    options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu])
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  end
+  Capybara.javascript_driver = :chrome
+
+  class ActionDispatch::IntegrationTest
+    include Capybara::DSL
+  end
+else
+  ActionDispatch::SystemTestCase.driven_by(:selenium, using: :headless_chrome)
 end
 
 module DatabaseDeleter
