@@ -3,6 +3,9 @@ language: ruby
 before_install: gem update bundler --no-document
 script: bundle exec rake test
 
+addons:
+  chrome: stable
+
 rvm:
   - 2.5.0
   - 2.4.3
