@@ -1,10 +1,17 @@
 language: ruby
 
-before_install: gem update bundler --no-document
+sudo: required
+
 script: bundle exec rake test
 
 addons:
   chrome: stable
+
+before_install:
+  - sudo apt update -qq
+  - sudo apt install -y chromium-chromedriver
+  - sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/
+  - gem update bundler --no-document
 
 rvm:
   - 2.5.0
