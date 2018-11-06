@@ -68,5 +68,8 @@ matrix:
       gemfile: gemfiles/Gemfile-rails.5.0.x
     - rvm: 2.0.0
       gemfile: gemfiles/Gemfile-rails.5.0.x
+  include:
+    - rvm: ruby-head
+      gemfile: gemfiles/Gemfile-rails.edge
   allow_failures:
     - rvm: ruby-head
