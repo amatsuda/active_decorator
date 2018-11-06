@@ -9,9 +9,9 @@ class ActionControllerAPITest < ActionDispatch::IntegrationTest
   end
 
   test 'decorating objects in api only controllers' do
-    visit "/api/bookstores/#{Bookstore.last.id}.json"
+    get "/api/bookstores/#{Bookstore.last.id}.json"
 
-    assert_equal '{"name":"junkudo"}', page.source
+    assert_equal({"name" => "junkudo"}, response.parsed_body)
   end
 end
 
