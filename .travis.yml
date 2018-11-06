@@ -1,6 +1,6 @@
 language: ruby
 
-sudo: required
+sudo: false
 
 script: bundle exec rake test
 
@@ -29,8 +29,6 @@ gemfile:
   - gemfiles/Gemfile-rails.4.1.x
   - gemfiles/Gemfile-rails.4.0.x
   - gemfiles/Gemfile-rails.3.2.x
-
-sudo: false
 
 matrix:
   exclude:
