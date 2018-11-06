@@ -45,7 +45,7 @@ ActiveDecoratorTestApp::Application.routes.draw do
 
   if Rails::VERSION::MAJOR >= 5
     namespace :api do
-      resources :authors, only: [:show]
+      resources :bookstores, only: :show
     end
   end
 end
@@ -86,6 +86,8 @@ class Magazine < ActiveRecord::Base
 end
 class Company < ActiveRecord::Base
   has_many :authors
+end
+class Bookstore < ActiveRecord::Base
 end
 
 # helpers
@@ -237,10 +239,10 @@ class MoviesController < ApplicationController
   end
 end
 if Rails::VERSION::MAJOR >= 5
-  module API
-    class AuthorsController < ActionController::API
+  module Api
+    class BookstoresController < ActionController::API
       def show
-        @author = Author.find params[:id]
+        @bookstore = Bookstore.find params[:id]
       end
     end
   end
@@ -266,6 +268,7 @@ class CreateAllTables < ActiveRecord::VERSION::MAJOR >= 5 ? ActiveRecord::Migrat
     create_table(:magazines) {|t| t.string :title}
     create_table(:authors_magazines) {|t| t.references :author; t.references :magazine}
     create_table(:companies) {|t| t.string :name}
+    create_table(:bookstores) {|t| t.string :name}
   end
 end
 

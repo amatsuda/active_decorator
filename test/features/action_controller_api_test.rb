@@ -5,14 +5,13 @@ if Rails::VERSION::MAJOR >= 5
 
 class ActionControllerAPITest < ActionDispatch::IntegrationTest
   setup do
-    nari = Author.create! name: 'nari'
-    nari.books.create! title: 'the gc book'
+    Bookstore.create! name: 'junkudo'
   end
 
   test 'decorating objects in api only controllers' do
-    visit "/authors/#{Author.last.id}.json"
+    visit "/api/bookstores/#{Bookstore.last.id}.json"
 
-    assert_equal '{"name":"nari","books":[{"title":"the gc book","reverse_title":"koob cg eht"}]}', page.source
+    assert_equal '{"name":"junkudo"}', page.source
   end
 end
 
