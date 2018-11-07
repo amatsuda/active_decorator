@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # A monkey-patch for Active Record that enables association auto-decoration.
 module ActiveDecorator
   module Monkey

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # A module that carries the controllers' view_context to decorators.
 module ActiveDecorator
   module ViewContext

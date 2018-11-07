@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Rspec
   module Generators
     class DecoratorGenerator < ::Rails::Generators::NamedBase

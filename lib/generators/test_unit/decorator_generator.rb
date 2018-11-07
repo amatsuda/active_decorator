@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module TestUnit
   module Generators
     class DecoratorGenerator < ::Rails::Generators::NamedBase

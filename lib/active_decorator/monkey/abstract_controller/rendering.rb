@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # A monkey-patch for Rails controllers/mailers that auto-decorates ivars
 # that are passed to views.
 module ActiveDecorator
