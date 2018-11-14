@@ -29,8 +29,6 @@ module ActiveDecorator
 
             require 'active_decorator/monkey/action_controller/base/rescue_from'
             ::ActionController::API.send :prepend, ActiveDecorator::Monkey::ActionController::Base
-
-            ::ActionController::API.send :include, ActiveDecorator::ViewContext::Filter
           end
         end
       end
