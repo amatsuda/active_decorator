@@ -22,12 +22,6 @@ module ActiveDecorator
       end
 
       if Rails::VERSION::MAJOR >= 5
-        module ::ActionController
-          module ApiRendering
-            include ActionView::Rendering
-          end
-        end
-
         ActiveSupport.on_load :action_controller do
           if self == ActionController::API
             require 'active_decorator/monkey/abstract_controller/rendering'
