@@ -78,5 +78,17 @@ matrix:
   include:
     - rvm: ruby-head
       gemfile: gemfiles/Gemfile-rails.edge
+    - rvm: 2.5.3
+      gemfile: gemfiles/Gemfile-rails.5.2.x
+      env: API=1
+    - rvm: 2.5.3
+      gemfile: gemfiles/Gemfile-rails.5.1.x
+      env: API=1
+    - rvm: 2.5.3
+      gemfile: gemfiles/Gemfile-rails.5.0.x
+      env: API=1
+    - rvm: ruby-head
+      gemfile: gemfiles/Gemfile-rails.edge
+      env: API=1
   allow_failures:
     - rvm: ruby-head

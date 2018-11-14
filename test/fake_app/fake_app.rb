@@ -167,79 +167,80 @@ end
 class MovieDecorator; end
 
 # controllers
-class ApplicationController < ActionController::Base
-  self.append_view_path File.dirname(__FILE__)
-end
-class AuthorsController < ApplicationController
-  def index
-    if Author.respond_to?(:scoped)
-      # ActiveRecord 3.x
-      if params[:variable_type] == 'array'
-        @authors = Author.all
-      elsif params[:variable_type] == 'proxy'
-        @authors = RelationProxy.new(Author.scoped)
+unless ENV['API']
+  class ApplicationController < ActionController::Base
+    self.append_view_path File.dirname(__FILE__)
+  end
+  class AuthorsController < ApplicationController
+    def index
+      if Author.respond_to?(:scoped)
+        # ActiveRecord 3.x
+        if params[:variable_type] == 'array'
+          @authors = Author.all
+        elsif params[:variable_type] == 'proxy'
+          @authors = RelationProxy.new(Author.scoped)
+        else
+          @authors = Author.scoped
+        end
       else
-        @authors = Author.scoped
-      end
-    else
-      # ActiveRecord 4.x
-      if params[:variable_type] == 'array'
-        @authors = Author.all.to_a
-      elsif params[:variable_type] == 'proxy'
-        @authors = RelationProxy.new(Author.all)
-      else
-        @authors = Author.all
+        # ActiveRecord 4.x
+        if params[:variable_type] == 'array'
+          @authors = Author.all.to_a
+        elsif params[:variable_type] == 'proxy'
+          @authors = RelationProxy.new(Author.all)
+        else
+          @authors = Author.all
+        end
       end
     end
-  end
 
-  def show
-    @author = Author.find params[:id]
+    def show
+      @author = Author.find params[:id]
+    end
   end
-end
-class BooksController < ApplicationController
-  class CustomError < StandardError; end
+  class BooksController < ApplicationController
+    class CustomError < StandardError; end
 
-  rescue_from CustomError do
-    render :error
-  end
+    rescue_from CustomError do
+      render :error
+    end
 
-  def index
-    @author = Author.find params[:author_id]
-    @books  = @author.books
-  end
+    def index
+      @author = Author.find params[:author_id]
+      @books  = @author.books
+    end
 
-  def show
-    @book = Author.find(params[:author_id]).books.find(params[:id])
-  end
+    def show
+      @book = Author.find(params[:author_id]).books.find(params[:id])
+    end
 
-  def errata
-    @book = Author.find(params[:author_id]).books.find(params[:id])
-  end
+    def errata
+      @book = Author.find(params[:author_id]).books.find(params[:id])
+    end
 
-  def errata2
-    @book = Author.find(params[:author_id]).books.find(params[:id])
-  end
+    def errata2
+      @book = Author.find(params[:author_id]).books.find(params[:id])
+    end
 
-  def error
-    @book = Author.find(params[:author_id]).books.find(params[:id])
-    raise CustomError, "error"
-  end
+    def error
+      @book = Author.find(params[:author_id]).books.find(params[:id])
+      raise CustomError, "error"
+    end
 
-  def purchase
-    @book = Author.find(params[:author_id]).books.find(params[:id])
+    def purchase
+      @book = Author.find(params[:author_id]).books.find(params[:id])
 
-    @view_context_before_sending_mail = ActiveDecorator::ViewContext.current
-    BookMailer.thanks(@book).deliver
-    raise 'Wrong ViewContext!' if ActiveDecorator::ViewContext.current != @view_context_before_sending_mail
+      @view_context_before_sending_mail = ActiveDecorator::ViewContext.current
+      BookMailer.thanks(@book).deliver
+      raise 'Wrong ViewContext!' if ActiveDecorator::ViewContext.current != @view_context_before_sending_mail
+    end
   end
-end
-class MoviesController < ApplicationController
-  def show
-    @movie = Movie.find params[:id]
+  class MoviesController < ApplicationController
+    def show
+      @movie = Movie.find params[:id]
+    end
   end
-end
-if Rails::VERSION::MAJOR >= 5
+else
   module Api
     class BookstoresController < ActionController::API
       def show

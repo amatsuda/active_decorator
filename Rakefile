@@ -8,7 +8,11 @@ require 'rake/testtask'
 
 Rake::TestTask.new do |t|
   t.libs << "test"
-  t.pattern = 'test/**/*_test.rb'
+  if ENV['API']
+    t.pattern = 'test/**/*_api_test.rb'
+  else
+    t.test_files = p(Dir['test/**/*_test.rb'] - Dir['test/**/*_api_test.rb'])
+  end
   t.warning = true
   t.verbose = true
 end
