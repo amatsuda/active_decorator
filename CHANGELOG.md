@@ -1,3 +1,10 @@
+## 1.1.1
+
+* Improved ActionController::API support for Rails 5.0.x [@frodsan]
+
+* Fixed "NameError: undefined local variable or method `view_context'" with ActionController::API or when rendering in controllers
+
+
 ## 1.1.0
 
 * ActionController::API support [@frodsan]
