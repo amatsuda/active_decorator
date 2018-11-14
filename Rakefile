@@ -11,7 +11,7 @@ Rake::TestTask.new do |t|
   if ENV['API']
     t.pattern = 'test/**/*_api_test.rb'
   else
-    t.test_files = p(Dir['test/**/*_test.rb'] - Dir['test/**/*_api_test.rb'])
+    t.test_files = Dir['test/**/*_test.rb'] - Dir['test/**/*_api_test.rb']
   end
   t.warning = true
   t.verbose = true
