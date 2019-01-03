@@ -13,91 +13,76 @@ before_install:
   - sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/
   - gem update bundler --no-document
 
-rvm:
-  - 2.6.0
-  - 2.5.3
-  - 2.4.5
-  - 2.3.7
-  - 2.2.10
-  - 2.1.10
-  - 2.0.0
-gemfile:
-  - gemfiles/Gemfile-rails.5.2.x
-  - gemfiles/Gemfile-rails.5.1.x
-  - gemfiles/Gemfile-rails.5.0.x
-  - gemfiles/Gemfile-rails.4.2.x
-  - gemfiles/Gemfile-rails.4.1.x
-  - gemfiles/Gemfile-rails.4.0.x
-  - gemfiles/Gemfile-rails.3.2.x
+# rvm:
+#   - 2.6.0
+#   - 2.5.3
+#   - 2.4.5
+#   - 2.3.8
+#   - 2.2.10
+#   - 2.1.10
+#   - 2.0.0
+# gemfile:
+#   - gemfiles/Gemfile-rails.5.2.x
+#   - gemfiles/Gemfile-rails.5.1.x
+#   - gemfiles/Gemfile-rails.5.0.x
+#   - gemfiles/Gemfile-rails.4.2.x
+#   - gemfiles/Gemfile-rails.4.1.x
+#   - gemfiles/Gemfile-rails.4.0.x
+#   - gemfiles/Gemfile-rails.3.2.x
 
 matrix:
-  exclude:
-    - rvm: 2.1.10
-      gemfile: gemfiles/Gemfile-rails.5.2.x
-    - rvm: 2.0.0
-      gemfile: gemfiles/Gemfile-rails.5.2.x
-    - rvm: 2.4.5
-      gemfile: gemfiles/Gemfile-rails.5.1.x
-    - rvm: 2.3.7
-      gemfile: gemfiles/Gemfile-rails.5.1.x
-    - rvm: 2.1.10
-      gemfile: gemfiles/Gemfile-rails.5.1.x
-    - rvm: 2.0.0
-      gemfile: gemfiles/Gemfile-rails.5.1.x
-    - rvm: 2.4.5
-      gemfile: gemfiles/Gemfile-rails.5.0.x
-    - rvm: 2.3.7
-      gemfile: gemfiles/Gemfile-rails.5.0.x
-    - rvm: 2.1.10
-      gemfile: gemfiles/Gemfile-rails.5.0.x
-    - rvm: 2.0.0
-      gemfile: gemfiles/Gemfile-rails.5.0.x
-    - rvm: 2.6.0
-      gemfile: gemfiles/Gemfile-rails.4.2.x
-    - rvm: 2.5.3
-      gemfile: gemfiles/Gemfile-rails.4.2.x
-    - rvm: 2.4.5
-      gemfile: gemfiles/Gemfile-rails.4.2.x
-    - rvm: 2.6.0
-      gemfile: gemfiles/Gemfile-rails.4.1.x
-    - rvm: 2.5.3
-      gemfile: gemfiles/Gemfile-rails.4.1.x
-    - rvm: 2.4.5
-      gemfile: gemfiles/Gemfile-rails.4.1.x
-    - rvm: 2.2.10
-      gemfile: gemfiles/Gemfile-rails.4.1.x
-    - rvm: 2.1.10
-      gemfile: gemfiles/Gemfile-rails.4.1.x
-    - rvm: 2.6.0
-      gemfile: gemfiles/Gemfile-rails.4.0.x
-    - rvm: 2.5.3
-      gemfile: gemfiles/Gemfile-rails.4.0.x
-    - rvm: 2.4.5
-      gemfile: gemfiles/Gemfile-rails.4.0.x
-    - rvm: 2.2.10
-      gemfile: gemfiles/Gemfile-rails.4.0.x
-    - rvm: 2.1.10
-      gemfile: gemfiles/Gemfile-rails.4.0.x
-    - rvm: 2.6.0
-      gemfile: gemfiles/Gemfile-rails.3.2.x
-    - rvm: 2.5.3
-      gemfile: gemfiles/Gemfile-rails.3.2.x
-    - rvm: 2.4.5
-      gemfile: gemfiles/Gemfile-rails.3.2.x
   include:
-    - rvm: ruby-head
-      gemfile: gemfiles/Gemfile-rails.edge
-    - rvm: 2.5.3
+    - rvm: 2.6.0
+      gemfile: gemfiles/Gemfile-rails.5.2.x
+    - rvm: 2.6.0
       gemfile: gemfiles/Gemfile-rails.5.2.x
       env: API=1
-    - rvm: 2.5.3
+    - rvm: 2.6.0
+      gemfile: gemfiles/Gemfile-rails.5.1.x
+    - rvm: 2.6.0
       gemfile: gemfiles/Gemfile-rails.5.1.x
       env: API=1
-    - rvm: 2.5.3
+    - rvm: 2.6.0
+      gemfile: gemfiles/Gemfile-rails.5.0.x
+    - rvm: 2.6.0
       gemfile: gemfiles/Gemfile-rails.5.0.x
       env: API=1
+
+    - rvm: 2.5.3
+      gemfile: gemfiles/Gemfile-rails.5.2.x
+
+    - rvm: 2.4.5
+      gemfile: gemfiles/Gemfile-rails.5.2.x
+
+    - rvm: 2.3.8
+      gemfile: gemfiles/Gemfile-rails.5.2.x
+    - rvm: 2.3.8
+      gemfile: gemfiles/Gemfile-rails.4.2.x
+    - rvm: 2.3.8
+      gemfile: gemfiles/Gemfile-rails.4.1.x
+    - rvm: 2.3.8
+      gemfile: gemfiles/Gemfile-rails.4.0.x
+
+    - rvm: 2.2.10
+      gemfile: gemfiles/Gemfile-rails.5.2.x
+
+    - rvm: 2.1.10
+      gemfile: gemfiles/Gemfile-rails.4.2.x
+
+    - rvm: 2.0.0
+      gemfile: gemfiles/Gemfile-rails.4.2.x
+
+    - rvm: 2.0.0
+      gemfile: gemfiles/Gemfile-rails.3.2.x
+
+
+    - rvm: ruby-head
+      gemfile: gemfiles/Gemfile-rails.edge
+
     - rvm: ruby-head
       gemfile: gemfiles/Gemfile-rails.edge
       env: API=1
+
   allow_failures:
     - rvm: ruby-head
+    - gemfile: gemfiles/Gemfile-rails.edge
