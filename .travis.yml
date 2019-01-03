@@ -11,7 +11,7 @@ before_install:
   - sudo apt update -qq
   - sudo apt install -y chromium-chromedriver
   - sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/
-  - gem i bundler
+  - gem up --system && gem i bundler
 
 # rvm:
 #   - 2.6.0
