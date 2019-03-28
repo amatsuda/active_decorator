@@ -29,6 +29,10 @@ module ActiveDecorator
         obj.each do |r|
           decorate r
         end
+      elsif obj.is_a?(Hash)
+        obj.values.each do |v|
+          decorate v
+        end
       elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation)
         # don't call each nor to_a immediately
         if obj.respond_to?(:records)
