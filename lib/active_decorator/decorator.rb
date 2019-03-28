@@ -15,6 +15,7 @@ module ActiveDecorator
     # Decorates the given object.
     # Plus, performs special decoration for the classes below:
     #   Array: decorates its each element
+    #   Hash: decorates its each value
     #   AR::Relation: decorates its each record lazily
     #   AR model: decorates its associations on the fly
     #
@@ -28,6 +29,10 @@ module ActiveDecorator
       if obj.is_a?(Array)
         obj.each do |r|
           decorate r
+        end
+      elsif obj.is_a?(Hash)
+        obj.values.each do |v|
+          decorate v
         end
       elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation)
         # don't call each nor to_a immediately
