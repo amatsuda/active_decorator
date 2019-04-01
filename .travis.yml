@@ -11,7 +11,6 @@ before_install:
   - sudo apt update -qq
   - sudo apt install -y chromium-chromedriver
   - sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/
-  - "ruby -e 'exit RUBY_VERSION.to_f >= 2.3' && gem up --system || gem i rubygems-update -v '<3' && update_rubygems"
   - gem i bundler -v '<2'
 
 # rvm:
