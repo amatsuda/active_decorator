@@ -3,7 +3,6 @@
 require 'test_helper'
 
 class DecoratorTest < Test::Unit::TestCase
-
   test 'it returns the object on decoration' do
     book = Book.new title: 'Boek'
     assert_equal book, ActiveDecorator::Decorator.instance.decorate(book)
@@ -32,22 +31,12 @@ class DecoratorTest < Test::Unit::TestCase
     assert_equal books, ActiveDecorator::Decorator.instance.decorate(ActiveDecorator::Decorator.instance.decorate(books))
   end
 
-  test 'it returns the object of Hash on decoration' do
-    book_in_hash = { some_record: Book.new(title: 'Boek') }
-    assert_equal book_in_hash, ActiveDecorator::Decorator.instance.decorate(book_in_hash)
-  end
+  test 'decorating Hash decorates its each value' do
+    hash = {some_record: Book.new(title: 'Boek')}
+    assert_equal hash, ActiveDecorator::Decorator.instance.decorate(hash)
 
-  test 'it returns the object of Hash when it already is decorated on decorate' do
-    book_in_hash = { some_record: Book.new(title: 'Boek') }
-    assert_equal book_in_hash, ActiveDecorator::Decorator.instance.decorate(ActiveDecorator::Decorator.instance.decorate(book_in_hash))
-  end
-
-  test 'The object in Hash has all the methods included by its Decorator' do
-    book = Book.new(title: 'Boek')
-    ActiveDecorator::Decorator.instance.decorate(some_record: book)
-    decorator = ActiveDecorator::Decorator.instance
-                                          .send(:decorator_for, book.class)
-
-    assert(decorator.instance_methods.all? { |d| book.methods.include?(d) })
+    hash.values.each do |value|
+      assert value.is_a?(BookDecorator)
+    end
   end
 end
