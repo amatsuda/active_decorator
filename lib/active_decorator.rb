@@ -2,5 +2,9 @@
 
 require 'active_decorator/version'
 require 'active_decorator/decorator'
-require 'active_decorator/railtie'
+begin
+  require 'rails'
+  require 'active_decorator/railtie'
+rescue LoadError
+end
 require 'active_decorator/config'

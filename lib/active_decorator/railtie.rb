@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails'
-
 module ActiveDecorator
   class Railtie < ::Rails::Railtie
     initializer 'active_decorator' do
