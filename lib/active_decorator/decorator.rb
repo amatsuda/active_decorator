@@ -31,7 +31,7 @@ module ActiveDecorator
           decorate r
         end
       elsif obj.is_a?(Hash)
-        obj.values.each do |v|
+        obj.each_value do |v|
           decorate v
         end
       elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation)
