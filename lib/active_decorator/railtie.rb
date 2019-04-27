@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_decorator/view_context'
 require 'rails'
 
 module ActiveDecorator
@@ -18,6 +17,7 @@ module ActiveDecorator
         require 'active_decorator/monkey/action_controller/base/rescue_from'
         ActionController::Base.send :prepend, ActiveDecorator::Monkey::ActionController::Base
 
+        require 'active_decorator/view_context'
         ActionController::Base.send :include, ActiveDecorator::ViewContext::Filter
       end
 
