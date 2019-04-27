@@ -90,18 +90,18 @@ module ActiveDecorator
   # For AR 3 and 4
   module RelationDecoratorLegacy
     def to_a
-      super.tap do |arr|
-        ActiveDecorator::Decorator.instance.decorate arr
-      end
+      arr = super
+      ActiveDecorator::Decorator.instance.decorate arr
+      arr
     end
   end
 
   # For AR 5+
   module RelationDecorator
     def records
-      super.tap do |arr|
-        ActiveDecorator::Decorator.instance.decorate arr
-      end
+      arr = super
+      ActiveDecorator::Decorator.instance.decorate arr
+      arr
     end
   end
 end
