@@ -36,6 +36,7 @@ module ActiveDecorator
         ActionMailer::Base.send :prepend, ActiveDecorator::Monkey::AbstractController::Rendering
 
         if ActionMailer::Base.respond_to? :before_action
+          require 'active_decorator/view_context'
           ActionMailer::Base.send :include, ActiveDecorator::ViewContext::Filter
         end
       end
