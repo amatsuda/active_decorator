@@ -14,9 +14,9 @@ before_install:
   - gem i bundler -v '<2'
 
 # rvm:
-#   - 2.6.2
+#   - 2.6.3
 #   - 2.5.5
-#   - 2.4.5
+#   - 2.4.6
 #   - 2.3.8
 #   - 2.2.10
 #   - 2.1.10
@@ -32,26 +32,26 @@ before_install:
 
 matrix:
   include:
-    - rvm: 2.6.2
+    - rvm: 2.6.3
       gemfile: gemfiles/Gemfile-rails.5.2.x
-    - rvm: 2.6.2
+    - rvm: 2.6.3
       gemfile: gemfiles/Gemfile-rails.5.2.x
       env: API=1
-    - rvm: 2.6.2
+    - rvm: 2.6.3
       gemfile: gemfiles/Gemfile-rails.5.1.x
-    - rvm: 2.6.2
+    - rvm: 2.6.3
       gemfile: gemfiles/Gemfile-rails.5.1.x
       env: API=1
-    - rvm: 2.6.2
+    - rvm: 2.6.3
       gemfile: gemfiles/Gemfile-rails.5.0.x
-    - rvm: 2.6.2
+    - rvm: 2.6.3
       gemfile: gemfiles/Gemfile-rails.5.0.x
       env: API=1
 
     - rvm: 2.5.5
       gemfile: gemfiles/Gemfile-rails.5.2.x
 
-    - rvm: 2.4.5
+    - rvm: 2.4.6
       gemfile: gemfiles/Gemfile-rails.5.2.x
 
     - rvm: 2.3.8
