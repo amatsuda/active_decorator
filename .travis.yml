@@ -33,6 +33,11 @@ before_install:
 matrix:
   include:
     - rvm: 2.6.3
+      gemfile: gemfiles/Gemfile-rails.6.0.x
+    - rvm: 2.6.3
+      gemfile: gemfiles/Gemfile-rails.6.0.x
+      env: API=1
+    - rvm: 2.6.3
       gemfile: gemfiles/Gemfile-rails.5.2.x
     - rvm: 2.6.3
       gemfile: gemfiles/Gemfile-rails.5.2.x
