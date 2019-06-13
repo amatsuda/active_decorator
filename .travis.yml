@@ -10,7 +10,6 @@ addons:
 before_install:
   - sudo apt update -qq
   - sudo apt install -y chromium-chromedriver
-  - sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/
   - gem i bundler -v '<2'
 
 # rvm:
