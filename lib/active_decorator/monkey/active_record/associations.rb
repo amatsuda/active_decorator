@@ -58,6 +58,14 @@ module ActiveDecorator
           ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
         end
 
+        if Rails::VERSION::MAJOR <= 4
+          protected
+
+          def find_last
+            ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+          end
+        end
+
         private
 
         def find_nth_with_limit(*)
