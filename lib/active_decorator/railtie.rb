@@ -44,11 +44,13 @@ module ActiveDecorator
       ActiveSupport.on_load :active_record do
         require 'active_decorator/monkey/active_record/associations'
         ActiveRecord::Associations::Association.send :prepend, ActiveDecorator::Monkey::ActiveRecord::Associations::Association
+
         if Rails.version.to_f < 5.1
           ActiveRecord::Associations::CollectionAssociation.send :prepend, ActiveDecorator::Monkey::ActiveRecord::Associations::CollectionAssociation
         end
         if Rails.version.to_f >= 4.0
           ActiveRecord::Associations::CollectionProxy.send :prepend, ActiveDecorator::Monkey::ActiveRecord::Associations::CollectionProxy
+          ActiveRecord::AssociationRelation.send :prepend, ActiveDecorator::Monkey::ActiveRecord::AssociationRelation
         end
       end
     end

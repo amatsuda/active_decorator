@@ -52,6 +52,22 @@ module ActiveDecorator
           end
         end
       end
+
+      module AssociationRelation
+        def take(*)
+          ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+        end
+
+        private
+
+        def find_nth_with_limit(*)
+          ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+        end
+
+        def find_nth_from_last(*)
+          ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+        end
+      end
     end
   end
 end

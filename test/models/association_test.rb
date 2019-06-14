@@ -17,5 +17,14 @@ class ConfigurationTest < Test::Unit::TestCase
 
     b = a.books.take
     assert b.is_a? ActiveDecorator::Decorated
+
+    b = a.books.order(:id).first
+    assert b.is_a? ActiveDecorator::Decorated
+
+    b = a.books.order(:id).last
+    assert b.is_a? ActiveDecorator::Decorated
+
+    b = a.books.order(:id).take
+    assert b.is_a? ActiveDecorator::Decorated
   end
 end
