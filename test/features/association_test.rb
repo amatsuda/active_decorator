@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class AssociationTest < ActionDispatch::IntegrationTest
+class AssociationIntegrationTest < ActionDispatch::IntegrationTest
   setup do
     company = Company.create! name: 'NaCl'
     @matz = company.authors.create! name: 'matz'

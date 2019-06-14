@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class ConfigurationTest < Test::Unit::TestCase
+class AssociationTest < Test::Unit::TestCase
   test 'decorating associations' do
     a = Author.create! name: 'yugui'
     ActiveDecorator::Decorator.instance.decorate a
