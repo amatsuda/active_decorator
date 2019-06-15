@@ -54,6 +54,7 @@ module ActiveDecorator
         end
 
         ActiveRecord::Associations::CollectionProxy.send :prepend, ActiveDecorator::Monkey::ActiveRecord::Associations::CollectionProxy
+        ActiveRecord::Associations::CollectionAssociation.send :prepend, ActiveDecorator::Monkey::ActiveRecord::Associations::CollectionAssociation
       end
     end
   end

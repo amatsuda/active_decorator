@@ -60,6 +60,14 @@ module ActiveDecorator
             end
           end
         end
+
+        module CollectionAssociation
+          private
+
+          def build_record(*)
+            ActiveDecorator::Decorator.instance.decorate_association(@owner, super)
+          end
+        end
       end
 
       module AssociationRelation

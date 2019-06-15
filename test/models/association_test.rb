@@ -7,7 +7,12 @@ class AssociationTest < Test::Unit::TestCase
     a = Author.create! name: 'yugui'
     ActiveDecorator::Decorator.instance.decorate a
 
+    b = a.books.build title: 'giraffe'
+    assert b.is_a? ActiveDecorator::Decorated
+    b = a.books.clear
+
     b = a.books.create! title: 'giraffe'
+    assert b.is_a? ActiveDecorator::Decorated
     id = b.id
 
     b = a.books.first
