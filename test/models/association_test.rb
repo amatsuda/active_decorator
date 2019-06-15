@@ -8,11 +8,15 @@ class AssociationTest < Test::Unit::TestCase
     ActiveDecorator::Decorator.instance.decorate a
 
     b = a.books.create! title: 'giraffe'
+    id = b.id
 
     b = a.books.first
     assert b.is_a? ActiveDecorator::Decorated
 
     b = a.books.last
+    assert b.is_a? ActiveDecorator::Decorated
+
+    b = a.books.find id
     assert b.is_a? ActiveDecorator::Decorated
 
     if ActiveRecord::VERSION::MAJOR >= 4
@@ -24,6 +28,9 @@ class AssociationTest < Test::Unit::TestCase
     assert b.is_a? ActiveDecorator::Decorated
 
     b = a.books.order(:id).last
+    assert b.is_a? ActiveDecorator::Decorated
+
+    b = a.books.order(:id).find id
     assert b.is_a? ActiveDecorator::Decorated
 
     if ActiveRecord::VERSION::MAJOR >= 4
