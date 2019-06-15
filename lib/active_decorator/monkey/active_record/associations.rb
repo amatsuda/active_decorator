@@ -38,6 +38,10 @@ module ActiveDecorator
             def scoped
               ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
             end
+
+            def find(*)
+              ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+            end
           end
 
           if Rails.version.to_f >= 5.1
