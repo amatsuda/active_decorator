@@ -33,6 +33,11 @@ module ActiveDecorator
             def take(*)
               ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
             end
+          else
+            # To propagate the decorated mark from association to relation
+            def scoped
+              ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
+            end
           end
 
           if Rails.version.to_f >= 5.1
