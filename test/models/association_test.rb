@@ -15,8 +15,10 @@ class AssociationTest < Test::Unit::TestCase
     b = a.books.last
     assert b.is_a? ActiveDecorator::Decorated
 
-    b = a.books.take
-    assert b.is_a? ActiveDecorator::Decorated
+    if ActiveRecord::VERSION::MAJOR >= 4
+      b = a.books.take
+      assert b.is_a? ActiveDecorator::Decorated
+    end
 
     b = a.books.order(:id).first
     assert b.is_a? ActiveDecorator::Decorated
@@ -24,7 +26,9 @@ class AssociationTest < Test::Unit::TestCase
     b = a.books.order(:id).last
     assert b.is_a? ActiveDecorator::Decorated
 
-    b = a.books.order(:id).take
-    assert b.is_a? ActiveDecorator::Decorated
+    if ActiveRecord::VERSION::MAJOR >= 4
+      b = a.books.order(:id).take
+      assert b.is_a? ActiveDecorator::Decorated
+    end
   end
 end
