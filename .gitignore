@@ -5,3 +5,4 @@ gemfiles/*.lock
 pkg/*
 log
 tmp
+.byebug_history
