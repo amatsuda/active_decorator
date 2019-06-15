@@ -11,6 +11,7 @@ require 'active_decorator'
 Bundler.require
 require 'capybara'
 require 'selenium/webdriver'
+require 'byebug'
 
 # needs to load the app next
 require 'fake_app/fake_app'
