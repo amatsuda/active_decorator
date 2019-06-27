@@ -23,6 +23,12 @@ class AssociationTest < Test::Unit::TestCase
     assert b.is_a? ActiveDecorator::Decorated
   end
 
+  test 'each' do
+    @books.each do |b|
+      assert b.is_a? ActiveDecorator::Decorated
+    end
+  end
+
   test 'first' do
     assert @books.first.is_a? ActiveDecorator::Decorated
   end
@@ -44,6 +50,12 @@ class AssociationTest < Test::Unit::TestCase
   sub_test_case 'when method chained' do
     setup do
       @books = @books.order(:id)
+    end
+
+    test 'each' do
+      @books.each do |b|
+        assert b.is_a? ActiveDecorator::Decorated
+      end
     end
 
     test 'first' do
