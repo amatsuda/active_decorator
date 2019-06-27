@@ -3,44 +3,65 @@
 require 'test_helper'
 
 class AssociationTest < Test::Unit::TestCase
-  test 'decorating associations' do
-    a = Author.create! name: 'yugui'
+  setup do
+    a = Author.create! name: 'pragdave'
     ActiveDecorator::Decorator.instance.decorate a
 
-    b = a.books.build title: 'giraffe'
-    assert b.is_a? ActiveDecorator::Decorated
-    b = a.books.clear
+    @books = a.books
 
-    b = a.books.create! title: 'giraffe'
-    assert b.is_a? ActiveDecorator::Decorated
-    id = b.id
+    b = @books.create! title: 'pragprog'
+    @id = b.id
+  end
 
-    b = a.books.first
+  test 'build' do
+    b = @books.build title: 'pickaxe'
     assert b.is_a? ActiveDecorator::Decorated
+  end
 
-    b = a.books.last
+  test 'create!' do
+    b = @books.create! title: 'pickaxe'
     assert b.is_a? ActiveDecorator::Decorated
+  end
 
-    b = a.books.find id
-    assert b.is_a? ActiveDecorator::Decorated
+  test 'first' do
+    assert @books.first.is_a? ActiveDecorator::Decorated
+  end
 
-    if ActiveRecord::VERSION::MAJOR >= 4
-      b = a.books.take
-      assert b.is_a? ActiveDecorator::Decorated
+  test 'last' do
+    assert @books.last.is_a? ActiveDecorator::Decorated
+  end
+
+  test 'find' do
+    assert @books.find(@id).is_a? ActiveDecorator::Decorated
+  end
+
+  if ActiveRecord::VERSION::MAJOR >= 4
+    test 'take' do
+      assert @books.take.is_a? ActiveDecorator::Decorated
+    end
+  end
+
+  sub_test_case 'when method chained' do
+    setup do
+      @books = @books.order(:id)
     end
 
-    b = a.books.order(:id).first
-    assert b.is_a? ActiveDecorator::Decorated
+    test 'first' do
+      assert @books.first.is_a? ActiveDecorator::Decorated
+    end
 
-    b = a.books.order(:id).last
-    assert b.is_a? ActiveDecorator::Decorated
+    test 'last' do
+      assert @books.last.is_a? ActiveDecorator::Decorated
+    end
 
-    b = a.books.order(:id).find id
-    assert b.is_a? ActiveDecorator::Decorated
+    test 'find' do
+      assert @books.find(@id).is_a? ActiveDecorator::Decorated
+    end
 
     if ActiveRecord::VERSION::MAJOR >= 4
-      b = a.books.order(:id).take
-      assert b.is_a? ActiveDecorator::Decorated
+      test 'take' do
+        assert @books.take.is_a? ActiveDecorator::Decorated
+      end
     end
   end
 end
