@@ -1,3 +1,14 @@
+## 1.3.0
+
+* Switched from Active Support `constantize` to Ruby's `const_get` when fetching decorator modules
+
+* Switched `config` from ActiveSupport::Configurable to a simple Struct
+
+* Association decoration now propagates from AssociationRelation to spawned Relations (e.g. `@post.comments.order(:id).each`)
+
+* Dropped support for Rails 3.2, 4.0, and 4.1
+
+
 ## 1.2.0
 
 * Decorate values in Hash recursively [@FumiyaShibusawa]
