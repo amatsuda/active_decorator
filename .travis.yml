@@ -1,7 +1,5 @@
 language: ruby
 
-script: bundle exec rake test
-
 addons:
   chrome: stable
 
