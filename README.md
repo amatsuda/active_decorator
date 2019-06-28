@@ -1,6 +1,6 @@
 # ActiveDecorator [![Build Status](https://travis-ci.org/amatsuda/active_decorator.svg?branch=master)](https://travis-ci.org/amatsuda/active_decorator) [![Code Climate](https://codeclimate.com/github/amatsuda/active_decorator/badges/gpa.svg)](https://codeclimate.com/github/amatsuda/active_decorator)
 
-A simple and Rubyish view helper for Rails 3, Rails 4, Rails 5, and Rails 6. Keep your helpers and views Object-Oriented!
+A simple and Rubyish view helper for Rails 4, Rails 5, and Rails 6. Keep your helpers and views Object-Oriented!
 
 
 ## Features ##
@@ -17,7 +17,7 @@ A simple and Rubyish view helper for Rails 3, Rails 4, Rails 5, and Rails 6. Kee
 
 * Ruby 2.0.0, 2.1.x, 2.2.x, 2.3.x, 2.4.x, 2.5.x, 2.6.x, and 2.7 (trunk)
 
-* Rails 3.2.x, 4.0.x, 4.1.x, 4.2.x, 5.0, 5.1, 5.2, and 6.0 (edge)
+* Rails 4.2.x, 5.0, 5.1, 5.2, and 6.0 (edge)
 
 
 ## Supported ORMs ##
