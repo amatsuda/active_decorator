@@ -175,24 +175,13 @@ unless ENV['API']
   end
   class AuthorsController < ApplicationController
     def index
-      if Author.respond_to?(:scoped)
-        # ActiveRecord 3.x
-        if params[:variable_type] == 'array'
-          @authors = Author.all
-        elsif params[:variable_type] == 'proxy'
-          @authors = RelationProxy.new(Author.scoped)
-        else
-          @authors = Author.scoped
-        end
+      # ActiveRecord 4.x
+      if params[:variable_type] == 'array'
+        @authors = Author.all.to_a
+      elsif params[:variable_type] == 'proxy'
+        @authors = RelationProxy.new(Author.all)
       else
-        # ActiveRecord 4.x
-        if params[:variable_type] == 'array'
-          @authors = Author.all.to_a
-        elsif params[:variable_type] == 'proxy'
-          @authors = RelationProxy.new(Author.all)
-        else
-          @authors = Author.all
-        end
+        @authors = Author.all
       end
     end
 

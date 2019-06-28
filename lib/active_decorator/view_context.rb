@@ -32,17 +32,9 @@ module ActiveDecorator
       extend ActiveSupport::Concern
 
       included do
-        if Rails::VERSION::MAJOR >= 4
-          around_action do |controller, blk|
-            ActiveDecorator::ViewContext.run_with(controller.view_context) do
-              blk.call
-            end
-          end
-        else
-          around_filter do |controller, blk|
-            ActiveDecorator::ViewContext.run_with(controller.view_context) do
-              blk.call
-            end
+        around_action do |controller, blk|
+          ActiveDecorator::ViewContext.run_with(controller.view_context) do
+            blk.call
           end
         end
       end

@@ -41,10 +41,8 @@ class AssociationTest < Test::Unit::TestCase
     assert @books.find(@id).is_a? ActiveDecorator::Decorated
   end
 
-  if ActiveRecord::VERSION::MAJOR >= 4
-    test 'take' do
-      assert @books.take.is_a? ActiveDecorator::Decorated
-    end
+  test 'take' do
+    assert @books.take.is_a? ActiveDecorator::Decorated
   end
 
   sub_test_case 'when method chained' do
@@ -70,10 +68,8 @@ class AssociationTest < Test::Unit::TestCase
       assert @books.find(@id).is_a? ActiveDecorator::Decorated
     end
 
-    if ActiveRecord::VERSION::MAJOR >= 4
-      test 'take' do
-        assert @books.take.is_a? ActiveDecorator::Decorated
-      end
+    test 'take' do
+      assert @books.take.is_a? ActiveDecorator::Decorated
     end
   end
 end

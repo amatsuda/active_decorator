@@ -49,9 +49,7 @@ module ActiveDecorator
           ActiveRecord::Associations::CollectionAssociation.send :prepend, ActiveDecorator::Monkey::ActiveRecord::Associations::CollectionAssociation
         end
 
-        if Rails.version.to_f >= 4.0
-          ActiveRecord::AssociationRelation.send :prepend, ActiveDecorator::Monkey::ActiveRecord::AssociationRelation
-        end
+        ActiveRecord::AssociationRelation.send :prepend, ActiveDecorator::Monkey::ActiveRecord::AssociationRelation
 
         ActiveRecord::Associations::CollectionProxy.send :prepend, ActiveDecorator::Monkey::ActiveRecord::Associations::CollectionProxy
         ActiveRecord::Associations::CollectionAssociation.send :prepend, ActiveDecorator::Monkey::ActiveRecord::Associations::CollectionAssociation

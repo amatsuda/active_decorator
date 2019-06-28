@@ -11,15 +11,7 @@ module ActiveDecorator
           end
         end
 
-        # @see https://github.com/rails/rails/commit/03855e790de2224519f55382e3c32118be31eeff
-        if Rails.version.to_f < 4.1
-          module CollectionAssociation
-            private
-            def first_or_last(*)
-              ActiveDecorator::Decorator.instance.decorate_association(owner, super)
-            end
-          end
-        elsif Rails.version.to_f < 5.1
+        if Rails.version.to_f < 5.1
           module CollectionAssociation
             private
             def first_nth_or_last(*)
@@ -29,19 +21,8 @@ module ActiveDecorator
         end
 
         module CollectionProxy
-          if Rails.version.to_f >= 4.0
-            def take(*)
-              ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
-            end
-          else
-            # To propagate the decorated mark from association to relation
-            def scoped
-              ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
-            end
-
-            def find(*)
-              ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
-            end
+          def take(*)
+            ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
           end
 
           if Rails.version.to_f >= 5.1
