@@ -105,7 +105,7 @@ end
 ```erb
 <p><%= @author.name %></p>
 <ul>
-<% @author.books.each do |book| %>
+<% @author.books.order(:id).each do |book| %>
   <%# `book` here is auto-decorated because @author is a decorated instance %>
   <li><%= book.link %></li>
 <% end %>
