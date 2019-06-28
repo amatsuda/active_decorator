@@ -1,3 +1,8 @@
+## 1.2.0
+
+* Decorate values in Hash recursively [@FumiyaShibusawa]
+
+
 ## 1.1.1
 
 * Improved ActionController::API support for Rails 5.0.x [@frodsan]
