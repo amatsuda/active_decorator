@@ -10,6 +10,8 @@ before_install:
   - sudo apt install -y chromium-chromedriver
   - gem i bundler -v '<2'
 
+cache: bundler
+
 # rvm:
 #   - 2.6.3
 #   - 2.5.5
