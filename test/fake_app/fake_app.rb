@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+ENV['RAILS_ENV'] ||= 'test'
+
 require 'active_record'
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
