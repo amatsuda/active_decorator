@@ -71,31 +71,7 @@ module ActiveDecorator
       end
 
       module AssociationRelation
-        def take(*)
-          ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
-        end
-
-        if Rails::VERSION::MAJOR <= 4
-          protected
-
-          if (Rails::VERSION::MAJOR == 4) && (Rails::VERSION::MINOR == 0)
-            def find_first
-              ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
-            end
-          end
-
-          def find_last
-            ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
-          end
-        end
-
-        private
-
-        def find_nth_with_limit(*)
-          ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
-        end
-
-        def find_nth_from_last(*)
+        def spawn(*)
           ActiveDecorator::Decorator.instance.decorate_association(@association.owner, super)
         end
       end
