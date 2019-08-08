@@ -69,7 +69,7 @@ module ActiveDecorator
       return @@decorators[model_class] if @@decorators.key? model_class
 
       decorator_name = "#{model_class.name}#{ActiveDecorator.config.decorator_suffix}"
-      d = Object.const_get decorator_name, false
+      d = decorator_name.constantize
       unless Class === d
         d.send :include, ActiveDecorator::Helpers
         @@decorators[model_class] = d

@@ -277,3 +277,7 @@ class RelationProxy < BasicObject
     @ar_relation.public_send(method, *args, &block)
   end
 end
+
+module Foo
+  class Comic; end
+end
