@@ -48,4 +48,11 @@ class DecoratorTest < Test::Unit::TestCase
       assert value.is_a?(BookDecorator)
     end
   end
+
+  test "Don't use the wrong decorator for nested classes" do
+    comic = Foo::Comic.new
+
+    assert_equal comic, ActiveDecorator::Decorator.instance.decorate(comic)
+    assert !comic.is_a?(ComicDecorator)
+  end
 end
