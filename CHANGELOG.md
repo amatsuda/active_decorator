@@ -1,3 +1,7 @@
+## 1.3.1
+
+* Switched back from Ruby's `const_get` to Active Support `constantize` for fetching decorator modules, due to inability to properly detect namespaced decorator [@sinsoku]
+
 ## 1.3.0
 
 * Switched from Active Support `constantize` to Ruby's `const_get` when fetching decorator modules
