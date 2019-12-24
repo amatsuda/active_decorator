@@ -164,6 +164,11 @@ module CompanyDecorator
     name.reverse
   end
 end
+module BookstoreDecorator
+  def initial
+    name.first
+  end
+end
 
 # decorator fake
 class MovieDecorator; end
