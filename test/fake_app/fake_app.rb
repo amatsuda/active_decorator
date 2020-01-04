@@ -7,7 +7,7 @@ require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
 require 'ostruct'
-require 'jbuilder'
+require 'jbuilder' unless ENV['API']
 
 # config
 ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
