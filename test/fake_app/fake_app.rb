@@ -48,7 +48,11 @@ ActiveDecoratorTestApp::Application.routes.draw do
 
   if Rails::VERSION::MAJOR >= 5
     namespace :api do
-      resources :bookstores, only: :show
+      resources :bookstores, only: :show do
+        collection do
+          get :error
+        end
+      end
     end
   end
 end
@@ -243,6 +247,12 @@ unless ENV['API']
 else
   module Api
     class BookstoresController < ActionController::API
+      class CustomError < StandardError; end
+
+      rescue_from CustomError do
+        head :internal_server_error
+      end
+
       def show
         @bookstore = Bookstore.find params[:id]
         render json: serialize('bookstore')
@@ -250,6 +260,10 @@ else
 
       private def serialize(name)
         view_assigns[name].to_json
+      end
+
+      def error
+        raise CustomError, 'boom!'
       end
     end
   end
