@@ -168,6 +168,10 @@ module BookstoreDecorator
   def initial
     name.first
   end
+
+  def to_json
+    {name: name, initial: initial}
+  end
 end
 
 # decorator fake
@@ -241,6 +245,11 @@ else
     class BookstoresController < ActionController::API
       def show
         @bookstore = Bookstore.find params[:id]
+        render json: serialize('bookstore')
+      end
+
+      private def serialize(name)
+        view_assigns[name].to_json
       end
     end
   end
