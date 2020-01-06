@@ -1,3 +1,7 @@
+## 1.3.2
+
+* Fixed NameError on ActionController::API controllers without jbuilder enhancement [@kamillle]
+
 ## 1.3.1
 
 * Switched back from Ruby's `const_get` to Active Support `constantize` for fetching decorator modules, due to inability to properly detect namespaced decorator [@sinsoku]
