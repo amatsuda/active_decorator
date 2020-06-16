@@ -99,6 +99,11 @@ class Company < ActiveRecord::Base
 end
 class Bookstore < ActiveRecord::Base
 end
+class NilRecord < ActiveRecord::Base
+  def nil?
+    true
+  end
+end
 
 # helpers
 module ApplicationHelper; end
@@ -180,6 +185,7 @@ module BookstoreDecorator
     {name: name, initial: initial}
   end
 end
+module NilRecordDecorator; end
 
 # decorator fake
 class MovieDecorator; end
@@ -303,6 +309,7 @@ class CreateAllTables < ActiveRecord::VERSION::MAJOR >= 5 ? ActiveRecord::Migrat
     create_table(:authors_magazines) {|t| t.references :author; t.references :magazine}
     create_table(:companies) {|t| t.string :name}
     create_table(:bookstores) {|t| t.string :name}
+    create_table(:nil_records) {|t| t.string :name}
   end
 end
 
