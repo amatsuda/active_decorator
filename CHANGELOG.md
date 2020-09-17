@@ -1,3 +1,7 @@
+## 1.3.3
+
+* Fixed Ruby 2.7 keyword arguments warning [@pocke]
+
 ## 1.3.2
 
 * Fixed NameError on ActionController::API controllers without jbuilder enhancement [@kamillle]
