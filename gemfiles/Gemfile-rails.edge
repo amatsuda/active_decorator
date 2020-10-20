@@ -10,3 +10,9 @@ end
 github 'rails/rails' do
   gem 'rails'
 end
+
+unless ENV['API']
+  github 'rails/jbuilder' do
+    gem 'jbuilder'
+  end
+end
