@@ -13,7 +13,9 @@ Gem::Specification.new do |s|
   s.summary     = %q{A simple and Rubyish view helper for Rails}
   s.description = %q{A simple and Rubyish view helper for Rails}
 
-  s.files         = `git ls-files`.split("\n")
+  s.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
+    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  end
   s.require_paths = ["lib"]
 
   s.add_dependency 'activesupport'
