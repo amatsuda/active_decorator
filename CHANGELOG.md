@@ -1,3 +1,7 @@
+## 1.3.4
+
+* Support Rails 6.1 [@y-yagi]
+
 ## 1.3.3
 
 * Fixed Ruby 2.7 keyword arguments warning [@pocke]
