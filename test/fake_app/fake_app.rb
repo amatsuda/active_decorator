@@ -29,6 +29,9 @@ ActiveDecoratorTestApp::Application.initialize!
 # routes
 ActiveDecoratorTestApp::Application.routes.draw do
   resources :authors, only: [:index, :show] do
+    collection do
+      get :partial
+    end
     resources :books, only: [:index, :show] do
       member do
         get :errata
@@ -200,6 +203,16 @@ unless ENV['API']
 
     def show
       @author = Author.find params[:id]
+    end
+
+    def partial
+      if params[:pattern] == 'collection'
+        render partial: 'authors/author', collection: @authors = Author.all
+      elsif params[:pattern] == 'locals'
+        render partial: 'authors/author_locals', locals: {a: Author.first}
+      else
+        render Author.first
+      end
     end
   end
   class BooksController < ApplicationController

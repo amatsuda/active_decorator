@@ -6,6 +6,14 @@ module ActiveDecorator
       ActiveSupport.on_load :action_view do
         require 'active_decorator/monkey/action_view/partial_renderer'
         ActionView::PartialRenderer.send :prepend, ActiveDecorator::Monkey::ActionView::PartialRenderer
+
+        if Rails.version.to_f >= 6.1
+          require 'active_decorator/monkey/action_view/collection_renderer'
+          ActionView::CollectionRenderer.send :prepend, ActiveDecorator::Monkey::ActionView::CollectionRenderer
+
+          require 'active_decorator/monkey/action_view/object_renderer'
+          ActionView::ObjectRenderer.send :prepend, ActiveDecorator::Monkey::ActionView::ObjectRenderer
+        end
       end
 
       ActiveSupport.on_load :action_controller do
