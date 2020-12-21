@@ -8,6 +8,7 @@ require 'rails'
 # load the plugin
 require 'active_decorator'
 
+require 'bundler'
 Bundler.require
 require 'capybara'
 require 'selenium/webdriver'

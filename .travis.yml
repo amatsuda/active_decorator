@@ -27,6 +27,15 @@ cache: bundler
 matrix:
   include:
     - rvm: 2.7.1
+      gemfile: gemfiles/Gemfile-rails.6.1.x
+    - rvm: 2.7.1
+      gemfile: gemfiles/Gemfile-rails.6.1.x
+      env: API=1
+    - rvm: 2.6.6
+      gemfile: gemfiles/Gemfile-rails.6.1.x
+    - rvm: 2.6.6
+      gemfile: gemfiles/Gemfile-rails.6.1.x
+    - rvm: 2.7.1
       gemfile: gemfiles/Gemfile-rails.6.0.x
     - rvm: 2.7.1
       gemfile: gemfiles/Gemfile-rails.6.0.x
