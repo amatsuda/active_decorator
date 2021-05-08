@@ -55,4 +55,11 @@ class DecoratorTest < Test::Unit::TestCase
     assert_equal comic, ActiveDecorator::Decorator.instance.decorate(comic)
     assert !comic.is_a?(ComicDecorator)
   end
+
+  test "it returns the object when nil? returns true on decorate" do
+    record = NilRecord.new
+
+    assert_equal record, ActiveDecorator::Decorator.instance.decorate(record)
+    assert record.is_a?(NilRecordDecorator)
+  end
 end
