@@ -1,3 +1,7 @@
+## 1.4.0
+
+* Decorate non-nil objects where `nil?` returns true, namely, ActionText::RichText body [@jamesbrooks]
+
 ## 1.3.4
 
 * Support Rails 6.1 [@y-yagi]
