@@ -25,15 +25,17 @@ module ActiveDecorator
     def decorate(obj)
       return obj if defined?(Jbuilder) && (Jbuilder === obj)
 
-      if obj.is_a?(Array)
+      case obj
+      when Array
         obj.each do |r|
           decorate r
         end
-      elsif obj.is_a?(Hash)
+      when Hash
         obj.each_value do |v|
           decorate v
         end
-      elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation)
+      else
+      if defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation)
         # don't call each nor to_a immediately
         if obj.respond_to?(:records)
           # Rails 5.0
@@ -50,6 +52,7 @@ module ActiveDecorator
         d = decorator_for obj.class
         return obj unless d
         obj.extend d unless obj.is_a? d
+      end
       end
 
       obj
