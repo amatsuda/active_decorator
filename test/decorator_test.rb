@@ -62,4 +62,9 @@ class DecoratorTest < Test::Unit::TestCase
     assert_equal record, ActiveDecorator::Decorator.instance.decorate(record)
     assert record.is_a?(NilRecordDecorator)
   end
+
+  test 'nil can be decorated via NilClassDecorator' do
+    assert_equal nil, ActiveDecorator::Decorator.instance.decorate(nil)
+    assert_equal 'nil', nil.do
+  end
 end

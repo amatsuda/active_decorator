@@ -190,6 +190,13 @@ module NilRecordDecorator; end
 # decorator fake
 class MovieDecorator; end
 
+# Maybe we can decorate `nil` now?
+module NilClassDecorator
+  def do
+    inspect
+  end
+end
+
 # controllers
 unless ENV['API']
   class ApplicationController < ActionController::Base
