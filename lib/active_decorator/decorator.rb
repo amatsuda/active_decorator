@@ -35,24 +35,24 @@ module ActiveDecorator
           decorate v
         end
       else
-      if defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation)
-        # don't call each nor to_a immediately
-        if obj.respond_to?(:records)
-          # Rails 5.0
-          obj.extend ActiveDecorator::RelationDecorator unless obj.is_a? ActiveDecorator::RelationDecorator
+        if defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation)
+          # don't call each nor to_a immediately
+          if obj.respond_to?(:records)
+            # Rails 5.0
+            obj.extend ActiveDecorator::RelationDecorator unless obj.is_a? ActiveDecorator::RelationDecorator
+          else
+            # Rails 3.x and 4.x
+            obj.extend ActiveDecorator::RelationDecoratorLegacy unless obj.is_a? ActiveDecorator::RelationDecoratorLegacy
+          end
         else
-          # Rails 3.x and 4.x
-          obj.extend ActiveDecorator::RelationDecoratorLegacy unless obj.is_a? ActiveDecorator::RelationDecoratorLegacy
-        end
-      else
-        if defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Base) && !obj.is_a?(ActiveDecorator::Decorated)
-          obj.extend ActiveDecorator::Decorated
-        end
+          if defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Base) && !obj.is_a?(ActiveDecorator::Decorated)
+            obj.extend ActiveDecorator::Decorated
+          end
 
-        d = decorator_for obj.class
-        return obj unless d
-        obj.extend d unless obj.is_a? d
-      end
+          d = decorator_for obj.class
+          return obj unless d
+          obj.extend d unless obj.is_a? d
+        end
       end
 
       obj
