@@ -63,8 +63,12 @@ class DecoratorTest < Test::Unit::TestCase
     assert record.is_a?(NilRecordDecorator)
   end
 
-  test 'nil can be decorated via NilClassDecorator' do
+  test 'nil, true, and false are not decorated' do
     assert_equal nil, ActiveDecorator::Decorator.instance.decorate(nil)
-    assert_equal 'nil', nil.do
+    assert_not_respond_to nil, :do
+    assert_equal true, ActiveDecorator::Decorator.instance.decorate(true)
+    assert_not_respond_to true, :do
+    assert_equal false, ActiveDecorator::Decorator.instance.decorate(false)
+    assert_not_respond_to false, :do
   end
 end

@@ -196,6 +196,16 @@ module NilClassDecorator
     inspect
   end
 end
+module TrueClassDecorator
+  def do
+    inspect
+  end
+end
+module FalseClassDecorator
+  def do
+    inspect
+  end
+end
 
 # controllers
 unless ENV['API']
