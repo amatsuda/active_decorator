@@ -23,7 +23,7 @@ module ActiveDecorator
     #
     # This method can be publicly called from anywhere by `ActiveDecorator::Decorator.instance.decorate(obj)`.
     def decorate(obj)
-      return if defined?(Jbuilder) && (Jbuilder === obj)
+      return obj if defined?(Jbuilder) && (Jbuilder === obj)
 
       if obj.is_a?(Array)
         obj.each do |r|
