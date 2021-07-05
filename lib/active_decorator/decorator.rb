@@ -9,7 +9,7 @@ module ActiveDecorator
     include Singleton
 
     def initialize
-      @@decorators = {}
+      @decorators = {}
     end
 
     # Decorates the given object.
@@ -70,23 +70,23 @@ module ActiveDecorator
     # Returns a decorator module for the given class.
     # Returns `nil` if no decorator module was found.
     def decorator_for(model_class)
-      return @@decorators[model_class] if @@decorators.key? model_class
+      return @decorators[model_class] if @decorators.key? model_class
 
       decorator_name = "#{model_class.name}#{ActiveDecorator.config.decorator_suffix}"
       d = decorator_name.constantize
       unless Class === d
         d.send :include, ActiveDecorator::Helpers
-        @@decorators[model_class] = d
+        @decorators[model_class] = d
       else
         # Cache nil results
-        @@decorators[model_class] = nil
+        @decorators[model_class] = nil
       end
     rescue NameError
       if model_class.respond_to?(:base_class) && (model_class.base_class != model_class)
-        @@decorators[model_class] = decorator_for model_class.base_class
+        @decorators[model_class] = decorator_for model_class.base_class
       else
         # Cache nil results
-        @@decorators[model_class] = nil
+        @decorators[model_class] = nil
       end
     end
   end
