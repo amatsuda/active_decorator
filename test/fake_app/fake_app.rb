@@ -7,7 +7,7 @@ require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
 require 'ostruct'
-require 'jbuilder' unless ENV['API']
+require 'jbuilder' unless ENV['API'] == '1'
 
 # config
 ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
@@ -208,7 +208,7 @@ module FalseClassDecorator
 end
 
 # controllers
-unless ENV['API']
+unless ENV['API'] == '1'
   class ApplicationController < ActionController::Base
     self.append_view_path File.dirname(__FILE__)
   end

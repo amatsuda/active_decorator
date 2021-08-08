@@ -8,7 +8,7 @@ require 'rake/testtask'
 
 Rake::TestTask.new do |t|
   t.libs << "test"
-  if ENV['API']
+  if ENV['API'] == '1'
     t.pattern = 'test/**/*_api_test.rb'
   else
     t.test_files = Dir['test/**/*_test.rb'] - Dir['test/**/*_api_test.rb']
