@@ -4,4 +4,4 @@ gemspec path: '..'
 
 gem 'rails', '~> 6.0.0'
 gem 'webdrivers'
-gem 'jbuilder' unless ENV['API']
+gem 'jbuilder' unless ENV['API'] == '1'
