@@ -7,68 +7,67 @@ jobs:
     strategy:
       matrix:
         ruby_version: [ruby-head, '3.1', '3.0', '2.7']
-        gemfile:
-          - gemfiles/Gemfile-rails.edge
-          - gemfiles/Gemfile-rails.7.0.x
-          - gemfiles/Gemfile-rails.6.1.x
+        rails_version: [edge, '7.0', '6.1']
         api: ['0', '1']
 
         include:
           - ruby_version: '2.7'
-            gemfile: gemfiles/Gemfile-rails.6.0.x
+            rails_version: '6.0'
           - ruby_version: '2.7'
-            gemfile: gemfiles/Gemfile-rails.6.0.x
+            rails_version: '6.0'
             api: '1'
 
           - ruby_version: '2.6'
-            gemfile: gemfiles/Gemfile-rails.6.1.x
+            rails_version: '6.1'
           - ruby_version: '2.6'
-            gemfile: gemfiles/Gemfile-rails.6.1.x
+            rails_version: '6.1'
             api: '1'
           - ruby_version: '2.6'
-            gemfile: gemfiles/Gemfile-rails.6.0.x
+            rails_version: '6.0'
           - ruby_version: '2.6'
-            gemfile: gemfiles/Gemfile-rails.6.0.x
+            rails_version: '6.0'
             api: '1'
           - ruby_version: '2.6'
-            gemfile: gemfiles/Gemfile-rails.5.2.x
+            rails_version: '5.2'
           - ruby_version: '2.6'
-            gemfile: gemfiles/Gemfile-rails.5.2.x
+            rails_version: '5.2'
             api: '1'
           - ruby_version: '2.6'
-            gemfile: gemfiles/Gemfile-rails.5.1.x
+            rails_version: '5.1'
           - ruby_version: '2.6'
-            gemfile: gemfiles/Gemfile-rails.5.1.x
+            rails_version: '5.1'
             api: '1'
           - ruby_version: '2.6'
-            gemfile: gemfiles/Gemfile-rails.5.0.x
+            rails_version: '5.0'
           - ruby_version: '2.6'
-            gemfile: gemfiles/Gemfile-rails.5.0.x
+            rails_version: '5.0'
             api: '1'
 
           - ruby_version: '2.5'
-            gemfile: gemfiles/Gemfile-rails.5.2.x
+            rails_version: '5.2'
 
           - ruby_version: '2.4'
-            gemfile: gemfiles/Gemfile-rails.5.2.x
+            rails_version: '5.2'
 
           - ruby_version: '2.3'
-            gemfile: gemfiles/Gemfile-rails.5.2.x
+            rails_version: '5.2'
           - ruby_version: '2.3'
-            gemfile: gemfiles/Gemfile-rails.4.2.x
+            rails_version: '4.2'
             bundler_version: '1'
 
           - ruby_version: '2.2'
-            gemfile: gemfiles/Gemfile-rails.5.2.x
+            rails_version: '5.2'
 
           - ruby_version: '2.1'
-            gemfile: gemfiles/Gemfile-rails.4.2.x
+            rails_version: '4.2'
             bundler_version: '1'
 
-    runs-on: ubuntu-18.04
     env:
+      RAILS_VERSION: ${{ matrix.rails_version }}
       API: ${{ matrix.api }}
       BUNDLE_GEMFILE: "${{ matrix.gemfile }}"
+
+    runs-on: ubuntu-18.04
 
     steps:
       - uses: actions/checkout@v2
