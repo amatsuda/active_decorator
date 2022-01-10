@@ -15,6 +15,6 @@ end
 
 gem 'nokogiri', RUBY_VERSION < '2.1' ? '~> 1.6.0' : '>= 1.7'
 gem 'selenium-webdriver'
-gem 'webdrivers'
+gem 'webdrivers', ENV['RAILS_VERSION'] && ENV['RAILS_VERSION'] < '6' ? '< 4' : '>= 4'
 gem 'net-smtp' if RUBY_VERSION >= '3.1'
 gem 'jbuilder' unless ENV['API'] == '1'
