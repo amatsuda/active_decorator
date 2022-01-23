@@ -65,7 +65,6 @@ jobs:
     env:
       RAILS_VERSION: ${{ matrix.rails_version }}
       API: ${{ matrix.api }}
-      BUNDLE_GEMFILE: "${{ matrix.gemfile }}"
 
     runs-on: ubuntu-18.04
 
