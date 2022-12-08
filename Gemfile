@@ -6,6 +6,8 @@ gemspec
 
 if ENV['RAILS_VERSION'] == 'edge'
   gem 'rails', git: 'https://github.com/rails/rails.git'
+elsif ENV['RAILS_VERSION'] == '5.2'
+  gem 'rails', '5.2.8'
 elsif ENV['RAILS_VERSION']
   gem 'rails', "~> #{ENV['RAILS_VERSION']}.0"
   gem 'sqlite3', '< 1.4' if ENV['RAILS_VERSION'] <= '5.0'
@@ -14,7 +16,7 @@ else
 end
 
 if RUBY_VERSION < '2.7'
-  gem 'puma', '< 6'
+  gem 'puma', '< 5.6'
 else
   gem 'puma'
 end
