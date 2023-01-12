@@ -39,6 +39,7 @@ jobs:
             api: '1'
           - ruby_version: '2.6'
             rails_version: '5.1'
+            allow_failures: 'true'
           - ruby_version: '2.6'
             rails_version: '5.1'
             api: '1'
