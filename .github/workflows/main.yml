@@ -76,11 +76,23 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - uses: ruby/setup-ruby@v1
+        if: matrix.ruby_version >= '2.6'
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          rubygems: latest
+          bundler: ${{ matrix.bundler_version }}
+          bundler-cache: true
+        continue-on-error: ${{ matrix.allow_failures == 'true' }}
+
+      - uses: ruby/setup-ruby@v1
+        if: matrix.ruby_version < '2.6'
         with:
           ruby-version: ${{ matrix.ruby_version }}
           bundler: ${{ matrix.bundler_version }}
           bundler-cache: true
         continue-on-error: ${{ matrix.allow_failures == 'true' }}
+
       - run: bundle exec rake
         continue-on-error: ${{ matrix.allow_failures == 'true' }}
