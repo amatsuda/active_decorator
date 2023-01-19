@@ -33,7 +33,6 @@ jobs:
             api: '1'
           - ruby_version: '2.6'
             rails_version: '5.2'
-            allow_failures: 'true'
             allow_failures: 'true'  # FIXME: this fails with "Selenium::WebDriver::Error::WebDriverError: unable to connect" error
           - ruby_version: '2.6'
             rails_version: '5.2'
