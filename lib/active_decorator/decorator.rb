@@ -86,16 +86,16 @@ module ActiveDecorator
     end
   end
 
-  # For AR 3 and 4
-  module RelationDecoratorLegacy
-    def to_a
+  # For AR 5+
+  module RelationDecorator
+    def records
       ActiveDecorator::Decorator.instance.decorate super
     end
   end
 
-  # For AR 5+
-  module RelationDecorator
-    def records
+  # For AR 3 and 4
+  module RelationDecoratorLegacy
+    def to_a
       ActiveDecorator::Decorator.instance.decorate super
     end
   end
