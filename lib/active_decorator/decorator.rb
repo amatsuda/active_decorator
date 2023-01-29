@@ -27,8 +27,8 @@ module ActiveDecorator
 
       case obj
       when Array
-        obj.each do |r|
-          decorate r
+        obj.each do |e|
+          decorate e
         end
       when Hash
         obj.each_value do |v|
