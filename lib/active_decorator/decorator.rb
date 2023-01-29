@@ -48,8 +48,7 @@ module ActiveDecorator
           end
 
           d = decorator_for obj.class
-          return obj unless d
-          obj.extend d unless obj.is_a? d
+          obj.extend d if d && !obj.is_a?(d)
         end
       end
 
