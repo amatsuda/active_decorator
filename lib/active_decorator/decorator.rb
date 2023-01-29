@@ -43,9 +43,7 @@ module ActiveDecorator
             obj.extend ActiveDecorator::RelationDecoratorLegacy unless (ActiveDecorator::RelationDecoratorLegacy === obj)
           end
         else
-          if defined?(ActiveRecord) && (ActiveRecord::Base === obj) && !(ActiveDecorator::Decorated === obj)
-            obj.extend ActiveDecorator::Decorated
-          end
+          obj.extend ActiveDecorator::Decorated if defined?(ActiveRecord) && (ActiveRecord::Base === obj) && !(ActiveDecorator::Decorated === obj)
 
           d = decorator_for obj.class
           obj.extend d if d && !(d === obj)
