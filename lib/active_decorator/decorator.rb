@@ -33,21 +33,23 @@ module ActiveDecorator
       when nil, true, false
         # Do nothing
       else
-        if defined?(ActiveRecord) && ((ActiveRecord::Relation === obj) || obj.is_a?(ActiveRecord::Relation))
-          # don't call each nor to_a immediately
-          if obj.respond_to?(:records)
-            # Rails 5.0
-            obj.extend ActiveDecorator::RelationDecorator unless (ActiveDecorator::RelationDecorator === obj)
-          else
-            # Rails 3.x and 4.x
-            obj.extend ActiveDecorator::RelationDecoratorLegacy unless (ActiveDecorator::RelationDecoratorLegacy === obj)
+        if defined? ActiveRecord
+          if obj.is_a? ActiveRecord::Relation
+            # don't call each nor to_a immediately
+            if obj.respond_to?(:records)
+              # Rails 5.0
+              return obj.extend ActiveDecorator::RelationDecorator unless ActiveDecorator::RelationDecorator === obj
+            else
+              # Rails 3.x and 4.x
+              return obj.extend ActiveDecorator::RelationDecoratorLegacy unless ActiveDecorator::RelationDecoratorLegacy === obj
+            end
+          elsif ActiveRecord::Base === obj
+            obj.extend ActiveDecorator::Decorated unless ActiveDecorator::Decorated === obj
           end
-        else
-          obj.extend ActiveDecorator::Decorated if defined?(ActiveRecord) && (ActiveRecord::Base === obj) && !(ActiveDecorator::Decorated === obj)
-
-          d = decorator_for obj.class
-          obj.extend d if d && !(d === obj)
         end
+
+        d = decorator_for obj.class
+        obj.extend d if d && !(d === obj)
       end
 
       obj
