@@ -44,7 +44,7 @@ class DecoratorTest < Test::Unit::TestCase
     hash = {some_record: Book.new(title: 'Boek')}
     assert_equal hash, ActiveDecorator::Decorator.instance.decorate(hash)
 
-    hash.values.each do |value|
+    hash.each_value do |value|
       assert value.is_a?(BookDecorator)
     end
   end

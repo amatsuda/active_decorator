@@ -31,7 +31,7 @@ module ActiveDecorator
       when Hash
         obj.each_value {|v| decorate v }
       when nil, true, false
-        obj
+        # Do nothing
       else
         if defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation)
           # don't call each nor to_a immediately
