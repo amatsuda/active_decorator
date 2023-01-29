@@ -35,14 +35,7 @@ module ActiveDecorator
       else
         if defined? ActiveRecord
           if obj.is_a? ActiveRecord::Relation
-            # don't call each nor to_a immediately
-            if obj.respond_to?(:records)
-              # Rails 5.0
-              return obj.extend ActiveDecorator::RelationDecorator unless ActiveDecorator::RelationDecorator === obj
-            else
-              # Rails 3.x and 4.x
-              return obj.extend ActiveDecorator::RelationDecoratorLegacy unless ActiveDecorator::RelationDecoratorLegacy === obj
-            end
+            return decorate_relation obj
           elsif ActiveRecord::Base === obj
             obj.extend ActiveDecorator::Decorated unless ActiveDecorator::Decorated === obj
           end
@@ -84,16 +77,28 @@ module ActiveDecorator
         @decorators[model_class] = nil
       end
     end
+
+    # Decorate with proper monkey patch based on AR version
+    def decorate_relation(obj)
+      if obj.respond_to?(:records)
+        # Rails 5.0
+        obj.extend ActiveDecorator::RelationDecorator unless ActiveDecorator::RelationDecorator === obj
+      else
+        # Rails 3.x and 4.x
+        obj.extend ActiveDecorator::RelationDecoratorLegacy unless ActiveDecorator::RelationDecoratorLegacy === obj
+      end
+      obj
+    end
   end
 
-  # For AR 5+
+  # Override AR::Relation#records to decorate each element after being loaded (for AR 5+)
   module RelationDecorator
     def records
       ActiveDecorator::Decorator.instance.decorate super
     end
   end
 
-  # For AR 3 and 4
+  # Override AR::Relation#to_a to decorate each element after being loaded (for AR 3 and 4)
   module RelationDecoratorLegacy
     def to_a
       ActiveDecorator::Decorator.instance.decorate super
