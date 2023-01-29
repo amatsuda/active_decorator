@@ -33,22 +33,22 @@ module ActiveDecorator
       when nil, true, false
         # Do nothing
       else
-        if defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation)
+        if defined?(ActiveRecord) && ((ActiveRecord::Relation === obj) || obj.is_a?(ActiveRecord::Relation))
           # don't call each nor to_a immediately
           if obj.respond_to?(:records)
             # Rails 5.0
-            obj.extend ActiveDecorator::RelationDecorator unless obj.is_a? ActiveDecorator::RelationDecorator
+            obj.extend ActiveDecorator::RelationDecorator unless (ActiveDecorator::RelationDecorator === obj)
           else
             # Rails 3.x and 4.x
-            obj.extend ActiveDecorator::RelationDecoratorLegacy unless obj.is_a? ActiveDecorator::RelationDecoratorLegacy
+            obj.extend ActiveDecorator::RelationDecoratorLegacy unless (ActiveDecorator::RelationDecoratorLegacy === obj)
           end
         else
-          if defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Base) && !obj.is_a?(ActiveDecorator::Decorated)
+          if defined?(ActiveRecord) && (ActiveRecord::Base === obj) && !(ActiveDecorator::Decorated === obj)
             obj.extend ActiveDecorator::Decorated
           end
 
           d = decorator_for obj.class
-          obj.extend d if d && !obj.is_a?(d)
+          obj.extend d if d && !(d === obj)
         end
       end
 
@@ -58,7 +58,7 @@ module ActiveDecorator
     # Decorates AR model object's association only when the object was decorated.
     # Returns the association instance.
     def decorate_association(owner, target)
-      owner.is_a?(ActiveDecorator::Decorated) ? decorate(target) : target
+      (ActiveDecorator::Decorated === owner) ? decorate(target) : target
     end
 
     private
