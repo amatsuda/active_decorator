@@ -27,13 +27,9 @@ module ActiveDecorator
 
       case obj
       when Array
-        obj.each do |e|
-          decorate e
-        end
+        obj.each {|e| decorate e }
       when Hash
-        obj.each_value do |v|
-          decorate v
-        end
+        obj.each_value {|v| decorate v }
       when nil, true, false
         obj
       else
