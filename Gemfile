@@ -15,11 +15,10 @@ else
   gem 'rails'
 end
 
-
 if RUBY_VERSION < '2.7'
   gem 'puma', '< 6'
 else
-  gem 'puma', '> 6'
+  gem 'puma'
 end
 
 gem 'nokogiri', RUBY_VERSION < '2.1' ? '~> 1.6.0' : '>= 1.7'
