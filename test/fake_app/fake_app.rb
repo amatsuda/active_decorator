@@ -20,6 +20,7 @@ module ActiveDecoratorTestApp
     config.eager_load = false
     config.action_dispatch.show_exceptions = false
     config.root = File.dirname(__FILE__)
+    config.logger = ActiveSupport::Logger.new($stdout)
 
     config.action_mailer.delivery_method = :test
   end
