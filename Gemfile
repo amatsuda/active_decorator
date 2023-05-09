@@ -22,6 +22,7 @@ else
 end
 
 gem 'nokogiri', RUBY_VERSION < '2.1' ? '~> 1.6.0' : '>= 1.7'
+gem 'concurrent-ruby', RUBY_VERSION < '2.3' ? '~> 1.1.0' : '>= 1.2'
 gem 'selenium-webdriver'
 gem 'webdrivers' if ENV['RAILS_VERSION'] && ENV['RAILS_VERSION'] >= '6'
 gem 'net-smtp' if RUBY_VERSION >= '3.1'
