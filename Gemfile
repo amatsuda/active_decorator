@@ -22,7 +22,7 @@ else
 end
 
 gem 'nokogiri', RUBY_VERSION < '2.1' ? '~> 1.6.0' : '>= 1.7'
-gem 'loofah', RUBY_VERSION < '2.5' ? '< 2.21.2' : '>= 0'
+gem 'loofah', RUBY_VERSION < '2.5' ? '< 2.21.0' : '>= 0'
 gem 'concurrent-ruby', RUBY_VERSION < '2.3' ? '~> 1.1.0' : '>= 1.2'
 gem 'selenium-webdriver', RUBY_VERSION == '3.0' ? '4.9.0' : '>= 0'
 gem 'webdrivers' if ENV['RAILS_VERSION'] && ENV['RAILS_VERSION'] >= '6'
