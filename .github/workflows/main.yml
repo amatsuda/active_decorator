@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    name: Ruby ${{ matrix.ruby_version }} / Rails ${{ matrix.rails_version }}${{ matrix.api == '1' && ' / API' || '' }}
     strategy:
       matrix:
         ruby_version: [ruby-head, '3.2', '3.1', '3.0', '2.7']
