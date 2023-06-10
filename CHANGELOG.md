@@ -1,22 +1,34 @@
+## 1.4.1
+
+* Support Ruby 3.2 by `File.exists?` => `File.exists?` in generator [@kyoshidajp]
+
+* A little bit of internal code cleanup
+
+
 ## 1.4.0
 
 * Decorate non-nil objects where `nil?` returns true, namely, ActionText::RichText body [@jamesbrooks]
+
 
 ## 1.3.4
 
 * Support Rails 6.1 [@y-yagi]
 
+
 ## 1.3.3
 
 * Fixed Ruby 2.7 keyword arguments warning [@pocke]
+
 
 ## 1.3.2
 
 * Fixed NameError on ActionController::API controllers without jbuilder enhancement [@kamillle]
 
+
 ## 1.3.1
 
 * Switched back from Ruby's `const_get` to Active Support `constantize` for fetching decorator modules, due to inability to properly detect namespaced decorator [@sinsoku]
+
 
 ## 1.3.0
 
