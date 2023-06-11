@@ -1,6 +1,6 @@
 ## 1.4.1
 
-* Support Ruby 3.2 by `File.exists?` => `File.exists?` in generator [@kyoshidajp]
+* Support Ruby 3.2 by `File.exists?` => `File.exist?` in generator [@kyoshidajp]
 
 * A little bit of internal code cleanup
 
