@@ -58,14 +58,12 @@ jobs:
             rails_version: '5.2'
           - ruby_version: '2.3'
             rails_version: '4.2'
-            bundler_version: '1'
 
           - ruby_version: '2.2'
             rails_version: '5.2'
 
           - ruby_version: '2.1'
             rails_version: '4.2'
-            bundler_version: '1'
 
     env:
       RAILS_VERSION: ${{ matrix.rails_version }}
@@ -80,7 +78,6 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby_version }}
           rubygems: ${{ (matrix.ruby_version < '2.3' && '2.7.11') || (matrix.ruby_version < '2.6' && '3.3.26') || 'latest' }}
-          bundler: ${{ matrix.bundler_version }}
           bundler-cache: true
         continue-on-error: ${{ matrix.allow_failures == 'true' }}
 
