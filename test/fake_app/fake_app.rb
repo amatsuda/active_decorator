@@ -18,7 +18,11 @@ module ActiveDecoratorTestApp
     config.session_store :cookie_store, key: '_myapp_session'
     config.active_support.deprecation = :log
     config.eager_load = false
-    config.action_dispatch.show_exceptions = false
+    if ((Rails::VERSION::MAJOR >= 7) && (Rails::VERSION::MINOR >= 1)) || (Rails::VERSION::MAJOR >= 8)
+      config.action_dispatch.show_exceptions = :none
+    else
+      config.action_dispatch.show_exceptions = false
+    end
     config.root = File.dirname(__FILE__)
     config.logger = ActiveSupport::Logger.new($stdout)
 
