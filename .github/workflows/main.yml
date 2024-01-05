@@ -11,7 +11,7 @@ jobs:
     name: Ruby ${{ matrix.ruby_version }} / Rails ${{ matrix.rails_version }}${{ matrix.api == '1' && ' / API' || '' }}
     strategy:
       matrix:
-        ruby_version: [ruby-head, '3.2', '3.1']
+        ruby_version: [ruby-head, '3.3', '3.2', '3.1']
         rails_version: [edge, '7.1', '7.0', '6.1']
         api: ['0', '1']
 
