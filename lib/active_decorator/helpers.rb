@@ -3,7 +3,7 @@
 # On the fly delegation from the decorator to the decorated object and the helpers.
 module ActiveDecorator
   module Helpers
-    def method_missing(method, *args, &block)
+    def method_missing(method, *args, **kwargs, &block)
       super
     rescue NoMethodError, NameError => e1
       # the error is not mine, so just releases it as is.
@@ -11,7 +11,7 @@ module ActiveDecorator
 
       if (view_context = ActiveDecorator::ViewContext.current)
         begin
-          view_context.send method, *args, &block
+          view_context.send method, *args, **kwargs, &block
         rescue NoMethodError => e2
           raise e2 if e2.name != method
 
