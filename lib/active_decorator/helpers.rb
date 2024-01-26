@@ -11,7 +11,11 @@ module ActiveDecorator
 
       if (view_context = ActiveDecorator::ViewContext.current)
         begin
-          view_context.send method, *args, **kwargs, &block
+          if kwargs.any?
+            view_context.send method, *args, **kwargs, &block
+          else
+            view_context.send method, *args, &block
+          end
         rescue NoMethodError => e2
           raise e2 if e2.name != method
 
