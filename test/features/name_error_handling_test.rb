@@ -22,7 +22,7 @@ class NameErrorHandlingTest < ActionDispatch::IntegrationTest
       visit "/authors/#{@rhg.author.id}/books/#{@rhg.id}/errata2"
     end
 
-    assert_match(/undefined method `boom!' for/, err.message)
+    assert_match(/undefined method [`']boom!' for/, err.message)
     assert_match 'boom!', err.cause.name if err.respond_to?(:cause)
     assert_not_match(/active_decorator\/lib\/active_decorator\/.* in method_missing'$/, err.backtrace[0])
   end
