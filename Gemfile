@@ -9,7 +9,11 @@ if ENV['RAILS_VERSION'] == 'edge'
   gem 'rackup'
 elsif ENV['RAILS_VERSION']
   gem 'rails', "~> #{ENV['RAILS_VERSION']}.0"
-  gem 'sqlite3', '< 1.4' if ENV['RAILS_VERSION'] <= '5.0'
+  if ENV['RAILS_VERSION'] <= '5.0'
+    gem 'sqlite3', '< 1.4'
+  elsif (ENV['RAILS_VERSION'] <= '8') || (RUBY_VERSION < '3')
+    gem 'sqlite3', '< 2'
+  end
   gem 'rackup' if ENV['RAILS_VERSION'] > '7.1'
 else
   gem 'rails'
