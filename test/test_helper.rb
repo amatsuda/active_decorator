@@ -9,6 +9,7 @@ require 'rails'
 require 'active_decorator'
 
 Bundler.require
+require 'rack/handler'
 require 'capybara'
 require 'selenium/webdriver'
 require 'byebug'
