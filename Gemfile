@@ -14,7 +14,7 @@ elsif ENV['RAILS_VERSION']
   elsif (ENV['RAILS_VERSION'] <= '8') || (RUBY_VERSION < '3')
     gem 'sqlite3', '< 2'
   end
-  gem 'rackup' if ENV['RAILS_VERSION'] >= '7.1'
+  gem 'rackup' if ENV['RAILS_VERSION'] > '7.1'
 else
   gem 'rails'
 end
