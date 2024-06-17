@@ -27,6 +27,10 @@ module ActiveDecoratorTestApp
     config.logger = ActiveSupport::Logger.new($stdout)
 
     config.action_mailer.delivery_method = :test
+
+    config.after_initialize do |app|
+      app.routes_reloader.reload!
+    end
   end
 end
 ActiveDecoratorTestApp::Application.initialize!
