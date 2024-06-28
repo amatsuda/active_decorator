@@ -19,8 +19,4 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency 'activesupport'
-
-  s.add_development_dependency 'test-unit-rails'
-  s.add_development_dependency 'capybara'
-  s.add_development_dependency 'sqlite3'
 end
