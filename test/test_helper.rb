@@ -12,7 +12,6 @@ Bundler.require
 require 'rack/handler'
 require 'capybara'
 require 'selenium/webdriver'
-require 'byebug'
 
 # needs to load the app next
 require 'fake_app/fake_app'
