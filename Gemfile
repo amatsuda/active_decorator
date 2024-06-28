@@ -4,7 +4,11 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'rails', "~> #{ENV['RAILS_VERSION']}.0"
+if ENV['RAILS_VERSION'] == 'edge'
+  gem 'rails', git: 'https://github.com/rails/rails.git'
+elsif ENV['RAILS_VERSION']
+  gem 'rails', "~> #{ENV['RAILS_VERSION']}.0"
+end
 gem 'rackup'
 
 gem 'test-unit-rails'
