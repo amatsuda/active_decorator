@@ -4,13 +4,8 @@ source 'https://rubygems.org'
 
 gemspec
 
-if ENV['RAILS_VERSION'] == 'edge'
-  gem 'rails', git: 'https://github.com/rails/rails.git'
-  gem 'sqlite3'
-elsif ENV['RAILS_VERSION']
-  gem 'rails', "~> #{ENV['RAILS_VERSION']}.0"
-  gem 'sqlite3', '< 2'
-end
+gem 'rails', "~> #{ENV['RAILS_VERSION']}.0"
+gem 'sqlite3', '< 2'
 gem 'rackup'
 
 gem 'test-unit-rails'
