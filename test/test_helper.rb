@@ -11,6 +11,8 @@ require 'active_decorator'
 Bundler.require
 begin
   require 'rackup/handler'
+  # Work around "uninitialized constant Rack::Handler" on Capybara here: https://github.com/teamcapybara/capybara/blob/0480f90168a40780d1398c75031a255c1819dce8/lib/capybara/registrations/servers.rb#L31
+  ::Rack::Handler = ::Rackup::Handler unless defined?(::Rack::Handler)
 rescue LoadError
   require 'rack/handler'
 end
