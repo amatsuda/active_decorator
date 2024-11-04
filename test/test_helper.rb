@@ -9,7 +9,11 @@ require 'rails'
 require 'active_decorator'
 
 Bundler.require
-require 'rack/handler'
+begin
+  require 'rackup/handler'
+rescue LoadError
+  require 'rack/handler'
+end
 require 'capybara'
 require 'selenium/webdriver'
 require 'byebug'
