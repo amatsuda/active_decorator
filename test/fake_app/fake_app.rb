@@ -6,7 +6,11 @@ require 'active_record'
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
-require 'ostruct'
+begin
+  require 'ostruct'
+rescue LoadError
+  # Ruby 3.5+ may fail to require 'ostruct' but it has to be bundling jbuilder 2.13.0+ that doesn't require ostruct
+end
 require 'jbuilder' unless ENV['API'] == '1'
 
 # config
