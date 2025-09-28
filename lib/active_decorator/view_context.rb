@@ -2,7 +2,36 @@
 
 # A module that carries the controllers' view_context to decorators.
 module ActiveDecorator
-  module ViewContext
+  # Use Rails' CurrentAttributes if available (Rails 5.2+)
+  if defined? ActiveSupport::CurrentAttributes
+    class ViewContext < ActiveSupport::CurrentAttributes
+      # Rails 7.2+
+      if method(:attribute).parameters.include? [:key, :default]
+        attribute :view_context_stack, default: []
+      else
+        attribute :view_context_stack
+
+        def view_context_stack
+          attributes[:view_context_stack] ||= []
+        end
+      end
+
+      resets do
+        view_context_stack = nil
+      end
+    end
+  else
+    # Fallback implementation for Rails < 5.2
+    class ViewContext
+      class << self
+        def view_context_stack
+          Thread.current[:active_decorator_view_contexts] ||= []
+        end
+      end
+    end
+  end
+
+  class ViewContext
     class << self
       def current
         view_context_stack.last
@@ -14,10 +43,6 @@ module ActiveDecorator
 
       def pop
         view_context_stack.pop
-      end
-
-      def view_context_stack
-        Thread.current[:active_decorator_view_contexts] ||= []
       end
 
       def run_with(view_context)
