@@ -1,3 +1,10 @@
+## 1.5.0
+
+* Don't drop keyword arguments when delegating helper methods via method_missing
+
+* Use ActiveSupport::CurrentAttributes (if available) for storing ViewContext instead of `Thread.current` for better thread safety
+
+
 ## 1.4.1
 
 * Support Ruby 3.2 by `File.exists?` => `File.exist?` in generator [@kyoshidajp]
