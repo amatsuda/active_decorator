@@ -23,7 +23,7 @@ require 'selenium/webdriver'
 require 'byebug'
 
 # needs to load the app next
-require 'fake_app/fake_app'
+require 'rails_app/app'
 
 require 'test/unit/rails/test_help'
 
