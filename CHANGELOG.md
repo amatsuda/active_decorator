@@ -1,3 +1,10 @@
+## 1.5.1
+
+* Removed unnecessary `ruby2_keywords` call that emits "warning: Skipping set of ruby2_keywords flag" [@t-kinoshita]
+
+* Fixed another warning "assigned but unused variable - view_context_stack"
+
+
 ## 1.5.0
 
 * Don't drop keyword arguments when delegating helper methods via method_missing
