@@ -17,7 +17,7 @@ module ActiveDecorator
       end
 
       resets do
-        view_context_stack = nil
+        self.view_context_stack = nil
       end
     end
   else
