@@ -14,10 +14,10 @@ module ActiveDecorator
         def view_context_stack
           attributes[:view_context_stack] ||= []
         end
-      end
 
-      resets do
-        self.view_context_stack = nil
+        resets do
+          self.view_context_stack = nil
+        end
       end
     end
   else
