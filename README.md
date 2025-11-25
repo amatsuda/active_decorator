@@ -17,7 +17,7 @@ A simple and Rubyish view helper for Rails 4, Rails 5, Rails 6, Rails 7, and Rai
 
 * Ruby 2.1.x, 2.2.x, 2.3.x, 2.4.x, 2.5.x, 2.6.x, 2.7.x, 3.0.x, 3.1.x, 3.2.x, 3.3.x, 3.4.x, and 3.5 (trunk)
 
-* Rails 4.2.x, 5.0, 5.1, 5.2, 6.0, 6.1, 7.0, 7.1, 7.2, 8.0, and 8.1 (edge)
+* Rails 4.2.x, 5.0, 5.1, 5.2, 6.0, 6.1, 7.0, 7.1, 7.2, 8.0, 8.1, and 8.2 (edge)
 
 
 ## Supported ORMs ##
