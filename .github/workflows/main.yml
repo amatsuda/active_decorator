@@ -119,6 +119,16 @@ jobs:
           - ruby_version: '3.1'
             rails_version: '8.0'
             api: '1'
+          - ruby_version: '4.0'
+            rails_version: '6.1'
+          - ruby_version: '4.0'
+            rails_version: '6.1'
+            api: '1'
+          - ruby_version: ruby-head
+            rails_version: '6.1'
+          - ruby_version: ruby-head
+            rails_version: '6.1'
+            api: '1'
 
     env:
       RAILS_VERSION: ${{ matrix.rails_version }}
