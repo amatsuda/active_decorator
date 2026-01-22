@@ -11,8 +11,8 @@ jobs:
     name: Ruby ${{ matrix.ruby_version }} / Rails ${{ matrix.rails_version }}${{ matrix.api == '1' && ' / API' || '' }}
     strategy:
       matrix:
-        ruby_version: [ruby-head, '3.4', '3.3', '3.2', '3.1']
-        rails_version: [edge, '8.0', '7.2', '7.1', '7.0', '6.1']
+        ruby_version: [ruby-head, '4.0', '3.4', '3.3', '3.2', '3.1']
+        rails_version: [edge, '8.2', '8.1', '8.0', '7.2', '7.1', '7.0', '6.1']
         api: ['0', '1']
 
         include:
@@ -110,9 +110,29 @@ jobs:
             rails_version: edge
             api: '1'
           - ruby_version: '3.1'
+            rails_version: '8.2'
+          - ruby_version: '3.1'
+            rails_version: '8.2'
+            api: '1'
+          - ruby_version: '3.1'
+            rails_version: '8.1'
+          - ruby_version: '3.1'
+            rails_version: '8.1'
+            api: '1'
+          - ruby_version: '3.1'
             rails_version: '8.0'
           - ruby_version: '3.1'
             rails_version: '8.0'
+            api: '1'
+          - ruby_version: '4.0'
+            rails_version: '6.1'
+          - ruby_version: '4.0'
+            rails_version: '6.1'
+            api: '1'
+          - ruby_version: ruby-head
+            rails_version: '6.1'
+          - ruby_version: ruby-head
+            rails_version: '6.1'
             api: '1'
 
     env:
