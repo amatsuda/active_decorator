@@ -19,6 +19,10 @@ else
   gem 'rails'
 end
 
+if ENV['RAILS_VERSION'] && (ENV['RAILS_VERSION'] < '8.1')
+  gem 'json', '< 3'
+end
+
 if RUBY_VERSION < '2.7'
   gem 'puma', '< 6'
 else
