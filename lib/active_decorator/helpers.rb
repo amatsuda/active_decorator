@@ -29,5 +29,12 @@ module ActiveDecorator
         raise e1
       end
     end
+
+    def respond_to_missing?(method, include_private = false)
+      return true if super
+
+      view_context = ActiveDecorator::ViewContext.current
+      !view_context.nil? && view_context.respond_to?(method)
+    end
   end
 end

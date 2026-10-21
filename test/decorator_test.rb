@@ -79,3 +79,16 @@ class DecoratorErrorHandlingTest < Test::Unit::TestCase
     assert_equal :NonExistentHelper, err.name
   end
 end
+
+class DecoratorRespondToTest < Test::Unit::TestCase
+  test 'decorated object responds to view helper methods within a view context' do
+    book = ActiveDecorator::Decorator.instance.decorate Book.new(title: 'Boek')
+    assert_respond_to book, :reverse_title
+    assert_not_respond_to book, :link_to
+
+    ActiveDecorator::ViewContext.run_with(ActionController::Base.new.view_context) do
+      assert_respond_to book, :link_to
+      assert_not_respond_to book, :no_such_helper
+    end
+  end
+end
