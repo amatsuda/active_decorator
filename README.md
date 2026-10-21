@@ -1,4 +1,4 @@
-# ActiveDecorator [![Build Status](https://github.com/amatsuda/active_decorator/actions/workflows/main.yml/badge.svg)](https://github.com/amatsuda/active_decorator/actions) [![Code Climate](https://codeclimate.com/github/amatsuda/active_decorator/badges/gpa.svg)](https://codeclimate.com/github/amatsuda/active_decorator)
+# ActiveDecorator [![Build Status](https://github.com/amatsuda/active_decorator/actions/workflows/main.yml/badge.svg)](https://github.com/amatsuda/active_decorator/actions)
 
 A simple and Rubyish view helper for Rails 4, Rails 5, Rails 6, Rails 7, and Rails 8. Keep your helpers and views Object-Oriented!
 
