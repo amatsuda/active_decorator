@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'singleton'
+require 'active_support/core_ext/name_error'
 require 'active_decorator/helpers'
 require 'active_decorator/decorated'
 
@@ -69,7 +70,10 @@ module ActiveDecorator
         # Cache nil results
         @decorators[model_class] = nil
       end
-    rescue NameError
+    rescue NameError => e
+      # Re-raise NameErrors that were raised from inside the decorator module while loading it
+      raise unless e.missing_name?(decorator_name)
+
       if model_class.respond_to?(:base_class) && (model_class.base_class != model_class)
         @decorators[model_class] = decorator_for model_class.base_class
       else

@@ -359,3 +359,6 @@ end
 module Foo
   class Comic; end
 end
+
+# a model whose decorator raises NameError while being loaded
+class Typo; end

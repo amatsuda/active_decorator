@@ -72,3 +72,10 @@ class DecoratorTest < Test::Unit::TestCase
     assert_not_respond_to false, :do
   end
 end
+
+class DecoratorErrorHandlingTest < Test::Unit::TestCase
+  test "NameError raised while loading a decorator module is not swallowed" do
+    err = assert_raises(NameError) { ActiveDecorator::Decorator.instance.decorate Typo.new }
+    assert_equal :NonExistentHelper, err.name
+  end
+end
