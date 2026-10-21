@@ -1,3 +1,10 @@
+## 1.6.0
+
+* Don't swallow NameError raised from inside a decorator module while loading it. Previously such an error was silently rescued and the decorator just disappeared
+
+* Decorated objects now `respond_to?` view helper methods via `respond_to_missing?`
+
+
 ## 1.5.1
 
 * Removed unnecessary `ruby2_keywords` call that emits "warning: Skipping set of ruby2_keywords flag" [@t-kinoshita]
